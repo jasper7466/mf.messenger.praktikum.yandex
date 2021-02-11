@@ -30,34 +30,49 @@
 - Макет в Figma: https://www.figma.com/file/WWatgxaRSJ86THRxGmKn3i/Chat-(modified)
 
 <details>
- <summary>Изображения макета экранов</summary>
-  <details>
-   <summary>Вход и регистрация</summary>
-   <img src="./docpics/ui/login.png" alt="Форма входа" title="Форма входа">
-   <img src="./docpics/ui/login-screen.png" alt="Страница входа" title="Страница входа">
-   <img src="./docpics/ui/signup.png" alt="Страница регистрации" title="Страница регистрации">
-  </details>
-  <details>
-    <summary>Чат</summary>
-    <img src="./docpics/ui/chat-select.png" alt="Выбор чата" title="Выбор чата">
-    <img src="./docpics/ui/chat-select.png" alt="Чат" title="Чат">
-    <img src="./docpics/ui/chat-find.png" alt="Поиск" title="Поиск">
-    <img src="./docpics/ui/chat-options.png" alt="Функции чата" title="Функции чата">
-    <img src="./docpics/ui/chat-options-popup.png" alt="Действия в чате" title="Действия в чате">
-  </details>
-  <details>
-   <summary>Профиль</summary>
-   <img src="./docpics/ui/profile-main.png" alt="Профиль" title="Профиль">
-   <img src="./docpics/ui/profile-edit-data.png" alt="Изменить данные" title="Изменить данные">
-   <img src="./docpics/ui/profile-edit-password.png" alt="Изменить пароль" title="Изменить пароль">
-   <img src="./docpics/ui/profile-avatar.png" alt="Аватар" title="Аватар">
-   <img src="./docpics/ui/profile-avatar-upload.png" alt="Загрузить аватар" title="Загрузить аватар">
-  </details>
-  <details>
-   <summary>Страницы кодов состояния</summary>
-   <img src="./docpics/ui/page400.png" alt="Страница 400" title="Страница 400">
-   <img src="./docpics/ui/page500.png" alt="Страница 500" title="Страница 500">
-  </details>
+ <summary>Изображения макета экранов (кликните, чтобы развернуть)</summary>
+ <details>
+  <summary>Вход и регистрация</summary>
+  <p>Форма входа</p>
+  <img src="./docpics/ui/login.png" alt="Форма входа" title="Форма входа">
+  <p>Страница входа</p>
+  <img src="./docpics/ui/login-screen.png" alt="Страница входа" title="Страница входа">
+  <p>Страница регистрации</p>
+  <img src="./docpics/ui/signup.png" alt="Страница регистрации" title="Страница регистрации">
+ </details>
+ <details>
+  <summary>Чат</summary>
+  <p>Выбор чата</p>
+  <img src="./docpics/ui/chat-select.png" alt="Выбор чата" title="Выбор чата">
+  <p>Чат</p>
+  <img src="./docpics/ui/chat-main.png" alt="Чат" title="Чат">
+  <p>Поиск</p>
+  <img src="./docpics/ui/chat-find.png" alt="Поиск" title="Поиск">
+  <p>Функции чата</p>
+  <img src="./docpics/ui/chat-options.png" alt="Функции чата" title="Функции чата">
+  <p>Действия в чате</p>
+  <img src="./docpics/ui/chat-options-popup.png" alt="Действия в чате" title="Действия в чате">
+ </details>
+ <details>
+  <summary>Профиль</summary>
+  <p>Профиль</p>
+  <img src="./docpics/ui/profile-main.png" alt="Профиль" title="Профиль">
+  <p>Изменить данные</p>
+  <img src="./docpics/ui/profile-edit-data.png" alt="Изменить данные" title="Изменить данные">
+  <p>Изменить пароль</p>
+  <img src="./docpics/ui/profile-edit-password.png" alt="Изменить пароль" title="Изменить пароль">
+  <p>Аватар</p>
+  <img src="./docpics/ui/profile-avatar.png" alt="Аватар" title="Аватар">
+  <p>Загрузить аватар</p>
+  <img src="./docpics/ui/profile-avatar-upload.png" alt="Загрузить аватар" title="Загрузить аватар">
+ </details>
+ <details>
+  <summary>Страницы кодов состояния</summary>
+  <p>Страница 404</p>
+  <img src="./docpics/ui/page404.png" alt="Страница 404" title="Страница 404">
+  <p>Страница 500</p>
+  <img src="./docpics/ui/page500.png" alt="Страница 500" title="Страница 500">
+ </details>
 </details>
 
 ## Как развернуть проект
