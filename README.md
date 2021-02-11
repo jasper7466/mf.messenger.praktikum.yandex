@@ -33,30 +33,30 @@
  <summary>Изображения макета экранов</summary>
   <details>
    <summary>Вход и регистрация</summary>
-    ![Форма входа](./docpics/ui/login.png "Форма входа")
-    ![Страница входа](./docpics/ui/login-screen.png "Страница входа")
-    ![Страница регистрации](./docpics/ui/signup.png "Страница регистрации")
+   <img src="./docpics/ui/login.png" alt="Форма входа" title="Форма входа">
+   <img src="./docpics/ui/login-screen.png" alt="Страница входа" title="Страница входа">
+   <img src="./docpics/ui/signup.png" alt="Страница регистрации" title="Страница регистрации">
   </details>
   <details>
     <summary>Чат</summary>
-    ![Выбор чата](./docpics/ui/chat-select.png "Выбор чата")
-    ![Чат](./docpics/ui/chat-select.png "Чат")
-    ![Поиск](./docpics/ui/chat-find.png "Поиск")
-    ![Функции чата](./docpics/ui/chat-options.png "Функции чата")
-    ![Действия в чате](./docpics/ui/chat-options-popup.png "Действия в чате")
+    <img src="./docpics/ui/chat-select.png" alt="Выбор чата" title="Выбор чата">
+    <img src="./docpics/ui/chat-select.png" alt="Чат" title="Чат">
+    <img src="./docpics/ui/chat-find.png" alt="Поиск" title="Поиск">
+    <img src="./docpics/ui/chat-options.png" alt="Функции чата" title="Функции чата">
+    <img src="./docpics/ui/chat-options-popup.png" alt="Действия в чате" title="Действия в чате">
   </details>
   <details>
    <summary>Профиль</summary>
-    ![Профиль](./docpics/ui/profile-main.png "Профиль")
-    ![Изменить данные](./docpics/ui/profile-edit-data.png "Изменить данные")
-    ![Изменить пароль](./docpics/ui/profile-edit-password.png "Изменить пароль")
-    ![Аватар](./docpics/ui/profile-avatar.png "Аватар")
-    ![Загрузить аватар](./docpics/ui/profile-avatar-upload.png "Загрузить аватар")
+   <img src="./docpics/ui/profile-main.png" alt="Профиль" title="Профиль">
+   <img src="./docpics/ui/profile-edit-data.png" alt="Изменить данные" title="Изменить данные">
+   <img src="./docpics/ui/profile-edit-password.png" alt="Изменить пароль" title="Изменить пароль">
+   <img src="./docpics/ui/profile-avatar.png" alt="Аватар" title="Аватар">
+   <img src="./docpics/ui/profile-avatar-upload.png" alt="Загрузить аватар" title="Загрузить аватар">
   </details>
   <details>
-  <summary>Страницы кодов состояния</summary>
-    ![Страница 400](./docpics/ui/page400.png "Страница 400")
-    ![Страница 500](./docpics/ui/page500.png "Страница 500")
+   <summary>Страницы кодов состояния</summary>
+   <img src="./docpics/ui/page400.png" alt="Страница 400" title="Страница 400">
+   <img src="./docpics/ui/page500.png" alt="Страница 500" title="Страница 500">
   </details>
 </details>
 
