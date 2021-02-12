@@ -1,0 +1,18 @@
+.form__button {
+    justify-self: end;
+    max-width: 280px;
+    width: 100%;
+    height: 37px;
+    margin: auto 0 0;
+    padding: 0;
+    border-style: none;
+    border-radius: 8px;
+    background-color: var(--main-color);
+    color: var(--main-back-color);
+
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    font-size: 13px;
+    line-height: 13px;
+}

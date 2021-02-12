@@ -1,0 +1,12 @@
+.form__field-container {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    position: relative;
+    align-self: stretch;
+    margin: 0 0 16px;
+
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+}
