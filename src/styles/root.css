@@ -9,5 +9,6 @@
     --main-back-color: #FFF;
     --main-text-color: #1E1E1E;
     --sub-text-color: #999;
+    --error-text-color: #FF2F2F;
     --max-width: 340px;
 }

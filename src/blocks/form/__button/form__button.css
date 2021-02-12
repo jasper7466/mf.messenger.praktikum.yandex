@@ -23,3 +23,8 @@
     border: 1px solid var(--main-color);
     transition: background-color .15s ease-in;
 }
+
+.form__button:active, :focus{
+    outline: none;
+    border-style: none;
+}
