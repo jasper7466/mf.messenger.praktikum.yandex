@@ -4,9 +4,13 @@
     justify-content: flex-end;
     position: relative;
     align-self: stretch;
-    margin: 0 0 16px;
+    margin: 0 0 12px;
 
     font-family: inherit;
     font-style: inherit;
     font-weight: inherit;
+}
+
+.form__field-container:last-of-type {
+    margin-bottom: 45px;
 }

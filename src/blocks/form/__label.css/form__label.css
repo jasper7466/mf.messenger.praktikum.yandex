@@ -1,4 +1,5 @@
 .form__label {
+    margin: 0 0 0;
     opacity: 0;
     color: var(--sub-text-color);
 
