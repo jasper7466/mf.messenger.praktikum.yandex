@@ -1,0 +1,10 @@
+@import url(./__caption/error-banner__caption.css);
+@import url(./__description/error-banner__description.css);
+@import url(../link/link.css);
+
+.error-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
