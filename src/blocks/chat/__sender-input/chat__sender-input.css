@@ -1,0 +1,24 @@
+.chat__sender-input {
+    border: none;
+    width: 100%;
+    padding: 0;
+    margin: 0 1%;
+    border-radius: 30px;
+    text-indent: 2.5%;
+    columns: var(--main-text-color);
+    background-color: var(--input-back-color);
+
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 12px;
+}
+
+.chat__sender-input:focus {
+    outline: none;
+}
+
+.chat__sender-input::placeholder {
+    color: var(--sub-text-color);
+}

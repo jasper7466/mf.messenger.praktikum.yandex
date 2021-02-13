@@ -1,0 +1,16 @@
+.chat__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.chat__header .chat-caption {
+    margin-left: 10px;
+}
+
+.chat__header .round-button {
+    margin-left: auto;
+}

@@ -1,0 +1,7 @@
+.span-line {
+    width: auto;
+    height: 1px;
+    background-color: var(--stripe-color);
+    margin: 1.5px 0;
+    box-sizing: border-box;
+}

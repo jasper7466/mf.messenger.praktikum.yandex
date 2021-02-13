@@ -1,0 +1,21 @@
+@import url(./__find/chat-list__find.css);
+@import url(./__header/chat-list__header.css);
+@import url(./__item/chat-list__item.css);
+@import url(./__last-reply/chat-list__last-reply.css);
+@import url(./__list/chat-list__list.css);
+@import url(./__profile-link/chat-list__profile-link.css);
+@import url(./__unreads-counter/chat-list__unreads-counter.css);
+@import url(../chat-caption/chat-caption.css);
+@import url(../timestamp/timestamp.css);
+@import url(../span-line/span-line.css);
+
+.chat-list {
+    max-width: 310px;
+    margin: 0;
+    padding: 0;
+    background-color: var(--sub-back-color);
+
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+}

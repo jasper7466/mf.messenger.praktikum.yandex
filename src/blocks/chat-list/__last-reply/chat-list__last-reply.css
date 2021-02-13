@@ -1,0 +1,11 @@
+.chat-list__last-reply {
+    grid-area: last-reply;
+    margin: 0;
+    color: var(--sub-text-color);
+
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+}

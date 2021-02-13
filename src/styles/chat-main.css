@@ -1,0 +1,10 @@
+@import url(./root.css);
+@import url(../blocks/page/page.css);
+@import url(../blocks/application/application.css);
+@import url(../blocks/side-container/side-container.css);
+@import url(../blocks/chat-list/chat-list.css);
+@import url(../blocks/chat/chat.css);
+@import url(../blocks/link/link.css);
+@import url(../blocks/linear-container/linear-container.css);
+@import url(../blocks/avatar/avatar.css);
+/* @import url(../blocks); */

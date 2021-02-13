@@ -1,0 +1,36 @@
+.chat-list__find {
+    width: 100%;
+    height: 32px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 5px;
+    color: var(--main-text-color);
+    background-color: var(--input-back-color);
+    background-image: url(../../../images/lens.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position-x: 35%;
+    transition: background-position-x .2s ease-out;
+    
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 12px;
+}
+
+.chat-list__find:not(:placeholder-shown),
+.chat-list__find:focus {
+    outline: none;
+    text-indent: 30px;
+    background-position-x: left;
+    transition: background-position-x .1s ease-out;
+}
+
+.chat-list__find::placeholder {
+    text-align: center;    
+}
+
+.chat-list__find:focus::placeholder {
+    opacity: 0;
+}

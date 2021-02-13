@@ -20,10 +20,13 @@
     background-color: black;
 }
 
-.avatar:hover {
-    /* opacity: 0.5; */
+.avatar_mini {
+    grid-area: avatar;
+    width: 47px;
+    height: 47px;
 }
 
-.avatar_editable {
-
+.avatar_micro {
+    width: 34px;
+    height: 34px;
 }

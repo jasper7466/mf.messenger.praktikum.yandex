@@ -23,7 +23,17 @@
     line-height: 11px;
 }
 
-.link_dangerous,
-.link_dangerous:visited {
+.link_size_medium {
+    font-size: 12px;
+    line-height: 12px;
+}
+
+.link_color_dangerous,
+.link_color_dangerous:visited {
     color: var(--danger-color);
+}
+
+.link_color_sub-color,
+.link_color_sub-color:visited {
+    color: var(--sub-text-color);
 }
