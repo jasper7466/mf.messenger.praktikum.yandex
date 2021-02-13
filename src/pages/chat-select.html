@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Чат</title>
-    <link rel="stylesheet" href="../styles/chat-main.css">
+    <link rel="stylesheet" href="../styles/chat-select.css">
 </head>
 <body class="page">
     <section class="application">
@@ -38,7 +38,7 @@
                     <time class="timestamp" datetime="2000-01-01 10:49">10:49</time>
                     <div class="chat-list__unreads-counter">4</div>
                 </li>
-                <li class="chat-list__item chat-list__item_active">
+                <li class="chat-list__item">
                     <div class="avatar avatar_mini">
                         <img class="avatar__image" src="../images/avatar-dummy.png" alt="Аватар чата">
                     </div>
@@ -130,41 +130,8 @@
                 </li>
             </ul>
         </section>
-        <section class="side-container chat">
-            <div class="chat__header">
-                <div class="avatar avatar_micro">
-                    <img class="avatar__image" src="../images/avatar-dummy.png" alt="Аватар чата">
-                </div>
-                <p class="chat-caption">User-name</p>
-                <button class="round-button round-button_type_options"></button>
-            </div>
-            <div class="chat__feed">
-                <p class="chat__message chat__message_type_text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut gravida dui quis eros iaculis, eget posuere enim luctus. Morbi sed dapibus turpis. Phasellus condimentum quam vel risus elementum, ut cursus nisi varius. Donec non consequat tortor. Maecenas venenatis tincidunt turpis, eu viverra felis rhoncus in. Morbi at imperdiet augue. Integer urna tortor, laoreet nec vestibulum eget, venenatis eu purus. Nulla ullamcorper justo eget tortor vulputate ultrices. Aliquam euismod vel orci ut eleifend.
-                    <time class="timestamp" datetime="2000-01-01 10:49">10:49</time>
-                </p>
-                <p class="chat__message chat__message_type_other">
-                    <img src="../images/avatar-dummy2.png" alt="Изображение в сообщении">
-                    <time class="timestamp" datetime="2000-01-01 10:49">10:49</time>
-                </p>
-                <p class="chat__message chat__message_type_text chat__message_owner chat__message_status_viewed">
-                    Lorem ipsum.
-                    <time class="timestamp" datetime="2000-01-01 10:49">10:49</time>
-                </p>
-                <p class="chat__message chat__message_type_text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut gravida dui quis eros iaculis, eget posuere enim luctus. Morbi sed dapibus turpis. Phasellus condimentum quam vel risus elementum, ut cursus nisi varius. Donec non consequat tortor. Maecenas venenatis tincidunt turpis, eu viverra felis rhoncus in. Morbi at imperdiet augue. Integer urna tortor, laoreet nec vestibulum eget, venenatis eu purus. Nulla ullamcorper justo eget tortor vulputate ultrices. Aliquam euismod vel orci ut eleifend.
-                    <time class="timestamp" datetime="2000-01-01 10:49">10:49</time>
-                </p>
-                <p class="chat__message chat__message_type_text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut gravida dui quis eros iaculis, eget posuere enim luctus. Morbi sed dapibus turpis. Phasellus condimentum quam vel risus elementum, ut cursus nisi varius. Donec non consequat tortor. Maecenas venenatis tincidunt turpis, eu viverra felis rhoncus in. Morbi at imperdiet augue. Integer urna tortor, laoreet nec vestibulum eget, venenatis eu purus. Nulla ullamcorper justo eget tortor vulputate ultrices. Aliquam euismod vel orci ut eleifend.
-                    <time class="timestamp" datetime="2000-01-01 10:49">10:49</time>
-                </p>
-            </div>
-            <div class="chat__sender">
-                <button class="round-button round-button_type_attachment"></button>
-                <input class="chat__sender-input" type="text" placeholder="Сообщение">
-                <button class="round-button round-button_type_send"></button>
-            </div>
+        <section class="side-container side-container_type_centered">
+            Выберите чат чтобы отправить сообщение
         </section>
     </section>
 </body>
