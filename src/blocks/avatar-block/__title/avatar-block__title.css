@@ -1,0 +1,14 @@
+.avatar-block__title {
+    color: var(--main-text-color);
+    margin: 20px 0 0;
+
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+}
+
+.avatar-block__title_hidden {
+    opacity: 0;
+}

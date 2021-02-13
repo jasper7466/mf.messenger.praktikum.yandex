@@ -8,7 +8,10 @@
     --main-color: #3369F3;
     --main-back-color: #FFF;
     --main-text-color: #1E1E1E;
+    --sub-back-color: #FBFBFB;
     --sub-text-color: #999;
-    --error-text-color: #FF2F2F;
-    --max-width: 340px;
+    --msg-back-color: #F8F8F8;
+    --stripe-color: #EAEAEA;
+    --input-back-color: #EFEFEF;
+    --danger-color: #FF2F2F;
 }

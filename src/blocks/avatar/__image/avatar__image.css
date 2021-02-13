@@ -1,0 +1,7 @@
+.avatar__image {
+    /* z-index: -1; */
+}
+
+.avatar__image:hover {
+    opacity: 0.7;
+}

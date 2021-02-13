@@ -1,0 +1,29 @@
+.link {
+    color: var(--main-color);
+    text-decoration: none;
+
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.link:visited {
+    color: var(--main-color);
+}
+
+.link_size_regular {
+    font-size: 13px;
+    line-height: 13px;
+}
+
+.link_size_small {
+    font-size: 11px;
+    line-height: 11px;
+}
+
+.link_dangerous,
+.link_dangerous:visited {
+    color: var(--danger-color);
+}
