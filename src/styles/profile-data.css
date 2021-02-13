@@ -3,9 +3,11 @@
 @import url(../blocks/application/application.css);
 @import url(../blocks/side-button/side-button.css);
 @import url(../blocks/side-container/side-container.css);
+@import url(../blocks/avatar-block/avatar-block.css);
 @import url(../blocks/avatar/avatar.css);
 @import url(../blocks/profile-form/profile-form.css);
-@import url(../blocks/avatar-block/avatar-block.css);
 @import url(../blocks/settings-section/settings-section.css);
 @import url(../blocks/linear-container/linear-container.css);
 @import url(../blocks/link/link.css);
+@import url(../blocks/button/button.css);
+/* @import url(../blocks); */
