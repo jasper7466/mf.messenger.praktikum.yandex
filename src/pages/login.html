@@ -9,7 +9,7 @@
 </head>
 <body class="page">
     <section class="application">
-        <div class="form form_type_auth">
+        <form class="form form_type_auth">
             <h1 class="form__header">Вход</h1>
             <div class="form__field-container">
                 <span class="form__error">Кастомная ошибка валидации</span>
@@ -21,9 +21,13 @@
                 <input class="form__input" type="password" name="password" id="password" placeholder="Пароль">
                 <label class="form__label" for="password">Пароль</label>
             </div>
-            <button class="button">Авторизоваться</button>
-            <a class="form__link" href="#">Нет аккаунта?</a>
-        </div>
+            <button class="button" type="submit">
+                <!-- TODO, FIXME: убрать <a>, содержимое сохранить (временная реализация для кликабельности прототипа) -->
+                <a href="./chat-select.html">Авторизоваться</a>
+            </button>
+            <a class="form__link" href="./signup.html">Нет аккаунта?</a>
+        </form>
     </section>
+    <script src="../scripts/form-logger.js"></script>
 </body>
 </html>
