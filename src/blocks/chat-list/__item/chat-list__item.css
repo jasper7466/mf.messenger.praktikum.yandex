@@ -1,0 +1,20 @@
+.chat-list__item {
+    display: grid;
+    grid-template-areas: 
+        "avatar item-caption timestamp"
+        "avatar last-reply empty"
+        "avatar last-reply unreads-counter";
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: fit-content fit-content fit-content;
+    grid-row-gap: 4px;
+    grid-column-gap: 10px;
+    width: 100%;
+    height: 70px;
+    padding: 10px min(10px, 5%);
+    box-sizing: border-box;
+}
+
+.chat-list__item:hover,
+.chat-list__item_active {
+    background-color: var(--selected-back-color);
+}

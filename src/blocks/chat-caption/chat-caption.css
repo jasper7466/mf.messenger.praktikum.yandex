@@ -1,0 +1,12 @@
+.chat-caption {
+    justify-self: flex-start;
+    grid-area: item-caption;
+    margin: 0;
+    color: var(--main-text-color);
+
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 13px;
+}

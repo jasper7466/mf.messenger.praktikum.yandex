@@ -1,0 +1,17 @@
+@import url(./__input/profile-form__input.css);
+@import url(./__label/profile-form__label.css);
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    max-width: 510px;
+    width: 100%;
+    margin: 0;
+
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 13px;
+}

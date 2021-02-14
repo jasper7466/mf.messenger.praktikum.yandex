@@ -1,0 +1,39 @@
+.link {
+    color: var(--main-color);
+    text-decoration: none;
+
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.link:visited {
+    color: var(--main-color);
+}
+
+.link_size_regular {
+    font-size: 13px;
+    line-height: 13px;
+}
+
+.link_size_small {
+    font-size: 11px;
+    line-height: 11px;
+}
+
+.link_size_medium {
+    font-size: 12px;
+    line-height: 12px;
+}
+
+.link_color_dangerous,
+.link_color_dangerous:visited {
+    color: var(--danger-color);
+}
+
+.link_color_sub-color,
+.link_color_sub-color:visited {
+    color: var(--sub-text-color);
+}

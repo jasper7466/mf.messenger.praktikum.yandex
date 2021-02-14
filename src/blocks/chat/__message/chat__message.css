@@ -1,0 +1,47 @@
+.chat__message {
+    position: relative;
+    max-width: 45%;
+    margin: .5%;
+    padding: 1.5%;
+    color: var(--main-text-color);
+    border-radius: 0 10px 10px 10px;
+
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+}
+
+.chat__message .timestamp {
+    position: absolute;
+    height: 13px;
+    min-width: 37px;
+    right: 2%;
+    bottom: 4%;
+}
+
+.chat__message_type_text {
+    background-color: var(--msg-back-color);
+}
+
+.chat__message_type_other {
+    border: 1px solid var(--stripe-color);
+    border-radius: 12px;
+    background-color: var(--main-back-color);
+}
+
+.chat__message_type_other .timestamp {
+    color: var(--main-back-color);
+    background-color: var(--timestamp-back-color);
+}
+
+.chat__message_owner {
+    align-self: flex-end;
+    border-radius: 10px 10px 0 10px;
+    background-color: var(--selected-back-color);
+}
+
+.chat__message_status_viewed .timestamp::before {
+    content: url(../../../images/status-viewed.svg);
+}

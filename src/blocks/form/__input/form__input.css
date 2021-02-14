@@ -1,0 +1,27 @@
+.form__input {
+    width: 100%;
+    height: auto;
+    padding: 3px 0;
+    border-style: none;
+    border-bottom: 2px solid var(--main-color);
+
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    font-size: 13px;
+    line-height: 13px;
+}
+
+.form__input_error {
+    color: var(--error-text-color);
+}
+
+.form__input:focus {
+    outline: none;
+    border-bottom: 2px solid var(--main-color);
+}
+
+.form__input:not(:placeholder-shown) + .form__label {
+    opacity: 1;
+    transition: opacity .15s ease-in;
+}

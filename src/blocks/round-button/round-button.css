@@ -1,0 +1,54 @@
+.round-button {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    padding: 0;
+    border: none;
+    background-repeat: no-repeat;
+    background-position-x:center;
+    background-position-y: center;
+    transition: background-color .15s ease-in;
+}
+
+.round-button:focus {
+    outline: none;
+}
+
+.round-button_type_options {
+    width: 28px;
+    height: 28px;
+    padding: 3px;
+    color: var(--main-text-color);
+    background-color: var(--main-back-color);
+    transform: rotate(90deg);
+}
+
+.round-button_type_options::after {
+    content: "\2022 \2022 \2022";
+}
+
+.round-button_type_options:hover {
+    background-color: var(--sub-text-color);
+    transition: background-color .15s ease-in;
+}
+
+.round-button_type_attachment {
+    width: 32px;
+    height: 32px;
+    background-color: var(--main-back-color);
+    background-image: url('../../images/attachment.svg');
+}
+
+.round-button_type_attachment:hover {
+    opacity: .5;
+    transition: background-color .15s ease-in;
+}
+
+.round-button_type_send {
+    background-image: url('../../images/arrow_right.svg');
+    background-color: var(--main-color);
+}
+
+.round-button_type_send:hover {
+    opacity: .5;
+}

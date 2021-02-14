@@ -1,0 +1,22 @@
+.profile-form__input {
+    width: 50%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    text-align: right;
+    color: var(--sub-text-color);
+
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.profile-form__input:focus {
+    outline: none;
+}
+
+.profile-form__input::placeholder {
+    color: var(--sub-text-color);
+}

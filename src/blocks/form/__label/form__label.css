@@ -1,0 +1,11 @@
+.form__label {
+    margin: 0 0 0;
+    opacity: 0;
+    color: var(--sub-text-color);
+
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    font-size: 9px;
+    line-height: 9px;
+}

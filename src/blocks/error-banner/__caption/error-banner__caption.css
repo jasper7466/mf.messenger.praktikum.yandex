@@ -1,0 +1,10 @@
+.error-banner__caption {
+    margin: 0 0 20px;
+    color: var(--main-text-color);
+
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 40px;
+}

@@ -1,0 +1,9 @@
+.form__header {
+    margin: 0 0 40px;
+    
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    font-size: 20px;
+    line-height: 20px;
+}

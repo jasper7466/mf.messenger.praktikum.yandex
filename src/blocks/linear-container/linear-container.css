@@ -1,0 +1,22 @@
+.linear-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+    padding: 7px 0;
+    border: 1px solid var(--main-back-color);
+
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.linear-container_type_underlined {
+    border-bottom: 1px solid var(--stripe-color);
+}
+
+.linear-container:last-of-type {
+    border-color: var(--main-back-color);
+}

@@ -1,0 +1,28 @@
+.chat-list__list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow-y: scroll;
+    scrollbar-color: var(--sub-text-color) var(--main-back-color);
+    scrollbar-width: thin;
+}
+
+.chat-list__list::-webkit-scrollbar {
+    width: 6px;
+    background-color: var(--sub-back-color);
+    border-radius: 5em;
+}
+
+.chat-list__list::-webkit-scrollbar-thumb {
+    background-color: var(--sub-text-color);
+    border-radius: 5em;
+}
+
+
+.chat-list__list .span-line {
+    margin-left: min(20px, 5%);
+    margin-right: min(20px, 5%);
+}

@@ -1,0 +1,16 @@
+.form__error {
+    margin: 7px 0 0;
+    opacity: 1;
+    color: var(--danger-color);
+    transition: opacity 0.15s ease-in;
+
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: normal;
+    font-size: 8px;
+    line-height: 8px;
+}
+
+.form__error_hidden {
+    opacity: 0;
+}

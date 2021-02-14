@@ -1,0 +1,5 @@
+.chat__sender {
+    display: flex;
+    padding: 10px 0;
+    width: 100%;
+}

@@ -1,0 +1,28 @@
+.side-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 64px;
+    height: 100%;
+    width: 100%;
+    align-self: flex-start;
+    border: 1px solid var(--sub-back-color);
+    background-color: var(--sub-back-color);
+}
+
+.side-button_type_left {
+    border-right: 1px solid var(--stripe-color);
+}
+
+.side-button:hover {
+    background-color: var(--stripe-color);
+    transition: background-color 0.15s ease-in;
+}
+
+.side-button:active {
+    background-color: var(--main-back-color);
+}
+
+.side-button:focus {
+    border-color: var(--main-color);
+}

@@ -1,0 +1,32 @@
+@import url(./__image/avatar__image.css);
+@import url(./__banner/avatar__banner.css);
+@import url(./__banner-back/avatar__banner-back.css);
+@import url(./__banner-text/avatar__banner-text.css);
+
+.avatar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 130px;
+    max-height: 130px;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: black;
+}
+
+.avatar_mini {
+    grid-area: avatar;
+    width: 47px;
+    height: 47px;
+}
+
+.avatar_micro {
+    width: 34px;
+    height: 34px;
+}
