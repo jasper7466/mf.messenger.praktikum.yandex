@@ -8,10 +8,7 @@ export const template =`
             <label class="form__label" for={{name}}>{{description}}</label>
         </div>
     {{/each}}
-    <!-- TODO: убрать <a>, содержимое сохранить -->
-    <button class="button" type="submit">
-        <a href="./chat-select.html">Зарегистрироваться</a>
-    </button>
+    {{> button}}
     <a class="form__link" href="./login.html">Войти</a>
 </form>
 `;

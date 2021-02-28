@@ -28,11 +28,10 @@ export const template =`
                         <input class="profile-form__input" type={{type}} name={{name}} id={{name}} placeholder={{value}}>
                     </span>
                 {{/each}}
+                <section class="settings-section">
+                    {{> button}}
+                </section>
             </form>
-        </section>
-        <!--  Блок выбора действия -->
-        <section class="settings-section">
-            <button class="button" type="submit" form="profile-data">Сохранить</button>
         </section>
     </div>
 `;
