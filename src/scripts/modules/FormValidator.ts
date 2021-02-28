@@ -35,7 +35,7 @@ export default class FormValidator {
     }
 
     protected readonly _form: HTMLElement;
-    protected readonly _rules: object;
+    protected readonly _rules: any;
     protected readonly _inputs: NodeListOf<HTMLElement>;
 
     constructor(form: HTMLElement, rules: object) {
