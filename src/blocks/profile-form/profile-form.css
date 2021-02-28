@@ -1,5 +1,6 @@
 @import url(./__input/profile-form__input.css);
 @import url(./__label/profile-form__label.css);
+@import url(../form/__error/form__error.css);
 
 .profile-form {
     display: flex;

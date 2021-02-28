@@ -1,6 +1,7 @@
 .profile-form__label {
     margin: 0;
     padding: 0px;
+    width: 30%;
     color: var(--main-text-color);
     box-sizing: border-box;
     text-align: left;
