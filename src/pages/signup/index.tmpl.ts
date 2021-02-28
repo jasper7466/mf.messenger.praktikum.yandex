@@ -46,7 +46,7 @@ export const data = {
             description: 'Пароль'
         },
         verify: {
-            name: 'verify-password',
+            name: 'verify_password',
             type: 'password',
             description: 'Пароль (ещё раз)'
         }

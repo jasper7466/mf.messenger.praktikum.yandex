@@ -25,6 +25,7 @@ export const template =`
                 {{#each fields}}
                     <span class="linear-container linear-container_type_underlined">
                         <label class="profile-form__label" for={{name}}>{{description}}</label>
+                        <span class="form__error"></span>
                         <input class="profile-form__input" type={{type}} name={{name}} id={{name}} placeholder={{value}}>
                     </span>
                 {{/each}}
