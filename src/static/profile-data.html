@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,62 +8,9 @@
     <link rel="stylesheet" href="../styles/profile-data.css">
 </head>
 <body class="page">
-    <section class="application">
-        <!-- TODO, FIXME: заменить <a> на <button> (временная реализация для кликабельности прототипа) -->
-        <a href="./profile.html" class="side-button side-button_type_left">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="14" cy="14" r="14" transform="rotate(-180 14 14)" fill="#3369F3"/>
-                <rect x="20" y="14.8" width="11" height="1.6" transform="rotate(-180 20 14.8)" fill="white"/>
-                <path d="M13 19L9 14L13 9" stroke="white" stroke-width="1.6"/>
-            </svg>
-        </a>
-        <div class="side-container side-container_type_profile">
-            <!-- Блок аватара -->
-            <div class="avatar-block">
-                <div class="avatar">
-                    <img class="avatar__image" src="../images/avatar-dummy.png" alt="Аватар профиля">
-                    <div class="avatar__banner">
-                        <div class="avatar__banner-back"></div>
-                        <p class="avatar__banner-text">Поменять аватар</p>
-                    </div>
-                </div>
-                <p class="avatar-block__title avatar-block__title_hidden">First_name</p>
-            </div>
-            <!-- Форма данных аккаунта -->
-            <section class="settings-section">
-                <form class="form profile-form profile-form_disabled" id="profile-data">
-                    <span class="linear-container linear-container_type_underlined">
-                        <label class="profile-form__label" for="email">Почта</label>
-                        <input class="profile-form__input" type="text" name="email" id="email" placeholder="Почта">
-                    </span>
-                    <span class="linear-container linear-container_type_underlined">
-                        <label class="profile-form__label" for="login">Логин</label>
-                        <input class="profile-form__input" type="text" name="login" id="login" placeholder="Логин">
-                    </span>
-                    <span class="linear-container linear-container_type_underlined">
-                        <label class="profile-form__label" for="first_name">Имя</label>
-                        <input class="profile-form__input" type="text" name="first_name" id="first_name" placeholder="Имя">
-                    </span>
-                    <span class="linear-container linear-container_type_underlined">
-                        <label class="profile-form__label" for="second_name">Фамилия</label>
-                        <input class="profile-form__input" type="text" name="second_name" id="second_name" placeholder="Фамилия">
-                    </span>
-                    <span class="linear-container linear-container_type_underlined">
-                        <label class="profile-form__label" for="display_name">Имя в чате</label>
-                        <input class="profile-form__input" type="text" name="display_name" id="display_name" placeholder="Имя в чате">
-                    </span>
-                    <span class="linear-container linear-container_type_underlined">
-                        <label class="profile-form__label" for="phone">Телефон</label>
-                        <input class="profile-form__input" type="tel" name="phone" id="phone" placeholder="Телефон">
-                    </span>
-                </form>
-            </section>
-            <!--  Блок выбора действия -->
-            <section class="settings-section">
-                <button class="button" type="submit" form="profile-data">Сохранить</button>
-            </section>
-        </div>
-    </section>
+    <section class="application"></section>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script type="module" src="../pages/profile-data/index.js"></script>
     <script src="../scripts/form-logger.js"></script>
 </body>
 </html>
