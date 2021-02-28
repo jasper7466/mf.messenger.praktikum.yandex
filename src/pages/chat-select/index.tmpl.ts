@@ -10,7 +10,7 @@ export const template =`
                 <input class="chat-list__find" type="text" name="search" id="search" placeholder="Поиск" autocomplete="off">
             </div>
             <ul class="chat-list__list">
-                {{#each this}}
+                {{#each this.chats}}
                     <!-- TODO: заменить <a> на <li> -->
                     <a href="./chat-main.html" class="chat-list__item">
                         <div class="avatar avatar_mini">
@@ -31,12 +31,14 @@ export const template =`
 `;
 
 export const data = {
-    chats: {
-        image: '../images/avatar-dummy.png',
-        name: 'User-name',
-        last: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
-        datetime: '2000-01-01 10:49',
-        time: '10:49',
-        unreads: 1
-    }
+    chats: [
+        {
+            image: '../images/avatar-dummy.png',
+            name: 'User-name',
+            last: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
+            datetime: '2000-01-01 10:49',
+            time: '10:49',
+            unreads: 1
+        }
+    ]
 };
