@@ -66,7 +66,7 @@ export class Component {
         return response;
     }
 
-    componentDidUpdate(oldProps?: object, newProps?: object) {
+    componentDidUpdate(/*oldProps?: object, newProps?: object*/) {
         return true;
     }
 
