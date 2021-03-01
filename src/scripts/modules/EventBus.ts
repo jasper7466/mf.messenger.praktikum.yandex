@@ -1,12 +1,12 @@
+type Callback = (...args: any[]) => void;
+type ListenersList = Record<string, Callback[]>;
+
 interface IEventBus {
-    subscribe(event: string, callback: () => void): void;
-    unsubscribe(event: string, callback: () => void): void;
+    subscribe(event: string, callback: Callback): void;
+    unsubscribe(event: string, callback: Callback): void;
     debugOn(): void;
     debugOff(): void;
 }
-
-type Callback = (...args: any[]) => void;
-type ListenersList = Record<string, Callback[]>;
 
 export class EventBus implements IEventBus {
     protected _listeners: ListenersList = {};
