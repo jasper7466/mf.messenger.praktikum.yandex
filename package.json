@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "compile": "copyfiles -u 1 src/**/**/**/*.{css,html,svg,png} dist && tsc"
+    "compile": "copyfiles -u 1 static/**/**/**/*.{css,html,svg,png} dist && tsc"
   },
   "repository": {
     "type": "git",
