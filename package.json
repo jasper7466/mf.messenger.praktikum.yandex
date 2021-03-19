@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "compile": "copyfiles -u 1 static/**/**/**/*.{css,html,svg,png} dist && tsc",
-    "start": "node server.js"
+    "start": "npm run compile && node server.js"
   },
   "repository": {
     "type": "git",
