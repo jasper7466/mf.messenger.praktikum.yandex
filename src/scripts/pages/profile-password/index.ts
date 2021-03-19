@@ -1,7 +1,7 @@
-import { template, data } from './index.tmpl.js';
-import Button from '../../../components/button/index.js';
-import FormValidator from '../../modules/FormValidator.js';
-import { Component } from "../../modules/Component.js";
+import { template, data } from './index.tmpl';
+import Button from '../../../components/button/index';
+import FormValidator from '../../modules/FormValidator';
+import { Component } from "../../modules/Component";
 
 const checks = {
     oldPassword: [

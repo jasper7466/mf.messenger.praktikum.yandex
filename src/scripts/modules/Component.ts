@@ -1,4 +1,4 @@
-import { EventBus } from './EventBus.js';
+import { EventBus } from './EventBus';
 
 type Element = null | HTMLElement;
 type Property = Record<string, any>;

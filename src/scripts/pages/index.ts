@@ -1,13 +1,13 @@
-import { Router } from '../modules/Router.js';
-import { LoginPage } from "./login/index.js";
-import { ChatMainPage } from "./chat-main/index.js";
-import { ChatSelectPage } from "./chat-select/index.js";
-import { Error404Page } from "./error-404/index.js";
-import { Error500Page } from "./error-500/index.js";
-import { ProfilePage } from "./profile/index.js";
-import { ProfileDataPage } from "./profile-data/index.js";
-import { ProfilePasswordPage } from "./profile-password/index.js";
-import { SignupPage } from "./signup/index.js";
+import { Router } from '../modules/Router';
+import { LoginPage } from "./login/index";
+import { ChatMainPage } from "./chat-main/index";
+import { ChatSelectPage } from "./chat-select/index";
+import { Error404Page } from "./error-404/index";
+import { Error500Page } from "./error-500/index";
+import { ProfilePage } from "./profile/index";
+import { ProfileDataPage } from "./profile-data/index";
+import { ProfilePasswordPage } from "./profile-password/index";
+import { SignupPage } from "./signup/index";
 
 const router = new Router('.application');
 

@@ -1,5 +1,5 @@
-import template from "./template.js";
-import { Component } from "../../scripts/modules/Component.js";
+import template from "./template";
+import { Component } from "../../scripts/modules/Component";
 
 export default class Button extends Component {
     constructor(props: object) {
