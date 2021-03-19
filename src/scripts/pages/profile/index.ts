@@ -1,6 +1,12 @@
 import { template, data } from './index.tmpl.js';
+import { Component } from "../../modules/Component.js";
 
-const holder = document.querySelector('.application');
+export class ProfilePage extends Component {
+    constructor(props: any) {
+        super('div', props);
+    }
 
-if (holder)
-    holder.innerHTML = Handlebars.compile(template)(data);
+    render() {
+        return Handlebars.compile(template)(data);
+    }
+}

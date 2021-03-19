@@ -1,6 +1,7 @@
 import { template, data } from './index.tmpl.js';
 import Button from '../../../components/button/index.js';
 import FormValidator from "../../modules/FormValidator.js";
+import { Component } from "../../modules/Component.js";
 
 const checks = {
     email: [
@@ -37,16 +38,25 @@ const checks = {
     ]
 }
 
-const holder = document.querySelector('.application');
-const button = new Button({ link: './chat-select.html', caption: 'Зарегистрироваться', type: 'submit'});
+export class SignupPage extends Component {
+    constructor(props: any) {
+        const button = new Button({
+            link: './chat-select.html',
+            caption: 'Зарегистрироваться',
+            type: 'submit'
+        });
+        if (button.element)
+            Handlebars.registerPartial('button', button.element.innerHTML);
+        const form: HTMLElement | null = document.querySelector('.form');
+        if (form)
+            new FormValidator(form, checks);
+        super('div', props);
+    }
 
-if (button.element)
-    Handlebars.registerPartial('button', button.element.innerHTML);
+    render() {
+        return Handlebars.compile(template)(data);
+    }
+}
 
-if (holder)
-    holder.innerHTML = Handlebars.compile(template)(data);
 
-const form: HTMLElement | null = document.querySelector('.form');
 
-if (form)
-    new FormValidator(form, checks);

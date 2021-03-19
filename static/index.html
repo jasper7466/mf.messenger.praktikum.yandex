@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Чат</title>
+    <link rel="stylesheet" href="../styles/index.css">
 </head>
-<body>
-    <a href="./pages/login.html" style="font-size: 40px;" >Start app</a>
-    <ul>
-        Примечания:
-        <li>Для вывода содержимого форм в консоль - необходимо кликать по краям кнопок</li>
-        <li>Для перехода по экранам - необходимо кликать по тексту в центре кнопок (это временная реализация "кнопко-ссылок" для обеспечения навигации по прототипу)</li>
-    </ul>
+<body class="page">
+    <section class="application"></section>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script type="module" src="./scripts/pages/index.js"></script>
 </body>
 </html>

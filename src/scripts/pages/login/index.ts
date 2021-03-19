@@ -1,6 +1,7 @@
 import { template, data } from './index.tmpl.js';
 import Button from '../../../components/button/index.js';
 import FormValidator from '../../modules/FormValidator.js'
+import { Component } from "../../modules/Component.js";
 
 const checks = {
     login: [
@@ -11,16 +12,21 @@ const checks = {
     password: [FormValidator.CHECKS.REQUIRED]
 }
 
-const holder = document.querySelector('.application');
-const button = new Button({ link: './chat-select.html', caption: 'Авторизоваться', type: 'submit'});
+export class LoginPage extends Component {
+    constructor(props: any) {
+        const button = new Button({ link: './chat-select.html', caption: 'Авторизоваться', type: 'submit'});
+        const form: HTMLElement | null = document.querySelector('.form');
+        if (button.element)
+            Handlebars.registerPartial('button', button.element.innerHTML);
+        if (form)
+            new FormValidator(form, checks);
 
-if (button.element)
-    Handlebars.registerPartial('button', button.element.innerHTML);
 
-if (holder)
-    holder.innerHTML = Handlebars.compile(template)(data);
 
-const form: HTMLElement | null = document.querySelector('.form');
+        super('div', props);
+    }
 
-if (form)
-    new FormValidator(form, checks);
+    render() {
+        return Handlebars.compile(template)(data);
+    }
+}
