@@ -3,13 +3,16 @@ function isEqual(lhs, rhs) {
     return lhs === rhs;
 }
 
-function render(query, block) {
-    const root = document.querySelector(query);
-    root.textContent = block.getContent();
-    return root;
+function render(rootQuery, block) {
+    const root = document.querySelector(rootQuery);
+    if (root) {
+        root.innerHTML = block.render();
+        return root;
+    }
+    throw new Error(`Route.ts: Selector "${rootQuery}" not found`);
 }
 
-export default class Route {
+export class Route {
     constructor(pathname, view, props) {
         this._pathname = pathname;
         this._blockClass = view;
