@@ -1,4 +1,4 @@
-import { template, data } from './index.tmpl';
+import { template } from './index.tmpl';
 import Button from '../../../components/button/index';
 import FormValidator from '../../modules/FormValidator'
 import { Component } from "../../modules/Component";
@@ -20,13 +20,10 @@ export class LoginPage extends Component {
             Handlebars.registerPartial('button', button.element.innerHTML);
         if (form)
             new FormValidator(form, checks);
-
-
-
-        super('div', props);
+        super(props);
     }
 
-    render() {
-        return Handlebars.compile(template)(data);
+    render(context: any) {
+        return Handlebars.compile(template)(context);
     }
 }

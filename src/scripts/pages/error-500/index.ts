@@ -1,12 +1,12 @@
-import { template, data } from './index.tmpl';
+import { template } from './index.tmpl';
 import { Component } from "../../modules/Component";
 
 export class Error500Page extends Component {
     constructor(props: any) {
-        super('div', props);
+        super(props);
     }
 
-    render() {
-        return Handlebars.compile(template)(data);
+    render(context: any) {
+        return Handlebars.compile(template)(context);
     }
 }

@@ -1,17 +1,4 @@
 //@ts-nocheck
-function isEqual(lhs, rhs) {
-    return lhs === rhs;
-}
-
-function render(rootQuery, block) {
-    const root = document.querySelector(rootQuery);
-    if (root) {
-        root.innerHTML = block.render();
-        return root;
-    }
-    throw new Error(`Route.ts: Selector "${rootQuery}" not found`);
-}
-
 export class Route {
     constructor(pathname, view, props) {
         this._pathname = pathname;
@@ -33,15 +20,23 @@ export class Route {
     }
 
     match(pathname) {
-        return isEqual(pathname, this._pathname);
+        return pathname === this._pathname;
     }
 
     render() {
         if (!this._block) {
             this._block = new this._blockClass(this._props);
-            render(this._props.rootQuery, this._block);
+            this.mount();
             return;
         }
         this._block.show();
+    }
+
+    mount() {
+        const root = document.querySelector(this._props.rootQuery);
+        if (!root)
+            throw new Error(`${this.constructor.name}: selector "${this._props.rootQuery}" not found`);
+        if (this._block.element)
+            root.appendChild(this._block.element);
     }
 }

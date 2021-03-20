@@ -13,8 +13,8 @@ export class Router {
         Router._instance = this;
     }
 
-    use(pathname, block) {
-        const route = new Route(pathname, block, {rootQuery: this._rootQuery});
+    use(pathname, block, context) {
+        const route = new Route(pathname, block, {rootQuery: this._rootQuery, ...context});
         this.routes.push(route);
         return this;
     }

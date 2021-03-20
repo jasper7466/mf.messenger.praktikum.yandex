@@ -28,7 +28,7 @@ export class Component {
      *
      * @returns {void}
      */
-    constructor(tagName = "div", props = {}) {
+    constructor(props = {}, tagName = 'div') {
         const eventBus = new EventBus();
         this._meta = { tagName, props };
         this.props = this._makePropsProxy(props);
@@ -46,6 +46,8 @@ export class Component {
 
     _createResources() {
         this._element = this._createDocumentElement(this._meta.tagName);
+        // TODO: Установка наследования всех стилей родителя, чтобы не ломалась вёрстка
+        this._element.setAttribute('style', 'all: inherit');
     }
 
     init() {
@@ -83,12 +85,15 @@ export class Component {
     }
 
     _render() {
-        const block = this.render();
-        if (this._element)
-            this._element.innerHTML = Handlebars.compile(block)(this.props);
+        const block = this.render(this._meta.props);
+        if (this._element) {
+                this._element.innerHTML = block;
+        }
     }
 
-    render() {}
+    render(context: any) {
+        return context;
+    }
 
     getContent() {
         return this.element;
