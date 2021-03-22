@@ -1,5 +1,5 @@
 import { template } from './index.tmpl';
-import Button from '../../../components/button/index';
+import Button from '../../components/button/index';
 import FormValidator from '../../modules/FormValidator';
 import { Component } from "../../modules/Component";
 
