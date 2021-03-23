@@ -2,11 +2,13 @@
 
 import { Route } from './Route';
 
-export class Router {
+export default class Router {
 
-    constructor(readonly _rootQuery) {
+    constructor(readonly _rootQuery?) {
         if (Router._instance)
             return Router._instance;
+        if (!_rootQuery)
+            throw new Error(`${this.constructor.name}: Instance does not exist, root node selector not defined`);
         this.routes = [];
         this.history = window.history;
         this._currentRoute = null;
