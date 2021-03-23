@@ -4,6 +4,7 @@ type StringObj = {
 
 type Options = {
     data?: StringObj,
+    headers?: Object,
     timeout?: number
 }
 
@@ -13,7 +14,7 @@ type RequestOptions = {
     method: string,
 }
 
-export class HTTPTransport {
+export default class HTTPTransport {
 
     private static METHODS = {
         GET: 'GET',
@@ -42,9 +43,9 @@ export class HTTPTransport {
 
     request = (url: string, options: RequestOptions, timeout: number = 5000): Promise<any> => {
         const {headers = {}, method, data} = options;
-        url = `${this._baseURL}/${url}`;
+        url = `${this._baseURL}${url}`;
 
-        if (data !== undefined)
+        if (method === HTTPTransport.METHODS.GET && !!data)
             url += HTTPTransport.queryStringify(data);
 
         return new Promise((resolve, reject) => {
@@ -63,8 +64,11 @@ export class HTTPTransport {
 
             if (method === HTTPTransport.METHODS.GET || !data)
                 xhr.send();
-            else
-                xhr.send(data as unknown as FormData);
+            else {
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify(data));
+                console.log(JSON.stringify(data));
+            }
         });
     };
 
