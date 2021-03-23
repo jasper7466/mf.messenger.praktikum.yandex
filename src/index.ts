@@ -1,9 +1,10 @@
-import { Router } from './modules/Router';
+import Router from './modules/Router';
 import { LoginPage } from './pages/login/index';
 import { ChatMainPage } from './pages/chat-main/index';
 import { ChatSelectPage } from './pages/chat-select/index';
 import { Error404Page } from './pages/error-404/index';
 import { Error500Page } from './pages/error-500/index';
+import { ErrorPage } from './pages/error/index';
 import { ProfilePage } from './pages/profile/index';
 import { ProfileDataPage } from './pages/profile-data/index';
 import { ProfilePasswordPage } from './pages/profile-password/index';
@@ -26,6 +27,7 @@ export enum Routes {
     chatSelect = 'chat-select',
     error404 = 'error-404',
     error500 = 'error-500',
+    error = 'error',
     profile = 'profile',
     profileData = 'profile-data',
     profilePassword = 'profile-password',
@@ -38,6 +40,7 @@ router
     .use(Routes.chatSelect, ChatSelectPage, chatSelectContext)
     .use(Routes.error404, Error404Page, error404Context)
     .use(Routes.error500, Error500Page, error500Context)
+    .use(Routes.error, ErrorPage, {})
     .use(Routes.profile, ProfilePage, profileContext)
     .use(Routes.profileData, ProfileDataPage, profileDataContext)
     .use(Routes.profilePassword, ProfilePasswordPage, profilePasswordContext)
