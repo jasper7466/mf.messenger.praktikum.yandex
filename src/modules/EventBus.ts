@@ -8,9 +8,10 @@ interface IEventBus {
     debugOff(): void;
 }
 
-export class EventBus implements IEventBus {
+export default class EventBus implements IEventBus {
     protected _listeners: ListenersList = {};
     protected _debugMode: boolean = false;
+    protected _strictMode: boolean = false;
 
     constructor() {
         this._listeners = {};
@@ -25,14 +26,15 @@ export class EventBus implements IEventBus {
     }
 
     unsubscribe(event: string, callback: () => void) {
-        this.checkEventExistance(event);
+        this.checkEventExistence(event);
         this._listeners[event] = this._listeners[event].filter(listener => listener !== callback);
         this.logger(`Event unsubscription (${event})`);
     }
 
     emit(event: string, ...args: any) {
         this.logger(`Event emitting initiated (${event})`);
-        this.checkEventExistance(event)
+        if (!this.checkEventExistence(event))
+            return;
         this._listeners[event].forEach(listener => listener(...args));
     }
 
@@ -49,8 +51,13 @@ export class EventBus implements IEventBus {
             console.log(`${this.constructor.name}: ${msg}`);
     }
 
-    protected checkEventExistance(event: string) {
-        if (!this._listeners[event])
-            throw new Error(`Event not found: ${event}`);
+    protected checkEventExistence(event: string): boolean | never {
+        if (!this._listeners[event]) {
+            if (this._strictMode)
+                throw new Error(`Event listeners not found: ${event}`);
+            else
+                return false;
+        }
+        return true;
     }
 }

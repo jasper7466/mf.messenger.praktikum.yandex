@@ -1,4 +1,7 @@
-import { EventBus } from './EventBus';
+import EventBus from './EventBus';
+import Store from './Store';
+import { merge } from '../utilities/objectHandlers';
+import {storeMap} from "../config";
 
 type Element = null | HTMLElement;
 type Property = Record<string, any>;
@@ -6,7 +9,10 @@ type Property = Record<string, any>;
 interface Meta {
     tagName: string;
     props: Property;
+    storePath: string | null;
 }
+
+const store = new Store();
 
 export class Component {
     static EVENTS = {
@@ -28,13 +34,20 @@ export class Component {
      *
      * @returns {void}
      */
-    constructor(props = {}, tagName = 'div') {
+    constructor(props = {}, storePath: string | null = null, tagName = 'div') {
         const eventBus = new EventBus();
-        this._meta = { tagName, props };
+        this._meta = { tagName, props, storePath };//, storePath };
         this.props = this._makePropsProxy(props);
         this.eventBus = eventBus;
         this._registerEvents(eventBus);
+        if (storePath)
+            store.eventBus.subscribe(storePath, () => eventBus.emit(Component.EVENTS.FLOW_RENDER));
         eventBus.emit(Component.EVENTS.INIT);
+    }
+
+    setParent(parent: Component) {
+        if (this._meta.storePath)
+            store.eventBus.subscribe(this._meta.storePath, () => parent.eventBus.emit(Component.EVENTS.FLOW_RENDER))
     }
 
     _registerEvents(eventBus: EventBus) {
@@ -85,6 +98,8 @@ export class Component {
     }
 
     _render() {
+        if (this._meta.storePath)
+            merge(this._meta.props, store.get(storeMap.errorPageProps));
         const block = this.render(this._meta.props);
         if (this._element) {
                 this._element.innerHTML = block;

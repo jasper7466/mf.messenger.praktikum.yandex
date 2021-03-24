@@ -14,6 +14,8 @@ import { data as profileContext } from './pages/profile/index.tmpl';
 import { data as profileDataContext } from './pages/profile-data/index.tmpl';
 import { data as profilePasswordContext } from './pages/profile-password/index.tmpl';
 import { data as signupContext } from './pages/signup/index.tmpl';
+import Store from "./modules/Store";
+import { storeMap } from "./config";
 
 const router = new Router('.application');
 
@@ -21,8 +23,6 @@ export enum Routes {
     login = 'login',
     chatMain = 'chat-main',
     chatSelect = 'chat-select',
-    error404 = 'error-404',
-    error500 = 'error-500',
     error = 'error',
     profile = 'profile',
     profileData = 'profile-data',
@@ -41,4 +41,11 @@ router
     .use(Routes.signup, SignupPage, signupContext)
     .start();
 
-router.go(Routes.profileData);
+router.go(Routes.error);
+
+const store = new Store();
+
+window.setTimeout(() => store.set(storeMap.errorPageProps, {
+    type: '404',
+    description: 'Не туда попали'
+}), 3000);
