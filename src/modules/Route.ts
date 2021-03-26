@@ -1,42 +1,46 @@
-//@ts-nocheck
-export class Route {
-    constructor(pathname, view, props) {
-        this._pathname = pathname;
-        this._blockClass = view;
+import Component from "./Component";
+
+export default class Route {
+
+    private _path: string;
+    private readonly _constructor: typeof Component;
+    private readonly _props: any;
+    private _block: any = null;
+
+    constructor(path: string, constructor: typeof Component, props: any) {
+        this._path = path;
+        this._constructor = constructor;
         this._block = null;
         this._props = props;
     }
 
-    navigate(pathname) {
-        if (this.match(pathname)) {
-            this._pathname = pathname;
+    navigate(path: string): void {
+        if (this.match(path)) {
+            this._path = path;
             this.render();
         }
     }
 
-    leave() {
-        if (this._block)
-            this._block.hide();
-    }
-
-    match(pathname) {
-        return pathname === this._pathname;
-    }
-
-    render() {
-        if (!this._block) {
-            this._block = new this._blockClass(this._props);
-            this.mount();
-            return;
+    leave(): void {
+        if (this._block) {
+            this._block.unmount();
         }
-        this._block.show();
     }
 
-    mount() {
+    match(path: string): boolean {
+        return path === this._path;
+    }
+
+    render(): void {
+        if (!this._block)
+            this._block = new this._constructor(this._props);
+        this.mount();
+    }
+
+    mount(): void {
         const root = document.querySelector(this._props.rootQuery);
         if (!root)
             throw new Error(`${this.constructor.name}: selector "${this._props.rootQuery}" not found`);
-        if (this._block.element)
-            root.appendChild(this._block.element);
+        this._block.mount(root);
     }
 }
