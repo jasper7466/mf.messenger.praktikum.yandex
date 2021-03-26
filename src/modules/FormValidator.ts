@@ -34,35 +34,76 @@ export default class FormValidator {
         }
     }
 
-    protected readonly _form: HTMLElement;
-    protected readonly _rules: any;
-    protected readonly _inputs: NodeListOf<HTMLElement>;
+    static readonly inputEvents = ['blur', 'keydown', 'keyup'];
 
-    constructor(form: HTMLElement, rules: object) {
+    protected _form: Element | null;
+    protected _inputs: NodeListOf<any> | null;
+    protected _dataHandler: Function | null = null;
+
+    constructor(protected readonly _rules: any) {}
+
+    public attach(root: Element, selector: string) {
+        let form = root.querySelector(selector);
+        if (!form)
+            throw new Error(`${this.constructor.name}: Form "${selector}" not found`);
+        let inputs = form.querySelectorAll('input');
+        if (inputs.length === 0)
+            throw new Error(`${this.constructor.name}: Form "${selector}" has no input fields`);
         this._form = form;
-        this._rules = rules;
-        this._inputs = form.querySelectorAll('input');
-        this.bindListeners();
+        this._inputs = inputs;
+        this._bindListeners();
     }
 
-    protected bindListeners() {
-        this._inputs.forEach((input: HTMLElement) => input.addEventListener('blur', this._validate.bind(this)));
-        this._inputs.forEach((input: HTMLElement) => input.addEventListener('focus', this._validate.bind(this)));
+    public detach() {
+        this._unbindListeners();
+        this._form = null;
+        this._inputs = null;
+    }
+
+    public setDataHandler(callback: Function): void {
+        this._dataHandler = callback;
+    }
+
+    protected _handle() {
+        let data: any = {};
+        if (!(this._inputs && this._dataHandler))
+            return;
+        this._inputs.forEach(input => data[input.name] = input.value);
+        this._dataHandler(data);
+    }
+
+    protected _bindListeners() {
+        if (!(this._inputs && this._form))
+            return;
+        FormValidator.inputEvents.forEach(event => {
+            // @ts-ignore
+            this._inputs.forEach((input: HTMLElement) => input.addEventListener(`${event}`, this._validate.bind(this)));
+        });
         this._form.addEventListener('submit', this._submitHandler.bind(this));
+    }
+
+    protected _unbindListeners() {
+        if (!(this._inputs && this._form))
+            return;
+        FormValidator.inputEvents.forEach(event => {
+            // @ts-ignore
+            this._inputs.forEach((input: HTMLElement) => input.removeEventListener(`${event}`, this._validate.bind(this)));
+        });
+        this._form.removeEventListener('submit', this._submitHandler.bind(this));
     }
 
     protected _validate(event: { target: HTMLInputElement } ) {
         const input = event.target;
         if (!this._rules.hasOwnProperty(input.name))
-            return;
+            return false;
 
         if (!input.parentNode)
-            return;
+            return false;
 
         const errorField = input.parentNode.querySelector('.form__error');
 
         if (!errorField)
-            return;
+            return false;
 
         let err: string | null = null;
 
@@ -75,16 +116,27 @@ export default class FormValidator {
         if (err) {
             errorField.textContent = err;
             errorField.classList.remove('form__error_hidden');
+            return false;
         }
-        else
-            errorField.classList.add('form__error_hidden');
+
+        errorField.classList.add('form__error_hidden');
+        return true;
     }
 
-    protected _submitHandler()
+    protected _submitHandler(event: Event)
     {
+        event.preventDefault();
+
+        if (!this._inputs)
+            return;
+        let isValid = true;
         this._inputs.forEach((input: HTMLElement) => {
             const pseudoEvent: any = {target: input};
-            this._validate(pseudoEvent)
+            if (!this._validate(pseudoEvent))
+                isValid = false;
         });
+
+        if (isValid && this._dataHandler)
+            this._handle();
     }
 }
