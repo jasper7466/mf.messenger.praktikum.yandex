@@ -3,7 +3,6 @@ import Store from './Store';
 import { merge } from '../utilities/objectHandlers';
 import {storeMap} from "../config";
 
-type Element = null | HTMLElement;
 type Property = Record<string, any>;
 
 interface Meta {
@@ -14,100 +13,116 @@ interface Meta {
 
 const store = new Store();
 
-export class Component {
+export default class Component {
     static EVENTS = {
-        INIT: "init",
-        FLOW_CDM: "flow:component-did-mount",
-        FLOW_CDU: "flow:component-did-update",
-        FLOW_RENDER: "flow:render"
+        CONSTRUCT: 'construct',                     // Завершена работа конструктора
+        FLOW_CDI: 'flow:component-did-init',        // Завершена инициализация
+        FLOW_CDU: 'flow:component-did-update',      // Обновлены параметры компонента
+        FLOW_CDC: 'flow:component-did-compile',     // Выполнена сборка компонента
+        STATUS_CDM: 'status:component-did-mount',   // Компонент смонтирован
+        STATUS_CDU: 'status:component-did-unmount'  // Компонент демонтирован
     };
 
     private readonly _meta: Meta;
-    private _element: Element = null;
-
+    private readonly _props: object;
+    private _storePath: string;
+    private _element: HTMLElement;
+    protected _parentNode: HTMLElement | null = null;
     public eventBus: EventBus;
-    public props: object;
+
 
     /** JSDoc
      * @param {string} tagName
      * @param {Object} props
+     * @param {storePath} storePath
      *
      * @returns {void}
      */
     constructor(props = {}, storePath: string | null = null, tagName = 'div') {
-        const eventBus = new EventBus();
-        this._meta = { tagName, props, storePath };//, storePath };
-        this.props = this._makePropsProxy(props);
-        this.eventBus = eventBus;
-        this._registerEvents(eventBus);
-        if (storePath)
-            store.eventBus.subscribe(storePath, () => eventBus.emit(Component.EVENTS.FLOW_RENDER));
-        eventBus.emit(Component.EVENTS.INIT);
+        this._meta = { tagName, props, storePath };
+        this._props = this._makePropsProxy(props);
+        this.eventBus = new EventBus();
+        this._registerEvents();
+        this.eventBus.emit(Component.EVENTS.CONSTRUCT);
     }
 
-    setParent(parent: Component) {
-        if (this._meta.storePath)
-            store.eventBus.subscribe(this._meta.storePath, () => parent.eventBus.emit(Component.EVENTS.FLOW_RENDER))
+    _registerEvents() {
+        this.eventBus.subscribe(Component.EVENTS.CONSTRUCT, this._init.bind(this));
+        this.eventBus.subscribe(Component.EVENTS.FLOW_CDI, this._componentDidUpdate.bind(this));
+        this.eventBus.subscribe(Component.EVENTS.FLOW_CDU, this._compile.bind(this));
+        this.eventBus.subscribe(Component.EVENTS.STATUS_CDM, this.componentDidMount.bind(this));
+        this.eventBus.subscribe(Component.EVENTS.STATUS_CDU, this.componentDidUnmount.bind(this));
     }
 
-    _registerEvents(eventBus: EventBus) {
-        eventBus.subscribe(Component.EVENTS.INIT, this.init.bind(this));
-        eventBus.subscribe(Component.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
-        eventBus.subscribe(Component.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
-        eventBus.subscribe(Component.EVENTS.FLOW_RENDER, this._render.bind(this));
-    }
-
-    _createResources() {
+    _init() {
         this._element = this._createDocumentElement(this._meta.tagName);
         // TODO: Установка наследования всех стилей родителя, чтобы не ломалась вёрстка
         this._element.setAttribute('style', 'all: inherit');
+        if (this._storePath)
+            store.eventBus.subscribe(this._storePath, () => this.eventBus.emit(Component.EVENTS.FLOW_CDU));
+        this.eventBus.emit(Component.EVENTS.FLOW_CDI);
     }
 
-    init() {
-        this._createResources();
-        this.eventBus.emit(Component.EVENTS.FLOW_CDM);
+    _componentDidUpdate() {
+        this.componentDidUpdate();
+        this.eventBus.emit(Component.EVENTS.FLOW_CDU);
     }
 
-    _componentDidMount() {
+    componentDidUpdate() {}
+
+    _compile() {
+        if (this._meta.storePath)
+            merge(this._meta.props, store.get(storeMap.errorPageProps));
+        const block = this.compile(this._meta.props);
+        if (this._element) {
+            this._element.innerHTML = block;
+        }
+        this.compiled();
+        this.eventBus.emit(Component.EVENTS.FLOW_CDC);
+    }
+
+    compile(context: any) {
+        return context;
+    }
+
+    compiled() {}
+
+    mount(parentNode: HTMLElement): void {
+        if (this._parentNode)
+            throw new Error(`${this.constructor.name}: Component is already mounted`);
+        parentNode.appendChild(this._element);
         this.componentDidMount();
-        this.eventBus.emit(Component.EVENTS.FLOW_RENDER);
+        this._parentNode = parentNode;
+        this.eventBus.emit(Component.EVENTS.STATUS_CDM);
     }
 
-    componentDidMount(/*oldProps?: object*/) {}
+    componentDidMount() {}
 
-    _componentDidUpdate(oldProps?: object, newProps?: object) {
-        const response = this.componentDidUpdate(oldProps, newProps);
-        this.eventBus.emit(Component.EVENTS.FLOW_RENDER);
-        return response;
+    unmount(): void {
+        if (!this._parentNode)
+            return;
+        this._parentNode.removeChild(this._element);
+        this._parentNode = null;
+        this.componentDidUnmount();
+        this.eventBus.emit(Component.EVENTS.STATUS_CDU);
     }
 
-    componentDidUpdate(oldProps?: object, newProps?: object) {
-        if (oldProps || newProps) {}
-        return true;
+    componentDidUnmount() {}
+
+    bindParent(parent: Component) {
+        if (this._meta.storePath)
+            store.eventBus.subscribe(this._meta.storePath, () => parent.eventBus.emit(Component.EVENTS.FLOW_CDU));
     }
 
     setProps = (nextProps: object) => {
         if (!nextProps) {
             return;
         }
-        Object.assign(this.props, nextProps);
+        Object.assign(this._props, nextProps);
     };
 
-    get element() {
+    public get element() {
         return this._element;
-    }
-
-    _render() {
-        if (this._meta.storePath)
-            merge(this._meta.props, store.get(storeMap.errorPageProps));
-        const block = this.render(this._meta.props);
-        if (this._element) {
-                this._element.innerHTML = block;
-        }
-    }
-
-    render(context: any) {
-        return context;
     }
 
     getContent() {
@@ -133,12 +148,14 @@ export class Component {
     }
 
     show() {
-        if (this.element)
-            this.element.style.display = "block";
+        const element = this.element;
+        if (element)
+            element.style.display = "block";
     }
 
     hide() {
-        if (this.element)
-            this.element.style.display = "none";
+        const element = this.element;
+        if (element)
+            element.style.display = "none";
     }
 }

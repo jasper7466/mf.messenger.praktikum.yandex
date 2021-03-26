@@ -1,20 +1,20 @@
 import { template } from './index.tmpl';
 import Button from '../../components/button/index';
-import FormValidator from '../../modules/FormValidator';
-import { Component } from "../../modules/Component";
+// import FormValidator from '../../modules/FormValidator';
+import Component from "../../modules/Component";
 
-const checks = {
-    oldPassword: [
-        FormValidator.CHECKS.REQUIRED,
-    ],
-    newPassword: [
-        FormValidator.CHECKS.REQUIRED,
-        FormValidator.CHECKS.PASSWORD_STRENGTH,
-    ],
-    verifyPassword: [
-        FormValidator.CHECKS.REQUIRED
-    ]
-}
+// const checks = {
+//     oldPassword: [
+//         FormValidator.CHECKS.REQUIRED,
+//     ],
+//     newPassword: [
+//         FormValidator.CHECKS.REQUIRED,
+//         FormValidator.CHECKS.PASSWORD_STRENGTH,
+//     ],
+//     verifyPassword: [
+//         FormValidator.CHECKS.REQUIRED
+//     ]
+// }
 
 export class ProfilePasswordPage extends Component {
     constructor(props: any) {
@@ -25,13 +25,13 @@ export class ProfilePasswordPage extends Component {
         });
         if (button.element)
             Handlebars.registerPartial('button', button.element.innerHTML);
-        const form: HTMLElement | null = document.querySelector('.form');
-        if (form)
-            new FormValidator(form, checks);
+        // const form: HTMLElement | null = document.querySelector('.form');
+        // if (form)
+        //     new FormValidator(form, checks);
         super(props);
     }
 
-    render(context: any) {
+    compile(context: any) {
         return Handlebars.compile(template)(context);
     }
 }

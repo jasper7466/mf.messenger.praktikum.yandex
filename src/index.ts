@@ -41,7 +41,7 @@ router
     .use(Routes.signup, SignupPage, signupContext)
     .start();
 
-router.go(Routes.error);
+router.go(Routes.login);
 
 const store = new Store();
 
