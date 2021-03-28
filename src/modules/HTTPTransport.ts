@@ -1,5 +1,5 @@
 type StringObj = {
-    [key: string]: string
+    [key: string]: string | number;
 };
 
 type Options = {
@@ -73,8 +73,6 @@ export default class HTTPTransport {
     };
 
     public static queryStringify(data: StringObj) {
-        if (typeof data === 'string')
-            return data;
         const params = [];
         for (let key in data) {
             params.push(`${key}=${data[key]}`)

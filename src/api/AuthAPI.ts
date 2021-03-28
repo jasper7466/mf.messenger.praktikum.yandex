@@ -1,4 +1,4 @@
-import { transport } from "./API";
+import transport from "./API";
 
 class AuthAPI {
     constructor() {

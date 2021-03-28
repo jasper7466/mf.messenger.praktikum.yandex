@@ -14,8 +14,7 @@ import { data as profileContext } from './pages/profile/index.tmpl';
 import { data as profileDataContext } from './pages/profile-data/index.tmpl';
 import { data as profilePasswordContext } from './pages/profile-password/index.tmpl';
 import { data as signupContext } from './pages/signup/index.tmpl';
-import Store from "./modules/Store";
-import { storeMap } from "./config";
+// import chatsController from "./pages/chat-select/controller";
 
 const router = new Router('.application');
 
@@ -43,9 +42,7 @@ router
 
 router.go(Routes.login);
 
-const store = new Store();
-
-window.setTimeout(() => store.set(storeMap.errorPageProps, {
-    type: '404',
-    description: 'Не туда попали'
-}), 3000);
+// chatsController.getChats();
+// chatsController.getUnreads(180);
+// chatsController.getUnreads(176);
+// chatsController.getUnreads(181);

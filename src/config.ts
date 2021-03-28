@@ -4,11 +4,17 @@ export const SETTINGS = {
 
 export const storeMap = {
     errorPageProps: 'store.errorPage',
+    chatPageProps: 'store.chatPage',
+    chatsList: 'store.chatsList',
+
 }
 
-export const httpErrorCodes = {
-    '500': 'Мы уже фиксим',
-    '404': 'Не туда попали',
+type ErrorsDescription = { [key: string]: string };
+
+export const httpErrorCodes: ErrorsDescription = {
+    500: 'Мы уже фиксим',
+    404: 'Не туда попали',
+    400: 'Некорректный запрос',
     default: 'Что-то пошло не так'
 }
 

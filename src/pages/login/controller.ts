@@ -1,5 +1,6 @@
-import Controller from '../../modules/Controller';
-import authAPI from '../../api/AuthAPI';
+import Controller from "../../modules/Controller";
+import authAPI from "../../api/AuthAPI";
+import {Routes} from "../../index";
 
 class LoginController extends Controller {
     constructor() {
@@ -8,7 +9,11 @@ class LoginController extends Controller {
 
     async signIn (data: any) {
         const response = await authAPI.signin(data);
-        this.statusHandler(response.status);
+        const status = response.status;
+        if (status >= 400)
+            this.statusHandler(response.status);
+        else
+            this.go(Routes.chatSelect);
     }
 
 }

@@ -14,11 +14,11 @@ export const template =`
                     <!-- TODO: заменить <a> на <li> -->
                     <a href="./chat-main.html" class="chat-list__item">
                         <div class="avatar avatar_mini">
-                            <img class="avatar__image" src={{image}} alt="Аватар чата">
+                            <img class="avatar__image" src={{avatar}} alt="Аватар чата">
                         </div>
-                        <p class="chat-caption">{{name}}</p>
+                        <p class="chat-caption">{{title}}</p>
                         <p class="chat-list__last-reply">{{last}}</p>
-                        <time class="timestamp" datetime={{datetime}}>{{time}}</time>
+                        <time class="timestamp" <!--datetime=datetime-->>{{time}}</time>
                         <div class="chat-list__unreads-counter">{{unreads}}</div>
                     </a>
                     <span class="span-line">&nbsp;</span>
@@ -33,10 +33,9 @@ export const template =`
 export const data = {
     chats: [
         {
-            image: '../images/avatar-dummy.png',
-            name: 'User-name',
+            avatar: '../images/avatar-dummy.png',
+            title: 'User-name',
             last: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
-            datetime: '2000-01-01 10:49',
             time: '10:49',
             unreads: 1
         }

@@ -1,7 +1,6 @@
 import EventBus from './EventBus';
 import Store from './Store';
 import { merge } from '../utilities/objectHandlers';
-import {storeMap} from "../config";
 
 type Property = Record<string, any>;
 
@@ -25,7 +24,6 @@ export default class Component {
 
     private readonly _meta: Meta;
     private readonly _props: object;
-    private _storePath: string;
     private _element: HTMLElement;
     protected _parentNode: HTMLElement | null = null;
     public eventBus: EventBus;
@@ -58,8 +56,8 @@ export default class Component {
         this._element = this._createDocumentElement(this._meta.tagName);
         // TODO: Установка наследования всех стилей родителя, чтобы не ломалась вёрстка
         this._element.setAttribute('style', 'all: inherit');
-        if (this._storePath)
-            store.eventBus.subscribe(this._storePath, () => this.eventBus.emit(Component.EVENTS.FLOW_CDU));
+        if (this._meta.storePath)
+            store.eventBus.subscribe(this._meta.storePath, () => this.eventBus.emit(Component.EVENTS.FLOW_CDU));
         this.eventBus.emit(Component.EVENTS.FLOW_CDI);
     }
 
@@ -71,8 +69,9 @@ export default class Component {
     componentDidUpdate() {}
 
     _compile() {
-        if (this._meta.storePath)
-            merge(this._meta.props, store.get(storeMap.errorPageProps));
+        if (this._meta.storePath) {
+            merge(this._meta.props, store.get(this._meta.storePath));
+        }
         const block = this.compile(this._meta.props);
         if (this._element) {
             this._element.innerHTML = block;
