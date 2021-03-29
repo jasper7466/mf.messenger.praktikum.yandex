@@ -40,7 +40,7 @@ router
     .use(Routes.signup, SignupPage, signupContext)
     .start();
 
-router.go(Routes.login);
+router.go(Routes.chatSelect);
 
 // chatsController.getChats();
 // chatsController.getUnreads(180);

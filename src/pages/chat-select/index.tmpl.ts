@@ -12,7 +12,7 @@ export const template =`
             <ul class="chat-list__list">
                 {{#each this.chats}}
                     <!-- TODO: заменить <a> на <li> -->
-                    <a href="./chat-main.html" class="chat-list__item">
+                    <li class="chat-list__item" data-id={{id}}>
                         <div class="avatar avatar_mini">
                             <img class="avatar__image" src={{avatar}} alt="Аватар чата">
                         </div>
@@ -20,7 +20,7 @@ export const template =`
                         <p class="chat-list__last-reply">{{last}}</p>
                         <time class="timestamp" <!--datetime=datetime-->>{{time}}</time>
                         <div class="chat-list__unreads-counter">{{unreads}}</div>
-                    </a>
+                    </li>
                     <span class="span-line">&nbsp;</span>
                 {{/each}}
             </ul>
