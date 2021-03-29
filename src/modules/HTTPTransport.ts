@@ -1,5 +1,5 @@
 type StringObj = {
-    [key: string]: string | number;
+    [key: string]: any;
 };
 
 type Options = {

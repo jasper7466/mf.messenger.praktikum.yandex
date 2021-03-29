@@ -2,6 +2,7 @@ import { template } from './index.tmpl';
 import ErrorBanner from '../../components/errorBanner/index';
 import Component from '../../modules/Component';
 import { storeMap } from '../../config';
+import Router from "../../modules/Router";
 
 type Partial = {
     name: string,
@@ -9,6 +10,7 @@ type Partial = {
 }
 
 const partials: Partial[] = [];
+const router = new Router();
 
 export class ErrorPage extends Component {
     constructor(props: any) {
@@ -16,6 +18,7 @@ export class ErrorPage extends Component {
         partials.push({name: 'errorBanner', component: errorBanner});
         super(props);
         errorBanner.bindParent(this);
+        this.element.addEventListener('click', e => this.clickHandler(e));
     }
 
     compile(context: any) {
@@ -24,5 +27,11 @@ export class ErrorPage extends Component {
                 Handlebars.registerPartial(partial.name, partial.component.element.innerHTML);
         })
         return Handlebars.compile(template)(context);
+    }
+
+    clickHandler(event: Event) {
+        const target = event.target as HTMLElement;
+        if (target.classList.contains('go-back-link'))
+            router.back();
     }
 }

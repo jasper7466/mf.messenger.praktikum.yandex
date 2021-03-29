@@ -14,19 +14,18 @@ import { data as profileContext } from './pages/profile/index.tmpl';
 import { data as profileDataContext } from './pages/profile-data/index.tmpl';
 import { data as profilePasswordContext } from './pages/profile-password/index.tmpl';
 import { data as signupContext } from './pages/signup/index.tmpl';
-// import chatsController from "./pages/chat-select/controller";
 
 const router = new Router('.application');
 
 export enum Routes {
-    login = 'login',
-    chatMain = 'chat-main',
-    chatSelect = 'chat-select',
-    error = 'error',
-    profile = 'profile',
-    profileData = 'profile-data',
-    profilePassword = 'profile-password',
-    signup = 'signup'
+    login = '/login',
+    chatMain = '/chat-main',
+    chatSelect = '/chat-select',
+    error = '/error',
+    profile = '/profile',
+    profileData = '/profile-data',
+    profilePassword = '/profile-password',
+    signup = '/signup'
 }
 
 router
@@ -40,9 +39,4 @@ router
     .use(Routes.signup, SignupPage, signupContext)
     .start();
 
-router.go(Routes.chatSelect);
-
-// chatsController.getChats();
-// chatsController.getUnreads(180);
-// chatsController.getUnreads(176);
-// chatsController.getUnreads(181);
+router.go(Routes.login);

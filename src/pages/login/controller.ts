@@ -1,5 +1,5 @@
 import Controller from "../../modules/Controller";
-import authAPI from "../../api/AuthAPI";
+import {authAPI, LoginFormData} from "../../api/AuthAPI";
 import {Routes} from "../../index";
 
 class LoginController extends Controller {
@@ -7,15 +7,17 @@ class LoginController extends Controller {
         super();
     }
 
-    async signIn (data: any) {
-        const response = await authAPI.signin(data);
-        const status = response.status;
-        if (status >= 400)
-            this.statusHandler(response.status);
-        else
+    async signIn (data: LoginFormData) {
+        const response = await authAPI.signIn(data);
+        if (!this.statusHandler(response.status))
             this.go(Routes.chatSelect);
     }
 
+    async checkAuth() {
+        const response = await authAPI.getUserInfo();
+        if (response.status === 200)
+            this.go(Routes.chatSelect);
+    }
 }
 
 const loginController = new LoginController();

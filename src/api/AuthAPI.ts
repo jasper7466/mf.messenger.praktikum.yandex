@@ -1,20 +1,34 @@
 import transport from "./API";
 
+export interface RegisterFormData {
+    first_name: string,
+    second_name: string,
+    login: string,
+    email: string,
+    password: string,
+    phone: string
+}
+
+export interface LoginFormData {
+    login: string,
+    password: string
+}
+
 class AuthAPI {
     constructor() {
     }
     /** Create new user */
-    signup(data: any) {
+    signUp(data: RegisterFormData) {
         return transport.post('/auth/signup',{data: data});
     }
 
     /** Auth existing user */
-    signin(data: any) {
+    signIn(data: LoginFormData) {
         return transport.post('/auth/signin',{data: data});
     }
 
-    getUserInfo(data: any) {
-        return transport.post('/auth/user',{data: data});
+    getUserInfo() {
+        return transport.get('/auth/user');
     }
 
     logout(data: any) {
@@ -22,6 +36,4 @@ class AuthAPI {
     }
 }
 
-const authAPI = new AuthAPI();
-
-export default authAPI;
+export const authAPI = new AuthAPI();

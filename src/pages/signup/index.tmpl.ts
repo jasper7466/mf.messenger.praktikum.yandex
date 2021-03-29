@@ -9,7 +9,7 @@ export const template =`
         </div>
     {{/each}}
     {{> button}}
-    <a class="form__link" href="./login.html">Войти</a>
+    <a class="form__link sign-in-link">Войти</a>
 </form>
 `;
 
