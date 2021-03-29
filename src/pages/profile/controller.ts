@@ -1,6 +1,7 @@
 import Controller from "../../modules/Controller";
 import {authAPI, UserInfoData} from "../../api/AuthAPI";
 import SETTINGS, {storeMap} from "../../config";
+import {Routes} from "../../index";
 
 
 export class ProfileController extends Controller {
@@ -13,6 +14,13 @@ export class ProfileController extends Controller {
         if (this.statusHandler(response.status))
             return null;
         return response.response;
+    }
+
+    async logout() {
+        const response = await authAPI.logout();
+        if (this.statusHandler(response.status))
+            return null;
+        this.go(Routes.login);
     }
 
     async updateUserInfo() {

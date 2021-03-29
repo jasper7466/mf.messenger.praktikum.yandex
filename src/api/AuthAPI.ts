@@ -42,8 +42,8 @@ class AuthAPI {
         return transport.get('/auth/user');
     }
 
-    logout(data: any) {
-        return transport.post('/auth/logout',{data: data});
+    logout() {
+        return transport.post('/auth/logout');
     }
 }
 

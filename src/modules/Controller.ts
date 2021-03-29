@@ -17,6 +17,10 @@ export default class Controller {
         router.go(path);
     }
 
+    back() {
+        router.back();
+    }
+
     storeSet(path: string, data: any) {
         store.set(path, data)
     }

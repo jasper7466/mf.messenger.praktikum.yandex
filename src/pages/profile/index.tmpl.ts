@@ -1,6 +1,6 @@
 export const template =`
     <!-- TODO: заменить <a> на <button> (временная реализация для кликабельности прототипа) -->
-    <a href="./chat-select.html" class="side-button side-button_type_left">
+    <a class="side-button side-button_type_left go-back-link">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="14" cy="14" r="14" transform="rotate(-180 14 14)" fill="#3369F3"/>
             <rect x="20" y="14.8" width="11" height="1.6" transform="rotate(-180 20 14.8)" fill="white"/>
@@ -51,13 +51,13 @@ export const template =`
         <!--  Блок выбора действия -->
         <section class="settings-section">
             <span class="linear-container linear-container_type_underlined">
-                <a class="link" href="./profile-data.html">Изменить данные</a>
+                <a class="link edit-profile-link">Изменить данные</a>
             </span>
             <span class="linear-container linear-container_type_underlined">
-                <a class="link" href="./profile-password.html">Изменить пароль</a>
+                <a class="link edit-password-link">Изменить пароль</a>
             </span>
             <span class="linear-container linear-container_type_underlined">
-                <a class="link link_color_dangerous" href="./login.html">Выйти</a>
+                <a class="link link_color_dangerous logout-link">Выйти</a>
             </span>
         </section>
     </div>
