@@ -1,8 +1,6 @@
 import Controller from "../../modules/Controller";
 import {chatsAPI, QueryOptions} from "../../api/ChatsAPI";
-import {storeMap} from "../../config";
-
-// import {Routes} from "../../index";
+import SETTINGS, {storeMap} from "../../config";
 
 class ChatsController extends Controller {
     constructor() {
@@ -29,7 +27,7 @@ class ChatsController extends Controller {
             return;
         for (const chat of chats) {
             if (chat.avatar === null)
-                chat.avatar = '../images/avatar-dummy2.png'
+                chat.avatar = SETTINGS.avatarDummy;
             chat.last = 'last message';
             chat.time = 'time'
             const unreads = await this.getUnreads(chat.id);

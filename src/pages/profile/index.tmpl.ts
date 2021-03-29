@@ -11,23 +11,41 @@ export const template =`
         <!-- Блок аватара -->
         <div class="avatar-block">
             <div class="avatar">
-                <img class="avatar__image" src={{image}} alt="Аватар профиля">
+                <img class="avatar__image" src={{avatar}} alt="Аватар профиля">
                 <div class="avatar__banner">
                     <div class="avatar__banner-back"></div>
                     <p class="avatar__banner-text">Поменять аватар</p>
                 </div>
             </div>
-            <p class="avatar-block__title">{{name}}</p>
+            <p class="avatar-block__title">{{first_name}}</p>
         </div>
         <!-- Форма данных аккаунта -->
         <section class="settings-section">
             <form class="profile-form profile-form_disabled">
-                {{#each fields}}
-                    <span class="linear-container linear-container_type_underlined">
-                        <label class="profile-form__label" for={{name}}>{{description}}</label>
-                        <input class="profile-form__input" type={{type}} name={{name}} id={{name}} placeholder={{value}}>
-                    </span>
-                {{/each}}
+                <span class="linear-container linear-container_type_underlined">
+                    <label class="profile-form__label" for="email">Почта</label>
+                    <input class="profile-form__input" readonly="readonly" type="text" name="email" id="email" placeholder="Почта" value={{email}}>
+                </span>
+                <span class="linear-container linear-container_type_underlined">
+                    <label class="profile-form__label" for="login">Логин</label>
+                    <input class="profile-form__input" readonly="readonly" type="text" name="login" id="login" placeholder="Логин" value={{login}}>
+                </span>
+                <span class="linear-container linear-container_type_underlined">
+                    <label class="profile-form__label" for="first_name">Имя</label>
+                    <input class="profile-form__input" readonly="readonly" type="text" name="first_name" id="first_name" placeholder="Имя" value={{first_name}}>
+                </span>
+                <span class="linear-container linear-container_type_underlined">
+                    <label class="profile-form__label" for="second_name">Фамилия</label>
+                    <input class="profile-form__input" readonly="readonly" type="text" name="second_name" id="second_name" placeholder="Фамилия" value={{second_name}}>
+                </span>
+                <span class="linear-container linear-container_type_underlined">
+                    <label class="profile-form__label" for="display_name">Отображаемое имя</label>
+                    <input class="profile-form__input" readonly="readonly" type="text" name="display_name" id="display_name" placeholder="Отображаемое имя" value={{display_name}}>
+                </span>
+                <span class="linear-container linear-container_type_underlined">
+                    <label class="profile-form__label" for="phone">Телефон</label>
+                    <input class="profile-form__input" readonly="readonly" type="tel" name="phone" id="phone" placeholder="Телефон" value={{phone}}>
+                </span>
             </form>
         </section>
         <!--  Блок выбора действия -->
@@ -46,14 +64,6 @@ export const template =`
 `;
 
 export const data = {
-    image: '../images/avatar-dummy.png',
-    name: 'First_name',
-    fields: [
-        { name: 'email', type: 'text', description: 'Почта', value: 'Почта' },
-        { name: 'login', type: 'text', description: 'Логин', value: 'Логин' },
-        { name: 'first_name', type: 'text', description: 'Имя', value: 'Имя' },
-        { name: 'second_name', type: 'text', description: 'Фамилия', value: 'Фамилия' },
-        { name: 'display_name', type: 'text', description: 'Имя в чате', value: 'Имя в чате' },
-        { name: 'phone', type: 'tel', description: 'Телефон', value: 'Телефон' }
-    ]
+    avatar: '../images/avatar-dummy.png',
+    first_name: 'First_name',
 };

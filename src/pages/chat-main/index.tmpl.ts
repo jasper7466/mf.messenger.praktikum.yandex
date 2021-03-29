@@ -1,3 +1,5 @@
+import SETTINGS from "../../config";
+
 export const template =`
     <section class="side-container chat-list">
         <div class="chat-list__header">
@@ -93,7 +95,7 @@ export const data = {
             {
                 text: '',
                 attachmentType: 'img',
-                attachmentSource: '../images/avatar-dummy2.png',
+                attachmentSource: SETTINGS.avatarDummy,
                 datetime: '2000-01-01 10:49',
                 time: '10:49',
                 isOwner: false,

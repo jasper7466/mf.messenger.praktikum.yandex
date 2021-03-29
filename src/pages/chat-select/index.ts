@@ -2,6 +2,7 @@ import {template} from "./index.tmpl";
 import Component from "../../modules/Component";
 import {storeMap} from "../../config";
 import controller from "./controller";
+import {Routes} from "../../index";
 
 export class ChatSelectPage extends Component {
     constructor(props: any) {
@@ -22,6 +23,8 @@ export class ChatSelectPage extends Component {
         const chatListItem = target.closest('.chat-list__item');
         if (chatListItem)
             this.chatSelectHandler(chatListItem as HTMLElement);
+        else if (target.closest('.go-profile-link'))
+            controller.go(Routes.profile);
     }
 
     // Обработчик событий выбора чата
