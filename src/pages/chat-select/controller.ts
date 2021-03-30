@@ -1,6 +1,6 @@
 import Controller from "../../modules/Controller";
 import {chatsAPI, QueryOptions} from "../../api/ChatsAPI";
-import SETTINGS, {storeMap} from "../../config";
+import {SETTINGS, storeMap} from "../../config";
 
 class ChatsController extends Controller {
     constructor() {

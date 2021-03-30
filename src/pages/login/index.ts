@@ -4,15 +4,7 @@ import FormValidator from "../../modules/FormValidator";
 import Component from "../../modules/Component";
 import controller from "./controller";
 import {Routes} from "../../index";
-
-const checks = {
-    login: [
-        FormValidator.CHECKS.MIN_LENGTH,
-        FormValidator.CHECKS.MAX_LENGTH,
-        FormValidator.CHECKS.ALPHANUMERIC
-    ],
-    password: [FormValidator.CHECKS.REQUIRED]
-}
+import {loginValidationRules as checks} from "../../config";
 
 const validator = new FormValidator(checks);
 validator.setDataHandler(controller.signIn.bind(controller));

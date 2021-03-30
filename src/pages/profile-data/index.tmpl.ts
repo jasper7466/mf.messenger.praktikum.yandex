@@ -1,17 +1,16 @@
 export const template =`
-    <!-- TODO, FIXME: заменить <a> на <button> (временная реализация для кликабельности прототипа) -->
-    <a href="./profile.html" class="side-button side-button_type_left">
+    <button class="side-button side-button_type_left go-back-link">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="14" cy="14" r="14" transform="rotate(-180 14 14)" fill="#3369F3"/>
             <rect x="20" y="14.8" width="11" height="1.6" transform="rotate(-180 20 14.8)" fill="white"/>
             <path d="M13 19L9 14L13 9" stroke="white" stroke-width="1.6"/>
         </svg>
-    </a>
+    </button>
     <div class="side-container side-container_type_profile">
         <!-- Блок аватара -->
         <div class="avatar-block">
             <div class="avatar">
-                <img class="avatar__image" src={{image}} alt="Аватар профиля">
+                <img class="avatar__image" src={{avatar}} alt="Аватар профиля">
                 <div class="avatar__banner">
                     <div class="avatar__banner-back"></div>
                     <p class="avatar__banner-text">Поменять аватар</p>
@@ -21,14 +20,37 @@ export const template =`
         </div>
         <!-- Форма данных аккаунта -->
         <section class="settings-section">
-            <form class="form profile-form profile-form_disabled" id="profile-data">
-                {{#each fields}}
-                    <span class="linear-container linear-container_type_underlined">
-                        <label class="profile-form__label" for={{name}}>{{description}}</label>
-                        <span class="form__error"></span>
-                        <input class="profile-form__input" type={{type}} name={{name}} id={{name}} placeholder={{value}}>
-                    </span>
-                {{/each}}
+            <form class="profile-form profile-form_disabled" id="profile-data">
+                <span class="linear-container linear-container_type_underlined">
+                    <label class="profile-form__label" for="email">Почта</label>
+                    <span class="form__error"></span>
+                    <input class="profile-form__input" type="text" name="email" id="email" placeholder="Почта" value={{email}}>
+                </span>
+                <span class="linear-container linear-container_type_underlined">
+                    <label class="profile-form__label" for="login">Логин</label>
+                    <span class="form__error"></span>
+                    <input class="profile-form__input" type="text" name="login" id="login" placeholder="Логин" value={{login}}>
+                </span>
+                <span class="linear-container linear-container_type_underlined">
+                    <label class="profile-form__label" for="first_name">Имя</label>
+                    <span class="form__error"></span>
+                    <input class="profile-form__input" type="text" name="first_name" id="first_name" placeholder="Имя" value={{first_name}}>
+                </span>
+                <span class="linear-container linear-container_type_underlined">
+                    <label class="profile-form__label" for="second_name">Фамилия</label>
+                    <span class="form__error"></span>
+                    <input class="profile-form__input" type="text" name="second_name" id="second_name" placeholder="Фамилия" value={{second_name}}>
+                </span>
+                <span class="linear-container linear-container_type_underlined">
+                    <label class="profile-form__label" for="display_name">Отображаемое имя</label>
+                    <span class="form__error"></span>
+                    <input class="profile-form__input" type="text" name="display_name" id="display_name" placeholder="Отображаемое имя" value={{display_name}}>
+                </span>
+                <span class="linear-container linear-container_type_underlined">
+                    <label class="profile-form__label" for="phone">Телефон</label>
+                    <span class="form__error"></span>
+                    <input class="profile-form__input" type="tel" name="phone" id="phone" placeholder="Телефон" value={{phone}}>
+                </span>
                 <section class="settings-section">
                     {{> button}}
                 </section>
@@ -38,14 +60,6 @@ export const template =`
 `;
 
 export const data = {
-    image: '../images/avatar-dummy.png',
-    name: 'First_name',
-    fields: [
-        { name: 'email', type: 'text', description: 'Почта', value: 'Почта' },
-        { name: 'login', type: 'text', description: 'Логин', value: 'Логин' },
-        { name: 'first_name', type: 'text', description: 'Имя', value: 'Имя' },
-        { name: 'second_name', type: 'text', description: 'Фамилия', value: 'Фамилия' },
-        { name: 'display_name', type: 'text', description: 'Имя в чате', value: 'Имя_в_чате' },
-        { name: 'phone', type: 'tel', description: 'Телефон', value: 'Телефон' }
-    ]
+    avatar: '../images/avatar-dummy.png',
+    first_name: 'First_name',
 };

@@ -109,15 +109,12 @@ export default class FormValidator {
     protected _validate(event: { target: HTMLInputElement } ) {
         const input = event.target;
         if (!this._rules.hasOwnProperty(input.name))
-            return false;
+            return true;
 
-        if (!input.parentNode)
-            return false;
+        let errorField = null;
 
-        const errorField = input.parentNode.querySelector('.form__error');
-
-        if (!errorField)
-            return false;
+        if (input.parentNode)
+            errorField = input.parentNode.querySelector('.form__error');
 
         let err: string | null = null;
 
@@ -128,19 +125,21 @@ export default class FormValidator {
         });
 
         if (err) {
-            errorField.textContent = err;
-            errorField.classList.remove('form__error_hidden');
+            if (errorField) {
+                errorField.textContent = err;
+                errorField.classList.remove('form__error_hidden');
+            }
             return false;
         }
 
-        errorField.classList.add('form__error_hidden');
+        if (errorField)
+            errorField.classList.add('form__error_hidden');
         return true;
     }
 
     protected _submitHandler(event: Event)
     {
         event.preventDefault();
-
         if (!this._inputs)
             return;
         let isValid = true;
@@ -149,8 +148,7 @@ export default class FormValidator {
             if (!this._validate(pseudoEvent))
                 isValid = false;
         });
-
-        if (isValid && this._dataHandler)
+        if (isValid)
             this._handle();
     }
 }

@@ -1,5 +1,5 @@
-import HTTPTransport from '../modules/HTTPTransport';
-import SETTINGS from '../config';
+import HTTPTransport from "../modules/HTTPTransport";
+import {SETTINGS} from "../config";
 
 const transport = new HTTPTransport(SETTINGS.baseURL);
 

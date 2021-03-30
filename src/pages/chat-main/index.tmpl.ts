@@ -1,4 +1,4 @@
-import SETTINGS from "../../config";
+import {SETTINGS} from "../../config";
 
 export const template =`
     <section class="side-container chat-list">
