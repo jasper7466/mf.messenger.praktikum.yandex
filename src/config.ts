@@ -72,3 +72,25 @@ export const loginValidationRules = {
     ],
     password: [FormValidator.CHECKS.REQUIRED]
 }
+
+export const passwordValidationRules = {
+    oldPassword: [
+        FormValidator.CHECKS.REQUIRED,
+    ],
+    newPassword: [
+        FormValidator.CHECKS.REQUIRED,
+        FormValidator.CHECKS.PASSWORD_STRENGTH.MIN_LENGTH_8,
+        FormValidator.CHECKS.PASSWORD_STRENGTH.USE_LOWER_CASE,
+        FormValidator.CHECKS.PASSWORD_STRENGTH.USE_UPPER_CASE,
+        FormValidator.CHECKS.PASSWORD_STRENGTH.USE_NUMERIC,
+        FormValidator.CHECKS.MAX_LENGTH
+    ],
+    verifyPassword: [
+        FormValidator.CHECKS.REQUIRED,
+        FormValidator.CHECKS.PASSWORD_STRENGTH.MIN_LENGTH_8,
+        FormValidator.CHECKS.PASSWORD_STRENGTH.USE_LOWER_CASE,
+        FormValidator.CHECKS.PASSWORD_STRENGTH.USE_UPPER_CASE,
+        FormValidator.CHECKS.PASSWORD_STRENGTH.USE_NUMERIC,
+        FormValidator.CHECKS.MAX_LENGTH
+    ]
+}
