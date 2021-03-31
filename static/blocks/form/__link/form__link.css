@@ -2,10 +2,15 @@
     margin: 14px 0 0;
     color: var(--main-color);
     text-decoration: none;
+    cursor: pointer;
 
     font-family: inherit;
     font-style: inherit;
     font-weight: inherit;
     font-size: 11px;
     line-height: 11px;
+}
+
+.form__link:hover {
+    opacity: .7;
 }

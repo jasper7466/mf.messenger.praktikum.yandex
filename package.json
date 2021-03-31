@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "compile": "copyfiles -u 1 static/**/**/**/*.{css,html,svg,png} dist && tsc",
-    "start": "node server.js"
+    "compile": "copyfiles -u 1 static/**/**/**/*.{css,html,svg,png} dist && tsc && node append-import-extensions.js",
+    "start": "npm run compile && node server.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
     "@types/node": "^14.14.31",
     "copyfiles": "^2.4.1",
     "express": "^4.17.1",
+    "filehound": "^1.17.4",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.2"
   },
