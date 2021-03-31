@@ -14,7 +14,12 @@
     box-sizing: border-box;
 }
 
+.chat-list__item_active:hover {
+    opacity: .7;
+}
+
 .chat-list__item:hover,
 .chat-list__item_active {
     background-color: var(--selected-back-color);
+    cursor: pointer;
 }
