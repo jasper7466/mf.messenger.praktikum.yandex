@@ -3,7 +3,7 @@ import Button from '../../components/button/index';
 // import FormValidator from '../../modules/FormValidator';
 import Component from "../../modules/Component";
 import FormValidator from "../../modules/FormValidator";
-import {passwordValidationRules as checks} from "../../config";
+import {passwordValidationRules as checks, storeMap} from "../../config";
 import controller from "./controller";
 
 const validator = new FormValidator(checks);
@@ -14,7 +14,7 @@ export class ProfilePasswordPage extends Component {
         const button = new Button({caption: 'Сохранить', type: 'submit'});
         if (button.element)
             Handlebars.registerPartial('button', button.element.innerHTML);
-        super(props);
+        super(props, storeMap.profilePageProps);
         this.element.addEventListener('click', e => this.clickHandler(e));
     }
 
