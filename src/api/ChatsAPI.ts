@@ -10,6 +10,11 @@ export interface CreateChatData {
     title: string;
 }
 
+export interface AddChatUserData {
+    users: number[],
+    chatId: number
+}
+
 class ChatsAPI {
 
     constructor() {}
@@ -50,7 +55,7 @@ class ChatsAPI {
         return transport.put('/chats/avatar', {data: data});
     }
 
-    addUser(data: any) {
+    addUser(data: AddChatUserData) {
         return transport.post('/chats/users', {data: data});
     }
 

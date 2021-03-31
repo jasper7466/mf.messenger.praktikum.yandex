@@ -9,7 +9,8 @@ export const storeMap = {
     errorPageProps: 'store.errorPage',
     chatPageProps: 'store.chatPage',
     chatsList: 'store.chatsList',
-    profilePageProps: 'store.profile'
+    profilePageProps: 'store.profile',
+    activeChatID: 'store.activeChatID'
 }
 
 type ErrorsDescription = { [key: string]: string };
