@@ -26,7 +26,7 @@ class UsersAPI {
     }
 
     changeAvatar(data: FormData) {
-        return transport.put('/user/profile/avatar',{data: data});
+        return transport.put('/user/profile/avatar',{data: data, headers: {'content-type': 'multipart/form-data'}});
     }
 
     changePassword(data: UserPasswordData) {

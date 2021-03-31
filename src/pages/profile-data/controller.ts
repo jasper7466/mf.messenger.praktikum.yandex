@@ -11,6 +11,12 @@ class ProfileDataController extends Controller {
         if (!this.statusHandler(response.status))
             this.back();
     }
+
+    async changeProfileAvatar(data: FormData) {
+        const response = await usersAPI.changeAvatar(data);
+        if (!this.statusHandler(response.status))
+            alert('Аватар обновлён');
+    }
 }
 
 const profileDataController = new ProfileDataController();

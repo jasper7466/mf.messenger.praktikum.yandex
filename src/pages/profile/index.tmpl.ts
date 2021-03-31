@@ -11,7 +11,7 @@ export const template =`
         <div class="avatar-block">
             <div class="avatar">
                 <img class="avatar__image" src={{avatar}} alt="Аватар профиля">
-                <div class="avatar__banner">
+                <div class="avatar__banner avatar__banner_inactive">
                     <div class="avatar__banner-back"></div>
                     <p class="avatar__banner-text">Поменять аватар</p>
                 </div>

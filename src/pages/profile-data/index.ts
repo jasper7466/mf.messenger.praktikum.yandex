@@ -10,15 +10,27 @@ validator.setDataHandler(controller.changeProfileInfo.bind(controller));
 
 export class ProfileDataPage extends Component {
     constructor(props: any) {
-        const button = new Button({caption: 'Сохранить', type: 'submit'});
-        if (button.element)
-            Handlebars.registerPartial('button', button.element.innerHTML);
+        const saveButton = new Button({caption: 'Сохранить', type: 'submit'});
+        if (saveButton.element)
+            Handlebars.registerPartial('saveButton', saveButton.element.innerHTML);
+        const changeButton = new Button({caption: 'Поменять', type: 'submit'});
+        if (changeButton.element)
+            Handlebars.registerPartial('changeButton', changeButton.element.innerHTML);
         super(props, storeMap.profilePageProps);
         this.element.addEventListener('click', e => this.clickHandler(e));
     }
 
     componentDidUpdate() {
         validator.detach();
+        const avatarForm = this.element.querySelector('.avatar-form');
+        if (avatarForm)
+            avatarForm.removeEventListener('submit', this.avatarFormHandler);
+    }
+
+    componentDidMount() {
+        const avatarForm = this.element.querySelector('.avatar-form');
+        if (avatarForm)
+            avatarForm.addEventListener('submit', e => this.avatarFormHandler(e));
     }
 
     compile(context: any) {
@@ -34,8 +46,23 @@ export class ProfileDataPage extends Component {
         const target = event.target as HTMLElement;
         if (target.closest('.go-back-link'))
             controller.back();
+        else if (target.closest('.avatar-block')) {
+            const modal = this.element.querySelector('.modal');
+            if (modal)
+                modal.classList.add('modal_active');
+        }
+        else if (target.classList.contains('modal'))
+            target.classList.remove('modal_active')
+    }
+
+    avatarFormHandler(event: Event) {
+        event.preventDefault();
+        const target = event.target as HTMLFormElement;
+        let formData  = new FormData(target);
+        controller.changeProfileAvatar(formData);
     }
 }
+
 
 
 

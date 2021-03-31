@@ -52,11 +52,19 @@ export const template =`
                     <input class="profile-form__input" type="tel" name="phone" id="phone" placeholder="Телефон" value={{phone}}>
                 </span>
                 <section class="settings-section">
-                    {{> button}}
+                    {{> saveButton}}
                 </section>
             </form>
         </section>
     </div>
+    <section class="modal">
+        <form class="form avatar-form">
+            <h1 class="form__header">Загрузите файл</h1>
+            Выбрать файл на компьютере
+            <input class="form__link" id="avatar" type="file" accept="image/*">
+            {{> changeButton}}
+        </form>
+    </section>
 `;
 
 export const data = {

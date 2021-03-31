@@ -28,6 +28,9 @@ export class ProfileController extends Controller {
             return;
         if (!userInfo.avatar)
             userInfo.avatar = SETTINGS.avatarDummy;
+        else
+            userInfo.avatar = SETTINGS.baseURL + userInfo.avatar;
+
         this.storeSet(storeMap.profilePageProps, userInfo);
     }
 }

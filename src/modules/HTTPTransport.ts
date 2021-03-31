@@ -1,16 +1,12 @@
-type StringObj = {
-    [key: string]: any;
-};
-
 type Options = {
-    data?: StringObj,
+    data?: any,
     headers?: Object,
     timeout?: number
 }
 
 type RequestOptions = {
     headers?: object,
-    data?: StringObj,
+    data?: any,
     method: string,
 }
 
@@ -65,14 +61,12 @@ export default class HTTPTransport {
             if (method === HTTPTransport.METHODS.GET || !data)
                 xhr.send();
             else {
-                xhr.setRequestHeader('Content-Type', 'application/json');
-                xhr.send(JSON.stringify(data));
-                console.log(JSON.stringify(data));
+                xhr.send(data);
             }
         });
     };
 
-    public static queryStringify(data: StringObj) {
+    public static queryStringify(data: {[key: string]: string}) {
         const params = [];
         for (let key in data) {
             params.push(`${key}=${data[key]}`)
