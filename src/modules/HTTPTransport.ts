@@ -55,13 +55,17 @@ export default class HTTPTransport {
             xhr.withCredentials = true;
             xhr.responseType = 'json';
 
-            if (headers)
-                Object.entries(headers).forEach(header => xhr.setRequestHeader(header[0], header[1]));
+            const headersEntries = Object.entries(headers);
+            if (headersEntries.length)
+                headersEntries.forEach(header => xhr.setRequestHeader(header[0], header[1]));
+            else
+                xhr.setRequestHeader('Content-Type', 'application/json');
 
             if (method === HTTPTransport.METHODS.GET || !data)
                 xhr.send();
             else {
-                xhr.send(data);
+                xhr.send(JSON.stringify(data));
+                console.log(JSON.stringify(data));
             }
         });
     };

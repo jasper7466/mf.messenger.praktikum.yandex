@@ -54,6 +54,8 @@ export default class Component {
 
     _init() {
         this._element = this._createDocumentElement(this._meta.tagName);
+        if (this._meta.props.hasOwnProperty('classList'))
+            this._meta.props.classList.forEach((c: string) => this._element.classList.add(c));
         // TODO: Установка наследования всех стилей родителя, чтобы не ломалась вёрстка
         this._element.setAttribute('style', 'all: inherit');
         if (this._meta.storePath)

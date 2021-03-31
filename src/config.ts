@@ -94,3 +94,11 @@ export const passwordValidationRules = {
         FormValidator.CHECKS.MAX_LENGTH
     ]
 }
+
+export const chatNameValidationRules = {
+    title: [
+        FormValidator.CHECKS.REQUIRED,
+        FormValidator.CHECKS.ALPHANUMERIC,
+        FormValidator.CHECKS.MAX_LENGTH,
+    ]
+}

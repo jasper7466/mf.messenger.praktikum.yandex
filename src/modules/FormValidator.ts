@@ -5,7 +5,7 @@ export default class FormValidator {
             err: 'Минимальная длина - 3 символа'
         },
         MAX_LENGTH: {
-            exp: /^[a-zA-Zа-яА-ЯёЁ0-9_-]{0,25}$/,
+            exp: /^.{0,25}$/,
             err: 'Максимальная длина - 25 символов'
         },
         ALPHABETIC: {

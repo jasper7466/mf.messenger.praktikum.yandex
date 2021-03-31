@@ -6,6 +6,10 @@ export type QueryOptions = {
     title?: string
 }
 
+export interface CreateChatData {
+    title: string;
+}
+
 class ChatsAPI {
 
     constructor() {}
@@ -18,7 +22,7 @@ class ChatsAPI {
         return transport.get('/chats/archive', {data: data});
     }
 
-    create(data: any) {
+    create(data: CreateChatData) {
         return transport.post('/chats', {data: data});
     }
 

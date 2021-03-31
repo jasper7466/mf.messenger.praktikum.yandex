@@ -1,5 +1,5 @@
 import Controller from "../../modules/Controller";
-import {chatsAPI, QueryOptions} from "../../api/ChatsAPI";
+import {chatsAPI, CreateChatData, QueryOptions} from "../../api/ChatsAPI";
 import {SETTINGS, storeMap} from "../../config";
 
 class ChatsController extends Controller {
@@ -9,6 +9,13 @@ class ChatsController extends Controller {
 
     async getChats(data?: QueryOptions) {
         const response = await chatsAPI.get(data);
+        if (!this.statusHandler(response.status))
+            return response.response;
+        return null;
+    }
+
+    async createChat(data: CreateChatData) {
+        const response = await chatsAPI.create(data);
         if (!this.statusHandler(response.status))
             return response.response;
         return null;

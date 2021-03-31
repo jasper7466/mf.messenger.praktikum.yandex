@@ -17,15 +17,3 @@
     --selected-back-color: #E4EDFD;
     --danger-color: #FF2F2F;
 }
-
-/* TODO, FIXME: убрать стили для <a> (временная реализация для кликабельности прототипа) */
-a {
-    text-decoration: none;
-    color: inherit;
-
-    font-family: inherit;
-    font-style: inherit;
-    font-weight: normal;
-    font-size: inherit;
-    line-height: inherit;
-}
