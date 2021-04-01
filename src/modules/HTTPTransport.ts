@@ -10,44 +10,54 @@ type RequestOptions = {
     method: string,
 }
 
+enum METHODS {
+    GET = 'GET',
+    POST = 'POST',
+    PUT = 'PUT',
+    DELETE = 'DELETE',
+}
+
+function queryStringify(data: {[key: string]: string}) {
+    return Object.entries(data).reduce((res, [key, value]) => {
+        return `${res}${key}=${value}&`;
+    }, '?');
+}
+
 export class HTTPTransport {
-
-    private static METHODS = {
-        GET: 'GET',
-        POST: 'POST',
-        PUT: 'PUT',
-        DELETE: 'DELETE'
-    };
-
     constructor(readonly _baseURL: string) {}
 
     get = (url: string, options: Options = {}) => {
-        return this.request(url, {...options, method: HTTPTransport.METHODS.GET}, options.timeout);
+        if (options.data)
+            url += queryStringify(options.data);
+        return this.request(url, {...options, method: METHODS.GET}, options.timeout);
     };
 
     post = (url: string, options: Options = {}) => {
-        return this.request(url, {...options, method: HTTPTransport.METHODS.POST}, options.timeout);
+        return this.request(url, {...options, method: METHODS.POST}, options.timeout);
     };
 
     put = (url: string, options: Options = {}) => {
-        return this.request(url, {...options, method: HTTPTransport.METHODS.PUT}, options.timeout);
+        return this.request(url, {...options, method: METHODS.PUT}, options.timeout);
     };
 
     delete = (url: string, options: Options = {}) => {
-        return this.request(url, {...options, method: HTTPTransport.METHODS.DELETE}, options.timeout);
+        return this.request(url, {...options, method: METHODS.DELETE}, options.timeout);
     };
 
     request = (url: string, options: RequestOptions, timeout: number = 5000): Promise<any> => {
         const {headers = {}, method, data} = options;
         url = `${this._baseURL}${url}`;
 
-        if (method === HTTPTransport.METHODS.GET && !!data)
-            url += HTTPTransport.queryStringify(data);
-
         return new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
             xhr.open(method, url);
-            xhr.onload = () => resolve(xhr);
+            xhr.onload = () => {
+                if (xhr.status < 400) {
+                    resolve(xhr);
+                } else {
+                    reject(xhr);
+                }
+            }
             xhr.onabort = reject;
             xhr.onerror = reject;
             xhr.ontimeout = reject;
@@ -61,7 +71,7 @@ export class HTTPTransport {
             else
                 xhr.setRequestHeader('Content-Type', 'application/json');
 
-            if (method === HTTPTransport.METHODS.GET || !data)
+            if (method === METHODS.GET || !data)
                 xhr.send();
             else {
                 xhr.send(JSON.stringify(data));
@@ -69,12 +79,4 @@ export class HTTPTransport {
             }
         });
     };
-
-    public static queryStringify(data: {[key: string]: string}) {
-        const params = [];
-        for (let key in data) {
-            params.push(`${key}=${data[key]}`)
-        }
-        return `?${params.join('&')}`;
-    }
 }
