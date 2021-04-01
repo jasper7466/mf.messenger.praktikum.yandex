@@ -1,4 +1,4 @@
-import transport from "./API";
+import {API} from "./API";
 
 export interface UserProfileData {
     first_name: string,
@@ -18,27 +18,29 @@ export interface UserSearchData {
     login: string
 }
 
-class UsersAPI {
-    constructor() {}
+class UsersAPI extends API {
+    constructor() {
+        super();
+    }
 
     changeProfile(data: UserProfileData) {
-        return transport.put('/user/profile',{data: data});
+        return this.put('/user/profile',{data});
     }
 
     changeAvatar(data: FormData) {
-        return transport.put('/user/profile/avatar',{data: data, headers: {'content-type': 'multipart/form-data'}});
+        return this.put('/user/profile/avatar',{data, headers: {'content-type': 'multipart/form-data'}});
     }
 
     changePassword(data: UserPasswordData) {
-        return transport.put('/user/password', {data: data});
+        return this.put('/user/password', {data});
     }
 
     getByID(id: number) {
-        return transport.get(`/user/${id}`);
+        return this.get(`/user/${id}`);
     }
 
     searchByLogin(data: UserSearchData) {
-        return transport.post('/user/search', {data: data});
+        return this.post('/user/search', {data});
     }
 }
 

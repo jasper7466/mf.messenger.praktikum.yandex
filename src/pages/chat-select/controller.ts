@@ -9,14 +9,14 @@ class ChatsController extends Controller {
     }
 
     async getChats(data?: QueryOptions) {
-        const response = await chatsAPI.get(data);
+        const response = await chatsAPI.getChat(data);
         if (!this.statusHandler(response.status))
             return response.response;
         return null;
     }
 
     async createChat(data: CreateChatData) {
-        const response = await chatsAPI.create(data);
+        const response = await chatsAPI.createChat(data);
         if (!this.statusHandler(response.status))
             return response.response;
         return null;

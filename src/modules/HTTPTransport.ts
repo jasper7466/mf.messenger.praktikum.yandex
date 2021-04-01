@@ -1,4 +1,4 @@
-type Options = {
+export type Options = {
     data?: any,
     headers?: Object,
     timeout?: number
@@ -10,7 +10,7 @@ type RequestOptions = {
     method: string,
 }
 
-export default class HTTPTransport {
+export class HTTPTransport {
 
     private static METHODS = {
         GET: 'GET',
