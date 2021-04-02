@@ -7,9 +7,12 @@ class ProfilePasswordController extends Controller {
     }
 
     async changeProfilePassword(data: UserPasswordData) {
-        const response = await usersAPI.changePassword(data);
-        if (!this.statusHandler(response.status))
+        try {
+            await usersAPI.changePassword(data);
             this.back();
+        } catch (e) {
+            this.statusHandler(e.status);
+        }
     }
 }
 

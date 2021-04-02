@@ -8,15 +8,21 @@ class LoginController extends Controller {
     }
 
     async signIn (data: LoginFormData) {
-        const response = await authAPI.signIn(data);
-        if (!this.statusHandler(response.status))
+        try {
+            await authAPI.signIn(data);
             this.go(Routes.chatSelect);
+        } catch (e) {
+            this.statusHandler(e.status);
+        }
     }
 
     async checkAuth() {
-        const response = await authAPI.getUserInfo();
-        if (response.status === 200)
-            this.go(Routes.chatSelect);
+        try {
+            await authAPI.getUserInfo();
+        } catch (e) {
+            return;
+        }
+        this.go(Routes.chatSelect);
     }
 }
 
