@@ -21,11 +21,17 @@ module.exports = {
             '@': path.resolve(__dirname, 'src'),
         }
     },
+    optimization: {
+        splitChunks: {
+            chunks: 'all'
+        }
+    },
     plugins: [
         new HtmlWebpackPlugin({ template: '../static/index.html' }),
         new CleanWebpackPlugin()
     ],
     devServer: {
+        port: 4000,
         open: true,
         host: 'localhost',
     },

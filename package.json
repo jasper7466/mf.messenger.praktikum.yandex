@@ -7,9 +7,9 @@
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
     "watch": "webpack --mode development --watch",
+    "start": "webpack serve --mode development --open",
     "compile": "copyfiles -u 1 static/**/**/**/*.{css,html,svg,png} dist && tsc && node append-import-extensions.js",
     "babel-compile": "babel src -d lib --extensions '.ts,.tsx'",
-    "start": "npm run compile && node server.js",
     "test": "./node_modules/.bin/mocha"
   },
   "repository": {
