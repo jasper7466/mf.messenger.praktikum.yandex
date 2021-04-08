@@ -14,12 +14,12 @@ import { data as profilePasswordContext } from './pages/profile-password/index.t
 import { data as signupContext } from './pages/signup/index.tmpl';
 import Store from "./modules/Store";
 import {storeMap} from "./config";
+import '../static/styles/index.css';
 
 const router = new Router('.application');
 
 export enum Routes {
     login = '/login',
-    chatMain = '/chat-main',
     chatSelect = '/chat-select',
     error = '/error',
     profile = '/profile',
