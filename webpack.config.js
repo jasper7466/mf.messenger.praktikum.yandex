@@ -2,6 +2,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     context: path.resolve(__dirname, 'src'),
@@ -28,7 +29,13 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({ template: '../static/index.html' }),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new CopyWebpackPlugin({
+            patterns: [{
+                from: path.resolve(__dirname, 'static/images'),
+                to: path.resolve(__dirname, 'dist/images'),
+            }]
+        })
     ],
     devServer: {
         port: 4000,
