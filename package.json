@@ -1,11 +1,12 @@
 {
   "name": "mf.messenger.praktikum.yandex",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
+    "watch": "webpack --mode development --watch",
     "compile": "copyfiles -u 1 static/**/**/**/*.{css,html,svg,png} dist && tsc && node append-import-extensions.js",
     "babel-compile": "babel src -d lib --extensions '.ts,.tsx'",
     "start": "npm run compile && node server.js",
@@ -39,6 +40,7 @@
     "copyfiles": "^2.4.1",
     "css-loader": "^5.2.0",
     "express": "^4.17.1",
+    "file-loader": "^6.2.0",
     "filehound": "^1.17.4",
     "html-webpack-plugin": "^5.3.1",
     "jsdom": "^16.5.2",
