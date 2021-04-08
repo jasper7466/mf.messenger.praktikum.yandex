@@ -1,5 +1,5 @@
-import EventBus from "./EventBus";
-import { set } from "../utilities/objectHandlers";
+import EventBus from "@modules/EventBus";
+import { set } from "@utils/objectHandlers";
 
 export default class Store {
 

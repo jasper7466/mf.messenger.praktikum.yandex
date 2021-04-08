@@ -1,8 +1,8 @@
 import { template } from "./index.tmpl";
-import Button from "../../components/button/index";
-import FormValidator from "../../modules/FormValidator";
-import Component from "../../modules/Component";
-import {loginValidationRules as checks, storeMap} from "../../config";
+import Button from "@components/button/index";
+import FormValidator from "@modules/FormValidator";
+import Component from "@modules/Component";
+import {loginValidationRules as checks, storeMap} from "@/config";
 import controller from "./controller";
 
 const validator = new FormValidator(checks);

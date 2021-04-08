@@ -1,7 +1,7 @@
-import Controller from "../../modules/Controller";
-import {chatsAPI, CreateChatData, QueryOptions} from "../../api/ChatsAPI";
-import {usersAPI, UserSearchData} from "../../api/UsersAPI";
-import {SETTINGS, storeMap} from "../../config";
+import Controller from "@modules/Controller";
+import {chatsAPI, CreateChatData, QueryOptions} from "@api/ChatsAPI";
+import {usersAPI, UserSearchData} from "@api/UsersAPI";
+import {SETTINGS, storeMap} from "@/config";
 
 class ChatsController extends Controller {
     constructor() {

@@ -1,10 +1,10 @@
 import {template} from "./index.tmpl";
-import Component from "../../modules/Component";
-import {chatNameValidationRules, loginValidationRules, storeMap} from "../../config";
+import Component from "@modules/Component";
+import {chatNameValidationRules, loginValidationRules, storeMap} from "@/config";
 import controller from "./controller";
-import {Routes} from "../../index";
-import Button from "../../components/button/index";
-import FormValidator from "../../modules/FormValidator";
+import {Routes} from "@/index";
+import Button from "@components/button/index";
+import FormValidator from "@/modules/FormValidator";
 
 const newChatValidator = new FormValidator(chatNameValidationRules);
 const addUserValidator = new FormValidator(loginValidationRules);

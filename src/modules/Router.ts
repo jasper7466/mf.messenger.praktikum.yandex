@@ -1,5 +1,5 @@
-import Route from "./Route";
-import Component from "./Component";
+import Route from "@modules/Route";
+import Component from "@modules/Component";
 
 export default class Router {
 

@@ -1,7 +1,7 @@
 import {assert} from "chai";
-import Router from "./Router";
-import Route from "./Route";
-import Component from "./Component";
+import Router from "@modules/Router";
+import Route from "@modules/Route";
+import Component from "@modules/Component";
 
 class ComponentLike extends Component {
     constructor(props?: any) {

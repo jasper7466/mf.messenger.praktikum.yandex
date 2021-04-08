@@ -1,6 +1,6 @@
 import {assert} from "chai";
-import Component from "./Component";
-import EventBus from "./EventBus";
+import Component from "@modules/Component";
+import EventBus from "@modules/EventBus";
 
 describe('Component.ts: Инициализация', () => {
     it('Инициализация по умолчанию (без входных аргументов)', () => {

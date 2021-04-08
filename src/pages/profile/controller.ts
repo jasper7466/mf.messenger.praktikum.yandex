@@ -1,7 +1,7 @@
-import Controller from "../../modules/Controller";
-import {authAPI, UserInfoData} from "../../api/AuthAPI";
-import {SETTINGS, storeMap} from "../../config";
-import {Routes} from "../../index";
+import Controller from "@modules/Controller";
+import {authAPI, UserInfoData} from "@api/AuthAPI";
+import {SETTINGS, storeMap} from "@/config";
+import {Routes} from "@/index";
 
 export class ProfileController extends Controller {
     constructor() {

@@ -1,5 +1,5 @@
-import Controller from "../../modules/Controller";
-import {UserProfileData, usersAPI} from "../../api/UsersAPI";
+import Controller from "@modules/Controller";
+import {UserProfileData, usersAPI} from "@api/UsersAPI";
 
 class ProfileDataController extends Controller {
     constructor() {
