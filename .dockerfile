@@ -12,7 +12,7 @@ RUN npm install
 RUN npm run build
 
 # копируем исходный код
-COPY . .
+COPY . /
 
 EXPOSE 4000
 
