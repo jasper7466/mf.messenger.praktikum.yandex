@@ -1,6 +1,6 @@
-import EventBus from '@modules/EventBus';
-import Store from '@modules/Store';
-import { merge } from '@utils/objectHandlers';
+import EventBus from './EventBus';
+import Store from './Store';
+import { merge } from '../utilities/objectHandlers';
 
 type Property = Record<string, any>;
 
