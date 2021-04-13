@@ -14,6 +14,8 @@ RUN npm run build
 # копируем исходный код
 COPY . /
 
+ENV PORT=4000
+
 EXPOSE 4000
 
 CMD npm install express && node server.js
