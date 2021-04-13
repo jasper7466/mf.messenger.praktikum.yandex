@@ -9,13 +9,9 @@ WORKDIR /app
 COPY package*.json ./
 
 RUN npm install
+RUN npm run build
 
 # копируем исходный код
 COPY . .
-RUN npm run build
-
-ENV PORT=4000
-
-EXPOSE 4000
 
 CMD [ "node", "server.js" ]
