@@ -44,6 +44,37 @@ const cssLoaders = extra => {
     return loaders;
 }
 
+// Не используется
+const scriptLoaders = (extra) => {
+    const loaders = [];
+
+    if (extra)
+        loaders.loaders.push(extra);
+    
+    if (isDevMode)
+        loaders.push('eslint-loader');  // WARN: eslint-loader is deprecated
+
+    return loaders;
+}
+
+// Не используется
+const babelOptions = preset => {
+    const opts = {
+        presets: [
+            '@babel/preset-env',
+            '@babel/preset-typescript'
+        ],
+        plugins: [
+            '@babel/plugin-proposal-calss-properties'
+        ]
+    }
+
+    if (preset)
+        opts.presets.push(preset);
+
+    return opts;
+}
+
 module.exports = {
     context: path.resolve(__dirname, 'src'),
     mode: 'development',
@@ -114,6 +145,11 @@ module.exports = {
                 test: /\.(svg|png|jpg|gif)$/,
                 use: ['file-loader?name=./images/[name].[ext]']
             },
+            // {
+            //     test: /\.js$/,
+            //     loader: 'babel-loader',
+            //     exclude: ['/node_modules/']
+            // }
 
             // Add your rules for custom modules here
             // Learn more about loaders from https://webpack.js.org/loaders/
