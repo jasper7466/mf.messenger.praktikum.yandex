@@ -1,7 +1,7 @@
 FROM node:12
 
 # создание директории приложения
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # установка зависимостей
 # символ астериск ("*") используется для того чтобы по возможности 
@@ -9,13 +9,13 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 RUN npm install
-RUN npm run build
 
 # копируем исходный код
-COPY . /
+COPY . .
+RUN npm run build
 
 ENV PORT=4000
 
 EXPOSE 4000
 
-CMD npm install express && node server.js
+CMD [ "node", "server.js" ]
