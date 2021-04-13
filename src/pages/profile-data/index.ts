@@ -58,7 +58,7 @@ export class ProfileDataPage extends Component {
     avatarFormHandler(event: Event) {
         event.preventDefault();
         const target = event.target as HTMLFormElement;
-        let formData  = new FormData(target);
+        const formData  = new FormData(target);
         controller.changeProfileAvatar(formData);
     }
 }

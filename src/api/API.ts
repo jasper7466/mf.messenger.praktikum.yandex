@@ -6,6 +6,7 @@ const transport = new HTTPTransport(SETTINGS.baseURL);
 // Базовый класс для реализации API
 export class API {
     constructor() {
+        return;
     }
 
     // Прозрачный обработчик исключений, может быть переопределён
