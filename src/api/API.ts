@@ -1,11 +1,12 @@
-import {HTTPTransport, Options} from "../modules/HTTPTransport";
-import {SETTINGS} from "../config";
+import {HTTPTransport, Options} from "@modules/HTTPTransport";
+import {SETTINGS} from "@/config";
 
 const transport = new HTTPTransport(SETTINGS.baseURL);
 
 // Базовый класс для реализации API
 export class API {
     constructor() {
+        return;
     }
 
     // Прозрачный обработчик исключений, может быть переопределён

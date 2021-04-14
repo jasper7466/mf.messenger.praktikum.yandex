@@ -1,8 +1,8 @@
 import { template } from './index.tmpl';
-import ErrorBanner from '../../components/errorBanner/index';
-import Component from '../../modules/Component';
-import { storeMap } from '../../config';
-import Router from "../../modules/Router";
+import ErrorBanner from '@components/errorBanner/index';
+import Component from '@modules/Component';
+import { storeMap } from '@/config';
+import Router from "@modules/Router";
 
 type Partial = {
     name: string,

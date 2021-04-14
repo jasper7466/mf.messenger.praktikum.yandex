@@ -1,9 +1,9 @@
 import { template } from "./index.tmpl";
-import Button from "../../components/button/index";
-import FormValidator from "../../modules/FormValidator";
-import Component from "../../modules/Component";
+import Button from "@components/button/index";
+import FormValidator from "@modules/FormValidator";
+import Component from "@modules/Component";
 import controller from "./controller";
-import {Routes} from "../../index";
+import {Routes} from "@/index";
 import {profileValidationRules as checks} from "../../config";
 
 const validator = new FormValidator(checks);
