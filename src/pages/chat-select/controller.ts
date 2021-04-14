@@ -115,6 +115,7 @@ class ChatsController extends Controller {
         const userID = this.storeGet(storeMap.currentUserID);
         const token = this.storeGet(storeMap.activeChatToken);
         this._socket = new WebSocket(`${SETTINGS.wssURL}/chats/${userID}/${chatID}/${token}`);
+        this._socket.addEventListener('message', this.messageHandler);
         console.log('socket opened:', userID, chatID, token);
     }
 
