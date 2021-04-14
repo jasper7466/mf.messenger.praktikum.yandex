@@ -115,12 +115,12 @@ class ChatsController extends Controller {
         const userID = this.storeGet(storeMap.currentUserID);
         const token = this.storeGet(storeMap.activeChatToken);
         this._socket = new WebSocket(`${SETTINGS.wssURL}/chats/${userID}/${chatID}/${token}`);
-        this._socket.addEventListener('message', this.messageHandler);
+        this._socket.addEventListener('message', this.messageHandler.bind(this));
         console.log('socket opened:', userID, chatID, token);
     }
 
     socketClose() {
-        this._socket?.removeEventListener('message', this.messageHandler);
+        this._socket?.removeEventListener('message', this.messageHandler.bind(this));
         this._socket?.close();
     }
 
@@ -134,7 +134,7 @@ class ChatsController extends Controller {
 
     messageHandler(event: any) {
         console.log(`ReceivedMessage:`, event.data);
-        this.storeSet(storeMap.activeChatFeed, event.data)
+        //this.storeSet(storeMap.activeChatFeed, event.data)
     }
 }
 
