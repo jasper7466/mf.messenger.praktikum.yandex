@@ -38,4 +38,8 @@ export default class Store {
         }
         return result;
     }
+
+    forceEmit(path: string) {
+        this.eventBus.emit(path);
+    }
 }

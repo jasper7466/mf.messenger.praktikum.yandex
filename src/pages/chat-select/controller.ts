@@ -74,7 +74,7 @@ class ChatsController extends Controller {
                 chat.unreads = 0;
             }
         }
-        this.storeSet(storeMap.chatsList, {chats: chats});
+        this.storeSet(storeMap.chatPageProps, {chats: chats});
     }
 
     async addUser(data: UserSearchData) {
@@ -134,7 +134,26 @@ class ChatsController extends Controller {
 
     messageHandler(event: any) {
         console.log(`ReceivedMessage:`, event.data);
-        //this.storeSet(storeMap.activeChatFeed, event.data)
+        const currentUserID = this.storeGet(storeMap.currentUserID);
+        const received = JSON.parse(event.data);
+        if (received.type === 'user connected')
+            return;
+        console.log(received);
+        const msg = {
+            text: received.content,
+            attachmentType: false,
+            attachmentSource: false,
+            datetime: received.time,
+            time: received.time,
+            isOwner: received.user_id === currentUserID,
+            isRead: true
+        }
+        const props = this.storeGet(storeMap.chatPageProps);
+        if (!props.feed)
+            props.feed = [];
+        props.feed.push(msg);
+        console.log(msg);
+        this.storeForceEmit(storeMap.chatPageProps);
     }
 }
 

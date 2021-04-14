@@ -29,7 +29,7 @@ export class ChatSelectPage extends Component {
             Handlebars.registerPartial('addUserButton', addUserButton.element.innerHTML);
         if (removeUserButton.element)
             Handlebars.registerPartial('removeUserButton', removeUserButton.element.innerHTML);
-        super(props, storeMap.chatsList);
+        super(props, storeMap.chatPageProps);
         this.element.addEventListener('click', e => this.clickHandler(e));
 
     }
@@ -134,6 +134,8 @@ export class ChatSelectPage extends Component {
         const chat = this.element.querySelector('.chat');
         if (chat)
             chat.classList.remove('side-container_hidden');
+        const props = controller.storeGet(storeMap.chatPageProps);
+        props.chatSelected = true;
     }
 
     newChatModalShow() {

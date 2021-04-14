@@ -28,12 +28,20 @@ export const template =`
     </section>
     
     <!-- Окно чата, чат не выбран -->
-    <section class="side-container side-container_type_centered no-chat-selected">
+    <section class="side-container side-container_type_centered no-chat-selected
+    {{#if this.chatSelected}}
+        side-container_hidden
+    {{/if}}
+    ">
     Выберите чат чтобы отправить сообщение
     </section>
     
     <!-- Окно чата, чат выбран -->
-    <section class="side-container chat side-container_hidden">
+    <section class="side-container chat 
+    {{#unless this.chatSelected}}
+        side-container_hidden
+    {{/unless}}
+    ">
         <div class="chat__header">
             <div class="avatar avatar_micro">
                 <img class="avatar__image" src={{chat.image}} alt="Аватар чата">
@@ -42,7 +50,7 @@ export const template =`
             <button class="round-button round-button_type_options chat-options-button"></button>
         </div>
         <div class="chat__feed">        
-            {{#each chat.feed}}
+            {{#each this.feed}}
                 <p class="chat__message
                     {{#if attachmentType}}
                         chat__message_type_other

@@ -9,7 +9,7 @@ export const SETTINGS = {
 export const storeMap = {
     errorPageProps: 'store.errorPage',
     chatPageProps: 'store.chatPage',
-    chatsList: 'store.chatsList',
+    //chatsList: 'store.chatsList',
     profilePageProps: 'store.profile',
     activeChatID: 'store.activeChatID',
     activeChatToken: 'store.activeChatToken',

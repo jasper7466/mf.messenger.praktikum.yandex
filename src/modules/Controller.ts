@@ -29,6 +29,10 @@ export default class Controller {
         return store.get(path);
     }
 
+    storeForceEmit(path: string) {
+        store.forceEmit(path);
+    }
+
     public statusHandler(status: number, descriptions: ErrorsDescription = null): boolean {
         // Обрабатываются только коды ошибок
         if (status < 400)
