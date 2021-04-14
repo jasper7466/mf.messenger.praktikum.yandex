@@ -4,6 +4,9 @@ import {usersAPI, UserSearchData} from "@api/UsersAPI";
 import {SETTINGS, storeMap} from "@/config";
 
 class ChatsController extends Controller {
+
+    protected _socket: WebSocket | null = null;
+
     constructor() {
         super();
     }
@@ -94,6 +97,43 @@ class ChatsController extends Controller {
             this.statusHandler(e.status);
             alert(`Пользователь ${data.login} удалён из чата`);
         }
+    }
+
+    async getChatToken(chatID: number) {
+        try {
+            const response = await chatsAPI.getToken(chatID);
+            console.log(response.response['token']);
+            return response.response['token'];
+        } catch (e) {
+            this.statusHandler(e.status);
+        }
+    }
+
+    socketOpen(chatID: number) {
+        if (this._socket)
+            this.socketClose();
+        const userID = this.storeGet(storeMap.currentUserID);
+        const token = this.storeGet(storeMap.activeChatToken);
+        this._socket = new WebSocket(`${SETTINGS.wssURL}/chats/${userID}/${chatID}/${token}`);
+        console.log('socket opened:', userID, chatID, token);
+    }
+
+    socketClose() {
+        this._socket?.removeEventListener('message', this.messageHandler);
+        this._socket?.close();
+    }
+
+    socketSendText(msg: string) {
+        this._socket?.send(JSON.stringify({
+            content: msg,
+            type: 'message'
+        }));
+        console.log('Message sended:', msg);
+    }
+
+    messageHandler(event: any) {
+        console.log(`ReceivedMessage:`, event.data);
+        this.storeSet(storeMap.activeChatFeed, event.data)
     }
 }
 

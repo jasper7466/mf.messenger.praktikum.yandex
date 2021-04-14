@@ -90,17 +90,34 @@ export class ChatSelectPage extends Component {
             if (addUserModal)
                 addUserModal.classList.add('modal_active');
         }
+        else if (target.classList.contains('round-button_type_send')) {
+            const messageInput = this.element.querySelector('.chat__sender-input') as HTMLInputElement;
+            const msg = messageInput?.value;
+            if (!msg || msg === '')
+                return;
+            messageInput.value = '';
+            controller.socketSendText(msg);
+        }
     }
 
     // Обработчик событий выбора чата
-    chatSelectHandler(chatListItem: HTMLElement) {
+    async chatSelectHandler(chatListItem: HTMLElement) {
         // Если чат уже активен - выходим
         if (chatListItem.classList.contains('chat-list__item_active'))
             return;
 
         const chatID = chatListItem.dataset.id;
-        if (chatID)
-            controller.storeSet(storeMap.activeChatID, parseInt(chatID));
+        if (!chatID)
+            return;
+        controller.storeSet(storeMap.activeChatID, parseInt(chatID));
+
+        const chatToken = await controller.getChatToken(parseInt(chatID));
+
+        // TODO: 
+        console.log(`Chat token received! Token: ${chatToken}`);
+
+        controller.storeSet(storeMap.activeChatToken, chatToken);
+        controller.socketOpen(parseInt(chatID));
 
         const chatList = chatListItem.closest('.chat-list__list');
         let activeChat = null;
