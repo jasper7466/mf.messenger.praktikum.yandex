@@ -9,6 +9,7 @@ export default class Router {
     private _routes: Route[] = [];
     private _history = window.history;
     private _currentRoute: Route | null = null;
+    public badRouteHandler?: () => void;
 
     constructor(rootSelector: string | null = null) {
         // Реализована возможность создания экземпляра без инициализации
@@ -40,10 +41,15 @@ export default class Router {
 
     _onRoute(path: string): void {
         const route = this.getRoute(path);
-        if (!route)
+        if (!route) {
+            if (this.badRouteHandler) {
+                this.badRouteHandler();
+            }
             return;
-        if (this._currentRoute)
+        }
+        if (this._currentRoute) {
             this._currentRoute.leave();
+        }
         this._currentRoute = route;
         route.render();
     }

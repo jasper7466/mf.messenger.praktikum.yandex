@@ -1,4 +1,4 @@
-import Router from './modules/Router';
+import Router from '@modules/Router';
 import { LoginPage } from './pages/login/index';
 import { ChatSelectPage } from './pages/chat-select/index';
 import { ErrorPage } from './pages/error/index';
@@ -12,12 +12,14 @@ import { data as profileContext } from './pages/profile/index.tmpl';
 import { data as profileDataContext } from './pages/profile-data/index.tmpl';
 import { data as profilePasswordContext } from './pages/profile-password/index.tmpl';
 import { data as signupContext } from './pages/signup/index.tmpl';
+import Store from "@modules/Store";
+import {storeMap} from "@/config";
+import '../static/styles/index.css';
 
 const router = new Router('.application');
 
 export enum Routes {
     login = '/login',
-    chatMain = '/chat-main',
     chatSelect = '/chat-select',
     error = '/error',
     profile = '/profile',
@@ -35,5 +37,11 @@ router
     .use(Routes.profilePassword, ProfilePasswordPage, profilePasswordContext)
     .use(Routes.signup, SignupPage, signupContext)
     .start();
+
+// Обработчик несуществующего роута
+router.badRouteHandler = () => {
+    new Store().set(storeMap.errorPageProps, {type: '404', description: 'Не туда попали'});
+    router.go(Routes.error);
+}
 
 router.go(Routes.login);

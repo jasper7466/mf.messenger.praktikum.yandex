@@ -1,5 +1,5 @@
-import Controller from "../../modules/Controller";
-import {UserPasswordData, usersAPI} from "../../api/UsersAPI";
+import Controller from "@modules/Controller";
+import {UserPasswordData, usersAPI} from "@api/UsersAPI";
 
 class ProfilePasswordController extends Controller {
     constructor() {
@@ -7,9 +7,12 @@ class ProfilePasswordController extends Controller {
     }
 
     async changeProfilePassword(data: UserPasswordData) {
-        const response = await usersAPI.changePassword(data);
-        if (!this.statusHandler(response.status))
+        try {
+            await usersAPI.changePassword(data);
             this.back();
+        } catch (e) {
+            this.statusHandler(e.status);
+        }
     }
 }
 

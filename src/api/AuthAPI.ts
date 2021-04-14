@@ -1,4 +1,4 @@
-import transport from "./API";
+import {API} from "@api/API";
 
 export interface RegisterFormData {
     first_name: string,
@@ -25,25 +25,25 @@ export interface UserInfoData {
     avatar: string
 }
 
-class AuthAPI {
+class AuthAPI extends API {
     constructor() {
-    }
-    /** Create new user */
-    signUp(data: RegisterFormData) {
-        return transport.post('/auth/signup',{data: data});
+        super();
     }
 
-    /** Auth existing user */
+    signUp(data: RegisterFormData) {
+        return this.post('/auth/signup',{data});
+    }
+
     signIn(data: LoginFormData) {
-        return transport.post('/auth/signin',{data: data});
+        return this.post('/auth/signin',{data});
     }
 
     getUserInfo() {
-        return transport.get('/auth/user');
+        return this.get('/auth/user');
     }
 
     logout() {
-        return transport.post('/auth/logout');
+        return this.post('/auth/logout');
     }
 }
 

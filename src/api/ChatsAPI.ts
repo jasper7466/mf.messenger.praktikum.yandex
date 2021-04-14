@@ -1,4 +1,4 @@
-import transport from "./API";
+import {API} from "@api/API";
 
 export type QueryOptions = {
     offset?: number,
@@ -15,56 +15,57 @@ export interface AddChatUserData {
     chatId: number
 }
 
-class ChatsAPI {
+class ChatsAPI extends API {
+    constructor() {
+        super();
+    }
 
-    constructor() {}
-
-    get(data?: QueryOptions) {
-        return transport.get('/chats', {data: data});
+    getChat(data?: QueryOptions) {
+        return this.get('/chats', {data});
     }
 
     getArchived(data: any) {
-        return transport.get('/chats/archive', {data: data});
+        return this.get('/chats/archive', {data});
     }
 
-    create(data: CreateChatData) {
-        return transport.post('/chats', {data: data});
+    createChat(data: CreateChatData) {
+        return this.post('/chats', {data});
     }
 
-    delete(data: any) {
-        return transport.delete('/chats', {data: data});
+    deleteChat(data: any) {
+        return this.delete('/chats', {data});
     }
 
-    archive(data: any) {
-        return transport.post('/chats/archive', {data: data});
+    archiveChat(data: any) {
+        return this.post('/chats/archive', {data});
     }
 
-    unArchive(data: any) {
-        return transport.post('/chats/unarchive', {data: data});
+    unArchiveChat(data: any) {
+        return this.post('/chats/unarchive', {data});
     }
 
     getUsers(chatID: any) {
-        return transport.get(`/chats/${chatID}/users`);
+        return this.get(`/chats/${chatID}/users`);
     }
 
     getNewMessagesCount(chatID: number) {
-        return transport.get(`/chats/new/${chatID}`);
+        return this.get(`/chats/new/${chatID}`);
     }
 
     uploadAvatar(data: any) {
-        return transport.put('/chats/avatar', {data: data});
+        return this.put('/chats/avatar', {data});
     }
 
     addUser(data: AddChatUserData) {
-        return transport.post('/chats/users', {data: data});
+        return this.post('/chats/users', {data});
     }
 
     deleteUser(data: any) {
-        return transport.delete('/chats/users', {data: data});
+        return this.delete('/chats/users', {data});
     }
 
     getToken(chatID: number) {
-        return transport.post(`/chats/token/${chatID}`);
+        return this.post(`/chats/token/${chatID}`);
     }
 }
 

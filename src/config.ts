@@ -1,16 +1,20 @@
-import FormValidator from "./modules/FormValidator";
+import FormValidator from "@modules/FormValidator";
 
 export const SETTINGS = {
     baseURL: 'https://ya-praktikum.tech/api/v2',
+    wssURL: 'wss://ya-praktikum.tech/ws',
     avatarDummy: '../images/avatar-dummy2.png'
 }
 
 export const storeMap = {
     errorPageProps: 'store.errorPage',
     chatPageProps: 'store.chatPage',
-    chatsList: 'store.chatsList',
+    //chatsList: 'store.chatsList',
     profilePageProps: 'store.profile',
-    activeChatID: 'store.activeChatID'
+    activeChatID: 'store.activeChatID',
+    activeChatToken: 'store.activeChatToken',
+    activeChatFeed: 'store.activeChatFeed',
+    currentUserID: 'store.userID'
 }
 
 type ErrorsDescription = { [key: string]: string };

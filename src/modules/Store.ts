@@ -5,7 +5,7 @@ export default class Store {
 
     static _instance: Store;
     public eventBus: EventBus;
-    private readonly _store: {};
+    private readonly _store: Record<string, unknown>;
 
     constructor() {
         if (Store._instance)
@@ -30,12 +30,16 @@ export default class Store {
 
         const pathArr = path.split('.');
         let result: any = this._store;
-        for (let key of pathArr) {
+        for (const key of pathArr) {
             const value = result[key];
             if (!value)
                 return undefined;
             result = value;
         }
         return result;
+    }
+
+    forceEmit(path: string) {
+        this.eventBus.emit(path);
     }
 }

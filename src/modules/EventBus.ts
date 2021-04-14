@@ -10,8 +10,8 @@ interface IEventBus {
 
 export default class EventBus implements IEventBus {
     protected _listeners: ListenersList = {};
-    protected _debugMode: boolean = false;
-    protected _strictMode: boolean = false;
+    protected _debugMode = false;
+    protected _strictMode = false;
 
     constructor() {
         this._listeners = {};

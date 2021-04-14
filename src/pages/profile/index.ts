@@ -1,8 +1,8 @@
 import { template } from './index.tmpl';
-import Component from "../../modules/Component";
-import {storeMap} from "../../config";
+import Component from "@modules/Component";
+import {storeMap} from "@/config";
 import controller from "./controller";
-import {Routes} from "../../index";
+import {Routes} from "@/index";
 
 export class ProfilePage extends Component {
     constructor(props: any) {

@@ -9,7 +9,7 @@ export function isObject(variable: any) {
 }
 
 export function merge(lhs: any, rhs: any): Indexed {
-    for (let key in rhs) {
+    for (const key in rhs) {
         if (isObject(lhs[key]))
             lhs[key] = merge(lhs[key], rhs[key]);
         else
