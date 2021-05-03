@@ -50,7 +50,7 @@ const scriptLoaders = (extra) => {
 
     if (extra)
         loaders.loaders.push(extra);
-    
+
     if (isDevMode)
         loaders.push('eslint-loader');  // WARN: eslint-loader is deprecated
 
@@ -117,6 +117,7 @@ module.exports = {
         open: true,
         hot: isDevMode,
         host: 'localhost',
+        historyApiFallback: true
     },
     module: {
         rules: [
