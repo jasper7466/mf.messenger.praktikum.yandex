@@ -28,6 +28,14 @@ export enum Routes {
     signup = '/signup'
 }
 
+/**
+ * Обработчик перехода по несуществующему роуту
+ */
+const badRouteHandler = () => {
+    new Store().set(storeMap.errorPageProps, {type: '404', description: 'Не туда попали'});
+    router.go(Routes.error);
+}
+
 router
     .use(Routes.login, LoginPage, loginContext)
     .use(Routes.chatSelect, ChatSelectPage, chatSelectContext)
@@ -36,12 +44,6 @@ router
     .use(Routes.profileData, ProfileDataPage, profileDataContext)
     .use(Routes.profilePassword, ProfilePasswordPage, profilePasswordContext)
     .use(Routes.signup, SignupPage, signupContext)
-    .start();
-
-// Обработчик несуществующего роута
-router.badRouteHandler = () => {
-    new Store().set(storeMap.errorPageProps, {type: '404', description: 'Не туда попали'});
-    router.go(Routes.error);
-}
-
-router.go(Routes.login);
+    .setDefaultRoute(Routes.login)
+    .setBadRouteHandler(badRouteHandler)
+    .start()
