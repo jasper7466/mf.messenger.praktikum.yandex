@@ -1,6 +1,6 @@
 import EventBus from './EventBus';
 import Store from './Store';
-import { merge } from '../utilities/objectHandlers';
+import merge from "../utilities/merge";
 
 type Property = Record<string, any>;
 
