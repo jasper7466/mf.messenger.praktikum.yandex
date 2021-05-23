@@ -1,7 +1,7 @@
 import { assert, expect } from "chai"
 import Stack from "./Stack";
 
-describe('Stack.ts: Black Box Testing', () => {
+describe('Stack: Black Box Testing', () => {
 
     function emptyStackBehavior(stack: Stack) {
         it('Размер стека. Ожидается: 0', () => {

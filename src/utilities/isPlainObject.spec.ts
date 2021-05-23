@@ -7,8 +7,12 @@ describe('isPlainObject: Black Box Testing', () => {
         expect(isPlainObject(obj)).to.be.true;
     });
 
-    it('Не объект (примитив). Ожидается: false', () => {
+    it('Не объект (число). Ожидается: false', () => {
         expect(isPlainObject(123)).to.be.false;
+    });
+
+    it('Не объект (функция). Ожидается: false', () => {
+        expect(isPlainObject(() => {})).to.be.false;
     });
 
     it('Не пустой простой объект. Ожидается: true', () => {
