@@ -1,5 +1,4 @@
 import { assert } from "chai"
-// import cloneDeep from "./cloneDeep";
 import merge from "./merge";
 
 describe('merge: Black Box Testing', () => {

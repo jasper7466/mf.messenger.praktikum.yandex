@@ -12,7 +12,7 @@ type StackItem = {
  * При обнаружении экземпляра класса - выбрасывается исключение.
  * @param source - копируемое значение
  */
-export default function cloneDeep(source: unknown) {
+export default function cloneDeep(source: unknown): unknown {
     if(!isObject(source) && !Array.isArray(source))
         return source;
 

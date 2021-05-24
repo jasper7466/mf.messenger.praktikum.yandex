@@ -137,15 +137,15 @@ describe('cloneDeep: Black Box Testing', () => {
         const nonPlainInArray = [ nonPlainInstance ];
 
         it('Выброс исключения при копировании экземпляра класса', () => {
-            expect(() => cloneDeep(nonPlainInstance)).to.be.throw('cloneDeep: Complex object detected');
+            expect(() => cloneDeep(nonPlainInstance)).to.throw('cloneDeep: Complex object detected');
         });
 
         it('Выброс исключения при копировании экземпляра класса, вложенного в объект', () => {
-            expect(() => cloneDeep(nonPlainInObject)).to.be.throw('cloneDeep: Complex object detected');
+            expect(() => cloneDeep(nonPlainInObject)).to.throw('cloneDeep: Complex object detected');
         });
 
         it('Выброс исключения при копировании экземпляра класса, вложенного в массив', () => {
-            expect(() => cloneDeep(nonPlainInArray)).to.be.throw('cloneDeep: Complex object detected');
+            expect(() => cloneDeep(nonPlainInArray)).to.throw('cloneDeep: Complex object detected');
         });
     });
 });
