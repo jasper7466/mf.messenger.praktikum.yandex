@@ -5,6 +5,7 @@ import controller from "./controller";
 import {Routes} from "@/index";
 import Button from "@components/button/index";
 import FormValidator from "@/modules/FormValidator";
+import {PlainObject} from "../../types";
 
 const newChatValidator = new FormValidator(chatNameValidationRules);
 const addUserValidator = new FormValidator(loginValidationRules);
@@ -31,24 +32,26 @@ export class ChatSelectPage extends Component {
             Handlebars.registerPartial('removeUserButton', removeUserButton.element.innerHTML);
         super(props, storeMap.chatPageProps);
         this.element.addEventListener('click', e => this.clickHandler(e));
-
     }
 
-    componentDidUpdate() {
+    beforeCompile() {
         newChatValidator.detach();
         removeUserValidator.detach();
         removeUserValidator.detach();
     }
 
+    async beforeMount() {
+        await controller.updateChats();
+    }
+
     componentDidMount() {
-        controller.updateChats();
     }
 
     compile(context: any) {
         return Handlebars.compile(template)(context);
     }
 
-    compiled() {
+    afterCompile() {
         if (this.element) {
             newChatValidator.attach(this.element, '.new-chat-form');
             addUserValidator.attach(this.element, '.add-user-form');
@@ -113,7 +116,7 @@ export class ChatSelectPage extends Component {
 
         const chatToken = await controller.getChatToken(parseInt(chatID));
 
-        // TODO: 
+        // TODO:
         console.log(`Chat token received! Token: ${chatToken}`);
 
         controller.storeSet(storeMap.activeChatToken, chatToken);
@@ -134,7 +137,7 @@ export class ChatSelectPage extends Component {
         const chat = this.element.querySelector('.chat');
         if (chat)
             chat.classList.remove('side-container_hidden');
-        const props = controller.storeGet(storeMap.chatPageProps);
+        const props = controller.storeGet(storeMap.chatPageProps) as PlainObject;
         props.chatSelected = true;
     }
 

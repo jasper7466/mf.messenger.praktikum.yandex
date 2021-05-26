@@ -18,12 +18,12 @@ export class SignupPage extends Component {
         this.element.addEventListener('click', e => this.clickHandler(e));
     }
 
-    compiled() {
+    afterCompile() {
         if (this.element)
             validator.attach(this.element, '.form')
     }
 
-    componentDidUpdate() {
+    beforeCompile() {
         validator.detach();
     }
 

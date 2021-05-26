@@ -20,26 +20,23 @@ export class ProfileDataPage extends Component {
         this.element.addEventListener('click', e => this.clickHandler(e));
     }
 
-    componentDidUpdate() {
+    beforeCompile() {
         validator.detach();
         const avatarForm = this.element.querySelector('.avatar-form');
         if (avatarForm)
             avatarForm.removeEventListener('submit', this.avatarFormHandler);
     }
 
-    componentDidMount() {
-        const avatarForm = this.element.querySelector('.avatar-form');
-        if (avatarForm)
-            avatarForm.addEventListener('submit', e => this.avatarFormHandler(e));
-    }
-
     compile(context: any) {
         return Handlebars.compile(template)(context);
     }
 
-    compiled() {
+    afterCompile() {
         if (this.element)
             validator.attach(this.element, '.profile-form')
+        const avatarForm = this.element.querySelector('.avatar-form');
+        if (avatarForm)
+            avatarForm.addEventListener('submit', e => this.avatarFormHandler(e));
     }
 
     clickHandler(event: Event) {

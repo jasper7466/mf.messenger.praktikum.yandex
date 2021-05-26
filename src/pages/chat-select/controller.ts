@@ -2,6 +2,7 @@ import Controller from "@modules/Controller";
 import {chatsAPI, CreateChatData, QueryOptions} from "@api/ChatsAPI";
 import {usersAPI, UserSearchData} from "@api/UsersAPI";
 import {SETTINGS, storeMap} from "@/config";
+import {PlainObject} from "../../types";
 
 class ChatsController extends Controller {
 
@@ -79,7 +80,7 @@ class ChatsController extends Controller {
 
     async addUser(data: UserSearchData) {
         const userId = await this._getUserIdByLogin(data);
-        const chatId = this.storeGet(storeMap.activeChatID);
+        const chatId = this.storeGet(storeMap.activeChatID) as number;
         try {
             const response = await chatsAPI.addUser({users: [userId], chatId: chatId});
             return response.response;
@@ -148,10 +149,11 @@ class ChatsController extends Controller {
             isOwner: received.user_id === currentUserID,
             isRead: true
         }
-        const props = this.storeGet(storeMap.chatPageProps);
+        const props = this.storeGet(storeMap.chatPageProps) as PlainObject;
         if (!props.feed)
             props.feed = [];
-        props.feed.push(msg);
+        if (Array.isArray(props.feed))
+            props.feed.push(msg);
         console.log(msg);
         this.storeForceEmit(storeMap.chatPageProps);
     }
