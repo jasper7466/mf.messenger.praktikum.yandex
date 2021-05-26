@@ -4,6 +4,7 @@ import {PlainObject} from "../types";
 
 describe('Store: Grey Box Testing', () => {
     const store = new Store;
+    store.enableStrictMode();
 
     describe('Black Box Tests', () => {
 

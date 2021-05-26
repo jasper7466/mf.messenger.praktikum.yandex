@@ -10,7 +10,8 @@ interface IStore {
     delete(path: string): void | never;
     subscribe(path: string, callback: () => void): void;
     unsubscribe(path: string, callback: () => void): void;
-
+    enableStrictMode(): void;
+    disableStrictMode(): void;
     forceEmit(path: string): void;
 }
 
@@ -22,8 +23,9 @@ type Host = {
 export default class Store implements IStore {
 
     static _instance: Store;
-    public eventBus: EventBus;
-    private _store: Record<string, unknown>;
+    protected _eventBus: EventBus;
+    protected _store: Record<string, unknown>;
+    protected _isStrictMode: boolean;
 
     /**
      * Создаёт singleton-экземпляр класса
@@ -32,8 +34,9 @@ export default class Store implements IStore {
         if (Store._instance)
             return Store._instance;
         Store._instance = this;
-        this.eventBus = new EventBus();
+        this._eventBus = new EventBus();
         this._store = {};
+        this._isStrictMode = false;
     }
 
     /**
@@ -55,6 +58,7 @@ export default class Store implements IStore {
         this._raiseErrorIfPathNotString(path);
 
         set(this._store, path, cloneDeep(data));
+
         this._emit(path);
     }
 
@@ -109,7 +113,7 @@ export default class Store implements IStore {
      * @param callback - обработчик
      */
     public subscribe(path: string, callback: () => void) {
-        this.eventBus.subscribe(path, callback);
+        this._eventBus.subscribe(path, callback);
     }
 
     /**
@@ -119,7 +123,21 @@ export default class Store implements IStore {
      * @param callback - обработчик
      */
     public unsubscribe(path: string, callback: () => void) {
-        this.eventBus.unsubscribe(path, callback);
+        this._eventBus.unsubscribe(path, callback);
+    }
+
+    /**
+     * Включает строгий режим проверки наличия ключей
+     */
+    public enableStrictMode(): void {
+        this._isStrictMode = true;
+    }
+
+    /**
+     * Отключает строгий режим проверки наличия ключей
+     */
+    public disableStrictMode(): void {
+        this._isStrictMode = true;
     }
 
     /**
@@ -133,6 +151,8 @@ export default class Store implements IStore {
 
         return pathKeys.reduce((target, key) => {
             this._raiseErrorIfHasNoProperty(target, key, path);
+            if (!target && !this._isStrictMode)
+                return undefined;
             return target[key];
         }, this._store);
     }
@@ -172,7 +192,7 @@ export default class Store implements IStore {
         pathKeys.reduce((partial, current) => {
             partial = [partial, current].filter(Boolean).join('.');
 
-            this.eventBus.emit(partial);
+            this._eventBus.emit(partial);
 
             return partial;
         }, '');
@@ -196,12 +216,14 @@ export default class Store implements IStore {
      * @protected
      */
     protected _raiseErrorIfHasNoProperty(target: PlainObject, key: string, fullPath: string) {
+        if (!this._isStrictMode)
+            return;
         if (!target.hasOwnProperty(key)) {
             throw new Error(`${this.constructor.name}: Key "${key}" of path "${fullPath}" doesn't exist in store`);
         }
     }
 
     forceEmit(path: string) {
-        this.eventBus.emit(path);
+        this._eventBus.emit(path);
     }
 }
