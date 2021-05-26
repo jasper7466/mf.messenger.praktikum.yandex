@@ -9,7 +9,6 @@ export const SETTINGS = {
 export const storeMap = {
     errorPageProps: 'store.errorPage',
     chatPageProps: 'store.chatPage',
-    //chatsList: 'store.chatsList',
     profilePageProps: 'store.profile',
     activeChatID: 'store.activeChatID',
     activeChatToken: 'store.activeChatToken',
@@ -106,4 +105,15 @@ export const chatNameValidationRules = {
         FormValidator.CHECKS.ALPHANUMERIC,
         FormValidator.CHECKS.MAX_LENGTH,
     ]
+}
+
+export const demoUsers = {
+    user1: {
+        login: 'RbdEz8E2KV',
+        password: 'RbdEz8E2KV',
+    },
+    user2: {
+        login: 'VEjb9ws4CZ@mail.com',
+        password: 'VEjb9ws4CZ',
+    }
 }

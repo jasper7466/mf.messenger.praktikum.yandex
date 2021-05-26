@@ -6,6 +6,7 @@ import { ProfilePage } from './pages/profile/index';
 import { ProfileDataPage } from './pages/profile-data/index';
 import { ProfilePasswordPage } from './pages/profile-password/index';
 import { SignupPage } from './pages/signup/index';
+import { DemoPage } from './pages/demo/index';
 import { data as loginContext } from './pages/login/index.tmpl';
 import { data as chatSelectContext } from './pages/chat-select/index.tmpl';
 import { data as profileContext } from './pages/profile/index.tmpl';
@@ -25,7 +26,8 @@ export enum Routes {
     profile = '/profile',
     profileData = '/profile-data',
     profilePassword = '/profile-password',
-    signup = '/signup'
+    signup = '/signup',
+    demo = '/demo',
 }
 
 /**
@@ -44,6 +46,7 @@ router
     .use(Routes.profileData, ProfileDataPage, profileDataContext)
     .use(Routes.profilePassword, ProfilePasswordPage, profilePasswordContext)
     .use(Routes.signup, SignupPage, signupContext)
+    .use(Routes.demo, DemoPage, {})
     .setDefaultRoute(Routes.login)
     .setBadRouteHandler(badRouteHandler)
     .start()
