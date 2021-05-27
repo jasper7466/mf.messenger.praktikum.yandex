@@ -5,7 +5,6 @@ import controller from "./controller";
 import {Routes} from "@/index";
 import Button from "@components/button/index";
 import FormValidator from "@/modules/FormValidator";
-import {PlainObject} from "../../types";
 
 const newChatValidator = new FormValidator(chatNameValidationRules);
 const addUserValidator = new FormValidator(loginValidationRules);
@@ -41,10 +40,7 @@ export class ChatSelectPage extends Component {
     }
 
     async beforeMount() {
-        await controller.updateChats();
-    }
-
-    componentDidMount() {
+        await controller.pageMountHandler();
     }
 
     compile(context: any) {
@@ -59,91 +55,129 @@ export class ChatSelectPage extends Component {
         }
     }
 
-    clickHandler(event: Event) {
-        // event.stopPropagation();
-        const target = event.target as HTMLElement;
+    afterUnmount() {
+        controller.pageUnmountHandler();
+    }
 
+    clickHandler(event: Event) {
+        const target = event.target as HTMLElement;
         const chatListItem = target.closest('.chat-list__item');
-        if (chatListItem)
+
+        if (chatListItem) {
             this.chatSelectHandler(chatListItem as HTMLElement);
-        else if (target.closest('.go-profile-link'))
+            return;
+        }
+
+        if (target.closest('.go-profile-link')) {
             controller.go(Routes.profile);
-        else if (target.closest('.add-chat-button'))
-            this.newChatModalShow();
-        else if (target.classList.contains('modal'))
-            target.classList.remove('modal_active');
-        else if (target.classList.contains('chat-options-button')) {
-            const chatMenu = this.element.querySelector('.chat-menu-modal');
-            if (chatMenu)
-                chatMenu.classList.add('modal_active');
+            return;
         }
-        else if (target.classList.contains('add-user-link')) {
-            const chatMenu = this.element.querySelector('.chat-menu-modal');
-            if (chatMenu)
-                chatMenu.classList.remove('modal_active');
-            const addUserModal = this.element.querySelector('.add-user-modal');
-            if (addUserModal)
-                addUserModal.classList.add('modal_active');
+
+        if (target.closest('.add-chat-button')) {
+            this._showModal('.new-chat-modal');
+            return;
         }
-        else if (target.classList.contains('remove-user-link')) {
-            const chatMenu = this.element.querySelector('.chat-menu-modal');
-            if (chatMenu)
-                chatMenu.classList.remove('modal_active');
-            const addUserModal = this.element.querySelector('.remove-user-modal');
-            if (addUserModal)
-                addUserModal.classList.add('modal_active');
+
+        if (target.classList.contains('modal')) {
+            this._hideCurrentModal(target);
+            return;
         }
-        else if (target.classList.contains('round-button_type_send')) {
-            const messageInput = this.element.querySelector('.chat__sender-input') as HTMLInputElement;
-            const msg = messageInput?.value;
-            if (!msg || msg === '')
-                return;
-            messageInput.value = '';
-            controller.socketSendText(msg);
+
+        if (target.classList.contains('chat-options-button')) {
+            this._showModal('.chat-menu-modal');
+            return;
+        }
+
+        if (target.classList.contains('add-user-link')) {
+            this._hideModal('.chat-menu-modal');
+            this._showModal('.add-user-modal');
+            return;
+        }
+
+        if (target.classList.contains('remove-user-link')) {
+            this._hideModal('.chat-menu-modal');
+            this._showModal('.remove-user-modal');
+            return;
+        }
+
+        if (target.classList.contains('round-button_type_send')) {
+            this._sendMessage();
+            return;
         }
     }
 
-    // Обработчик событий выбора чата
-    async chatSelectHandler(chatListItem: HTMLElement) {
+    private async chatSelectHandler(chatListItem: HTMLElement) {
         // Если чат уже активен - выходим
-        if (chatListItem.classList.contains('chat-list__item_active'))
+        if (chatListItem.classList.contains('chat-list__item_active')) {
             return;
+        }
 
         const chatID = chatListItem.dataset.id;
-        if (!chatID)
-            return;
-        controller.storeSet(storeMap.activeChatID, parseInt(chatID));
-
-        const chatToken = await controller.getChatToken(parseInt(chatID));
-
-        // TODO:
-        console.log(`Chat token received! Token: ${chatToken}`);
-
-        controller.storeSet(storeMap.activeChatToken, chatToken);
-        controller.socketOpen(parseInt(chatID));
-
-        const chatList = chatListItem.closest('.chat-list__list');
-        let activeChat = null;
-
-        if (chatList) {
-            activeChat = chatList.querySelector('.chat-list__item_active');
-            if (activeChat)
-                activeChat.classList.remove('chat-list__item_active');
+        if (!chatID) {
+            throw new Error(`${this.constructor.name}: Chat-list item chatID not defined`);
         }
-        chatListItem.classList.add('chat-list__item_active');
-        const chatPlaceholder = this.element.querySelector('.no-chat-selected');
-        if (chatPlaceholder)
-            chatPlaceholder.classList.add('side-container_hidden');
+
+        await controller.chatSelectHandler(parseInt(chatID));
+
+        this._deactivateChat();
+        this._activateChat(chatListItem);
+        this._hideFeedPlaceholder();
+        this._showChatFeed();
+
+        controller.storeSet(storeMap.chatPageProps + '.chatSelected', true);
+    }
+
+    private _showChatFeed() {
         const chat = this.element.querySelector('.chat');
         if (chat)
             chat.classList.remove('side-container_hidden');
-        const props = controller.storeGet(storeMap.chatPageProps) as PlainObject;
-        props.chatSelected = true;
     }
 
-    newChatModalShow() {
-        const modal = this.element.querySelector('.new-chat-modal');
+    private _hideFeedPlaceholder() {
+        const chatPlaceholder = this.element.querySelector('.no-chat-selected');
+        if (chatPlaceholder)
+            chatPlaceholder.classList.add('side-container_hidden');
+    }
+
+    private _deactivateChat() {
+        const chatList = this.element.querySelector('.chat-list__list');
+        if (chatList) {
+            const activeChat = chatList.querySelector('.chat-list__item_active');
+            if (activeChat) {
+                activeChat.classList.remove('chat-list__item_active');
+            }
+        }
+    }
+
+    private _sendMessage() {
+        const messageInput = this.element.querySelector('.chat__sender-input') as HTMLInputElement;
+        const message = messageInput?.value;
+
+        if (!message || message === '') {
+            return;
+        }
+
+        messageInput.value = '';
+        controller.sendMessage(message);
+    }
+
+    private _activateChat(chatListItem: Element) {
+        chatListItem.classList.add('chat-list__item_active');
+    }
+
+    private _hideCurrentModal(target: Element) {
+        target.classList.remove('modal_active');
+    }
+
+    private _showModal(selector: string) {
+        const modal = this.element.querySelector(selector);
         if (modal)
             modal.classList.add('modal_active');
+    }
+
+    private _hideModal(selector: string) {
+        const modal = this.element.querySelector(selector);
+        if (modal)
+            modal.classList.remove('modal_active');
     }
 }

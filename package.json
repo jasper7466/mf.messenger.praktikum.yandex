@@ -4,10 +4,11 @@
   "description": "",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack --mode development",
     "build": "cross-env NODE_ENV=production webpack --mode production",
+    "dev": "cross-env NODE_ENV=development webpack --mode development",
     "watch": "cross-env NODE_ENV=development webpack --mode development --watch",
-    "open": "cross-env NODE_ENV=development webpack serve --mode development --open",
+    "serve": "cross-env NODE_ENV=development webpack serve --mode development",
+    "open": "npm run serve --open",
     "start": "node server.js",
     "test": "./node_modules/.bin/mocha",
     "eslint": "eslint src/**/*.ts",

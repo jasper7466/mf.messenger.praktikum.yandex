@@ -82,8 +82,9 @@ export default class Component {
      */
     protected _compile(force = false) {
         // Игнорируем компиляцию, если компонент никуда не смонтирован и не требуется принудительная компиляция
-        if (!this._parentNode && !force)
-            return;
+        force;
+        // if (!this._parentNode && !force)
+        //     return;
 
         this.beforeCompile();
 

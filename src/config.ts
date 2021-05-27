@@ -113,7 +113,7 @@ export const demoUsers = {
         password: 'RbdEz8E2KV',
     },
     user2: {
-        login: 'VEjb9ws4CZ@mail.com',
+        login: 'VEjb9ws4CZ',
         password: 'VEjb9ws4CZ',
     }
 }

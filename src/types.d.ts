@@ -5,3 +5,5 @@ export type PlainObject<T = unknown> = {
 export type StringObject = {
     [k in string]: string;
 }
+
+export type Callback = (...args: unknown[]) => void;
