@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCssAssetWebpackPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 const isDevMode = process.env.NODE_ENV === 'development';
@@ -19,7 +19,7 @@ const optimization = () => {
 
     if (isProdMode) {
         config.minimizer = [
-            new OptimizeCssAssetWebpackPlugin(),
+            new CssMinimizerPlugin(),
             new TerserWebpackPlugin()
         ];
     }
