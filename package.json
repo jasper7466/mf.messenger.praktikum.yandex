@@ -11,7 +11,9 @@
     "start": "node server.js",
     "test": "./node_modules/.bin/mocha",
     "lint": "eslint src/**/*.ts",
-    "lint-fix": "eslint src/**/*.ts --fix"
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "precommit": "npm run lint",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -76,10 +78,5 @@
   "dependencies": {
     "express": "^4.17.1",
     "handlebars": "^4.7.7"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
   }
 }
