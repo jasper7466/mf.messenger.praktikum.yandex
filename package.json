@@ -15,6 +15,7 @@
     "stylelint": "stylelint static/**/*.css",
     "stylelint:fix": "stylelint static/**/*.css --fix",
     "precommit": "npm run eslint && npm run stylelint",
+    "prepush": "npm run test",
     "prepare": "husky install"
   },
   "repository": {
