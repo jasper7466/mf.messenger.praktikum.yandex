@@ -5,6 +5,7 @@ import controller from "./controller";
 import {Routes} from "@/index";
 import Button from "@components/button/index";
 import FormValidator from "@/modules/FormValidator";
+import xssEscape from "../../utilities/xssEscape";
 
 const newChatValidator = new FormValidator(chatNameValidationRules);
 const addUserValidator = new FormValidator(loginValidationRules);
@@ -158,7 +159,7 @@ export class ChatSelectPage extends Component {
         }
 
         messageInput.value = '';
-        controller.sendMessage(message);
+        controller.sendMessage(xssEscape(message));
     }
 
     private _activateChat(chatListItem: Element) {
