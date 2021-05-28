@@ -24,11 +24,11 @@ class UsersAPI extends API {
     }
 
     changeProfile(data: UserProfileData) {
-        return this.put('/user/profile',{data});
+        return this.put('/user/profile', {data});
     }
 
     changeAvatar(data: FormData) {
-        return this.put('/user/profile/avatar',{data, headers: {'content-type': 'multipart/form-data'}});
+        return this.put('/user/profile/avatar', {data});
     }
 
     changePassword(data: UserPasswordData) {
