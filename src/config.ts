@@ -1,16 +1,22 @@
-import FormValidator from "./modules/FormValidator";
+import FormValidator from "@modules/FormValidator";
 
 export const SETTINGS = {
     baseURL: 'https://ya-praktikum.tech/api/v2',
+    wssURL: 'wss://ya-praktikum.tech/ws',
     avatarDummy: '../images/avatar-dummy2.png'
 }
 
 export const storeMap = {
     errorPageProps: 'store.errorPage',
     chatPageProps: 'store.chatPage',
-    chatsList: 'store.chatsList',
     profilePageProps: 'store.profile',
-    activeChatID: 'store.activeChatID'
+    chatList: 'store.chatPage.chats',
+    activeChatFeed: 'store.chatPage.feed',
+    activeChatID: 'store.activeChatID',
+    activeChatToken: 'store.activeChatToken',
+    activeChatAvatar: 'store.chatPage.chat.image',
+    activeChatName: 'store.chatPage.chat.name',
+    currentUserID: 'store.userID'
 }
 
 type ErrorsDescription = { [key: string]: string };
@@ -102,4 +108,15 @@ export const chatNameValidationRules = {
         FormValidator.CHECKS.ALPHANUMERIC,
         FormValidator.CHECKS.MAX_LENGTH,
     ]
+}
+
+export const demoUsers = {
+    user1: {
+        login: 'RbdEz8E2KV',
+        password: 'RbdEz8E2KV',
+    },
+    user2: {
+        login: 'VEjb9ws4CZ',
+        password: 'VEjb9ws4CZ',
+    }
 }

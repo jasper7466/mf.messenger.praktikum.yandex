@@ -1,5 +1,6 @@
-import Controller from "../../modules/Controller";
-import {UserProfileData, usersAPI} from "../../api/UsersAPI";
+import Controller from "@modules/Controller";
+import {UserProfileData, usersAPI} from "@api/UsersAPI";
+import profileController from "../profile/controller";
 
 class ProfileDataController extends Controller {
     constructor() {
@@ -7,15 +8,21 @@ class ProfileDataController extends Controller {
     }
 
     async changeProfileInfo(data: UserProfileData) {
-        const response = await usersAPI.changeProfile(data);
-        if (!this.statusHandler(response.status))
+        try {
+            await usersAPI.changeProfile(data);
             this.back();
+        } catch (e) {
+            this.statusHandler(e.status);
+        }
     }
 
     async changeProfileAvatar(data: FormData) {
-        const response = await usersAPI.changeAvatar(data);
-        if (!this.statusHandler(response.status))
-            alert('Аватар обновлён');
+        try {
+            const userInfo = await usersAPI.changeAvatar(data);
+            await profileController.updateUserInfo(userInfo.response);
+        } catch (e) {
+            this.statusHandler(e.status);
+        }
     }
 }
 

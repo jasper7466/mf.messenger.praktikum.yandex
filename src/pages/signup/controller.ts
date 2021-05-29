@@ -1,6 +1,6 @@
-import Controller from "../../modules/Controller";
-import {authAPI, RegisterFormData} from "../../api/AuthAPI";
-import {Routes} from "../../index";
+import Controller from "@modules/Controller";
+import {authAPI, RegisterFormData} from "@api/AuthAPI";
+import {Routes} from "@/index";
 
 class SignUpController extends Controller {
     constructor() {
@@ -8,9 +8,12 @@ class SignUpController extends Controller {
     }
 
     async signUp (data: RegisterFormData) {
-        const response = await authAPI.signUp(data);
-        if (!this.statusHandler(response.status, errorDescriptions))
-            this.go(Routes.chatSelect)
+        try {
+            await authAPI.signUp(data);
+            this.go(Routes.chatSelect);
+        } catch (e) {
+            this.statusHandler(e.status, errorDescriptions);
+        }
     }
 }
 

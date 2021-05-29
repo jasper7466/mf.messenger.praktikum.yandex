@@ -10,6 +10,7 @@ export const template =`
     {{/each}}
     {{> button}}
     <a class="form__link register-link">Нет аккаунта?</a>
+    <a class="form__link demo-link">Демо-режим</a>
 </form>
 `;
 

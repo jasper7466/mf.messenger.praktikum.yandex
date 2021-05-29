@@ -1,7 +1,7 @@
-import Controller from "../../modules/Controller";
-import {authAPI, UserInfoData} from "../../api/AuthAPI";
-import {SETTINGS, storeMap} from "../../config";
-import {Routes} from "../../index";
+import Controller from "@modules/Controller";
+import {authAPI, UserInfoData} from "@api/AuthAPI";
+import {SETTINGS, storeMap} from "@/config";
+import {Routes} from "@/index";
 
 export class ProfileController extends Controller {
     constructor() {
@@ -9,27 +9,37 @@ export class ProfileController extends Controller {
     }
 
     async getUserInfo() {
-        const response = await authAPI.getUserInfo();
-        if (this.statusHandler(response.status))
-            return null;
-        return response.response;
+        try {
+            const response = await authAPI.getUserInfo();
+            return response.response;
+        } catch (e) {
+            this.statusHandler(e.status);
+        }
+        return null;
     }
 
     async logout() {
-        const response = await authAPI.logout();
-        if (this.statusHandler(response.status))
-            return null;
-        this.go(Routes.login);
+        try {
+            await authAPI.logout();
+            this.go(Routes.login);
+        } catch (e) {
+            this.statusHandler(e.status);
+        }
     }
 
-    async updateUserInfo() {
-        const userInfo: UserInfoData = await this.getUserInfo();
-        if (!userInfo)
+    async updateUserInfo(userInfo?: UserInfoData) {
+        if (!userInfo) {
+            userInfo = await this.getUserInfo();
+        }
+        if (!userInfo) {
             return;
-        if (!userInfo.avatar)
+        }
+        if (!userInfo.avatar) {
             userInfo.avatar = SETTINGS.avatarDummy;
-        else
-            userInfo.avatar = SETTINGS.baseURL + userInfo.avatar;
+        }
+        else {
+            userInfo.avatar = `${SETTINGS.baseURL}/resources${userInfo.avatar}`;
+        }
 
         this.storeSet(storeMap.profilePageProps, userInfo);
     }

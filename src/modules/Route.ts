@@ -1,22 +1,26 @@
-import Component from "./Component";
+import Component from "@modules/Component";
 
 export default class Route {
 
-    private _path: string;
+    private _pathname: string;
     private readonly _constructor: typeof Component;
     private readonly _props: any;
     private _block: any = null;
 
     constructor(path: string, constructor: typeof Component, props: any) {
-        this._path = path;
+        this._pathname = path;
         this._constructor = constructor;
         this._block = null;
         this._props = props;
     }
 
-    navigate(path: string): void {
-        if (this.match(path)) {
-            this._path = path;
+    pathname() {
+        return this._pathname;
+    }
+
+    navigate(pathname: string): void {
+        if (this.match(pathname)) {
+            this._pathname = pathname;
             this.render();
         }
     }
@@ -27,8 +31,8 @@ export default class Route {
         }
     }
 
-    match(path: string): boolean {
-        return path === this._path;
+    match(pathname: string): boolean {
+        return pathname === this._pathname;
     }
 
     render(): void {

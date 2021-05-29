@@ -1,12 +1,11 @@
-import Router from "./Router";
-import { Routes } from "../index";
-import Store from "./Store";
-import { storeMap, httpErrorCodes } from "../config";
-import { ErrorStatus } from "../components/errorBanner/types";
+import Router from "@modules/Router";
+import { Routes } from "@/index";
+import Store from "@modules/Store";
+import { storeMap, httpErrorCodes } from "@/config";
+import { ErrorStatus } from "@components/errorBanner/types";
 
 const router = new Router();
 const store = new Store();
-const errorProps = storeMap.errorPageProps;
 
 type ErrorsDescription = { [key: string]: string } | null;
 
@@ -21,12 +20,24 @@ export default class Controller {
         router.back();
     }
 
-    storeSet(path: string, data: any) {
+    storeSet(path: string, data: unknown) {
         store.set(path, data)
     }
 
     storeGet(path: string) {
         return store.get(path);
+    }
+
+    storeDelete(path: string) {
+        store.delete(path);
+    }
+
+    storeRewrite(path: string, data: unknown) {
+        store.rewrite(path, data);
+    }
+
+    storeForceEmit(path: string) {
+        store.forceEmit(path);
     }
 
     public statusHandler(status: number, descriptions: ErrorsDescription = null): boolean {
@@ -44,7 +55,7 @@ export default class Controller {
             description = httpErrorCodes.default;
 
         const props: ErrorStatus = { type: status, description: description };
-        store.set(errorProps, props);
+        store.set(storeMap.errorPageProps, props);
         this.go(Routes.error);
         return true;
     }

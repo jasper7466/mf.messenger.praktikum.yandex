@@ -1,7 +1,7 @@
 export default class FormValidator {
     static CHECKS = {
         MIN_LENGTH: {
-            exp: /^[a-zа-яё0-9_-]{3,}$/,
+            exp: /^.{3,}$/,
             err: 'Минимальная длина - 3 символа'
         },
         MAX_LENGTH: {
@@ -13,7 +13,7 @@ export default class FormValidator {
             err: 'Только буквы'
         },
         ALPHANUMERIC: {
-            exp: /^[a-zа-яё0-9_-]*$/,
+            exp: /^[a-zA-Zа-яА-ЯёЁ0-9_-]*$/,
             err: 'Недопустимые символы'
         },
         REQUIRED: {
@@ -51,16 +51,16 @@ export default class FormValidator {
     static readonly inputEvents = ['blur', 'keydown', 'keyup'];
 
     protected _form: Element | null;
-    protected _inputs: NodeListOf<any> | null;
+    protected _inputs: NodeListOf<HTMLInputElement> | null;
     protected _dataHandler: Function | null = null;
 
     constructor(protected readonly _rules: any) {}
 
     public attach(root: Element, selector: string) {
-        let form = root.querySelector(selector);
+        const form = root.querySelector(selector);
         if (!form)
             throw new Error(`${this.constructor.name}: Form "${selector}" not found`);
-        let inputs = form.querySelectorAll('input');
+        const inputs = form.querySelectorAll('input');
         if (inputs.length === 0)
             throw new Error(`${this.constructor.name}: Form "${selector}" has no input fields`);
         this._form = form;
@@ -74,12 +74,12 @@ export default class FormValidator {
         this._inputs = null;
     }
 
-    public setDataHandler(callback: Function): void {
+    public setDataHandler(callback: () => void): void {
         this._dataHandler = callback;
     }
 
     protected _handle() {
-        let data: any = {};
+        const data: any = {};
         if (!(this._inputs && this._dataHandler))
             return;
         this._inputs.forEach(input => data[input.name] = input.value);
