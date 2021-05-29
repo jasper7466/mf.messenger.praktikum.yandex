@@ -35,13 +35,17 @@ class ChatsController extends Controller {
 
             const lastMessage = JSON.parse(chat.last_message);
 
-            if (lastMessage.content.length > 25) {
-                chat.last = lastMessage.content.slice(0, 25) + '...';
+            if (lastMessage) {
+                if (lastMessage.content.length > 25) {
+                    chat.last = lastMessage.content.slice(0, 25) + '...';
+                } else {
+                    chat.last = lastMessage.content;
+                }
+                chat.time = splitTimestamp(lastMessage.time).hhmm;
             } else {
-                chat.last = lastMessage.content;
+                chat.last = '';
+                chat.time = ''
             }
-
-            chat.time = splitTimestamp(lastMessage.time).hhmm
 
             const unread = await this._getUnread(chat.id);
 
@@ -228,9 +232,9 @@ class ChatsController extends Controller {
             messagesData = [messagesData];
         }
 
-        messagesData.reduce((messageList: unknown[], message: PlainObject) => {
+        messagesData.reduceRight((messageList: unknown[], message: PlainObject) => {
             const parsedMessage = this._parseMessage(message, userID as number);
-            messageList.push(parsedMessage);
+            messageList.unshift(parsedMessage);
             return messageList
         }, props.feed)
 
