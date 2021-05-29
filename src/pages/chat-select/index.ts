@@ -163,7 +163,12 @@ export class ChatSelectPage extends Component {
     }
 
     private _activateChat(chatListItem: Element) {
+        const chatName = chatListItem.querySelector('.chat-caption')?.textContent;
+        const chatAvatar = (chatListItem.querySelector('.avatar__image') as HTMLImageElement).src;
+
         chatListItem.classList.add('chat-list__item_active');
+        controller.storeSet(storeMap.activeChatName, chatName);
+        controller.storeSet(storeMap.activeChatAvatar, chatAvatar);
     }
 
     private _hideCurrentModal(target: Element) {
