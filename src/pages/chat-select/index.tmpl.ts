@@ -18,7 +18,7 @@ export const template =`
                     </div>
                     <p class="chat-caption">{{title}}</p>
                     <p class="chat-list__last-reply">{{last}}</p>
-                    <time class="timestamp" <!--datetime=datetime-->>{{time}}</time>
+                    <time class="timestamp">{{time}}</time>
                     <div
                         class="chat-list__unreads-counter"
                         {{#ifEquals unreads '0'}} style="display: none" {{/ifEquals}}

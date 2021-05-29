@@ -5,6 +5,7 @@ import {authAPI} from "@api/AuthAPI";
 import {SETTINGS, storeMap} from "@/config";
 import {PlainObject} from "../../types";
 import WebSocketTransport from "../../modules/WebSocketTransport";
+import splitTimestamp from "../../utilities/splitTimestamp";
 
 class ChatsController extends Controller {
 
@@ -19,6 +20,7 @@ class ChatsController extends Controller {
 
     public async updateChatList(data?: QueryOptions) {
         const chats = await this._getChats(data);
+
         if (!chats) {
             return;
         }
@@ -26,12 +28,20 @@ class ChatsController extends Controller {
         this.storeSet(storeMap.chatList, null);
 
         for (const chat of chats) {
+
             if (chat.avatar === null) {
                 chat.avatar = SETTINGS.avatarDummy;
             }
 
-            chat.last = 'last message';
-            chat.time = 'time';
+            const lastMessage = JSON.parse(chat.last_message);
+
+            if (lastMessage.content.length > 25) {
+                chat.last = lastMessage.content.slice(0, 25) + '...';
+            } else {
+                chat.last = lastMessage.content;
+            }
+
+            chat.time = splitTimestamp(lastMessage.time).hhmm
 
             const unread = await this._getUnread(chat.id);
 
@@ -186,17 +196,14 @@ class ChatsController extends Controller {
     }
 
     private _parseMessage(message: any, userID: number) {
-        const time = message
-            .time.split('T')[1]
-            .split('+')[0]
-            .split(':');
+        const time = splitTimestamp(message.time).hhmm;
 
         return  {
             text: message.content,
             attachmentType: false,
             attachmentSource: false,
             datetime: message.time,
-            time: `${time[0]}:${time[1]}`,
+            time: time,
             isOwner: message.user_id === userID,
             isRead: true
         };
