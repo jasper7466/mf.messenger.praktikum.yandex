@@ -14,6 +14,7 @@ class ChatsController extends Controller {
         super();
         this._socket = new WebSocketTransport(SETTINGS.wssURL);
         this._socket.subscribe(WebSocketTransport.EVENTS.RECEIVED, this._socketMessageHandler.bind(this));
+        this._socket.subscribe(WebSocketTransport.EVENTS.OPENED, this._socketOpenedHandler.bind(this));
     }
 
     public async updateChatList(data?: QueryOptions) {
@@ -102,8 +103,9 @@ class ChatsController extends Controller {
         const chatToken = await this._getChatToken(chatID);
         const userID = this.storeGet(storeMap.currentUserID);
 
+        this.storeRewrite(`${storeMap.chatPageProps}.feed`, []);
         this.storeSet(storeMap.activeChatID, chatID);
-        this._socket.open(`/chats/${userID}/${chatID}/${chatToken}`);
+        await this._socket.open(`/chats/${userID}/${chatID}/${chatToken}`);
     }
 
     /**
@@ -117,6 +119,13 @@ class ChatsController extends Controller {
         });
 
         this._socket.send(message);
+    }
+
+    private _requestOldMessages(offset = 0) {
+        this._socket.send(JSON.stringify({
+            content: offset,
+            type: 'get old',
+        }))
     }
 
     private async _getUnread(chatID: number) {
@@ -169,33 +178,54 @@ class ChatsController extends Controller {
     }
 
     /**
+     * Обработчик websocket-событий типа "open"
+     * @private
+     */
+    private _socketOpenedHandler() {
+        this._requestOldMessages();
+    }
+
+    private _parseMessage(message: any, userID: number) {
+        const time = message
+            .time.split('T')[1]
+            .split('+')[0]
+            .split(':');
+
+        return  {
+            text: message.content,
+            attachmentType: false,
+            attachmentSource: false,
+            datetime: message.time,
+            time: `${time[0]}:${time[1]}`,
+            isOwner: message.user_id === userID,
+            isRead: true
+        };
+    }
+
+    /**
      * Обработчик websocket-событий типа "message"
      * @param event - объект MessageEvent
      * @private
      */
     private _socketMessageHandler(event: MessageEvent) {
-        const messageData = JSON.parse(event.data);
         const userID = this.storeGet(storeMap.currentUserID);
+        let messagesData = JSON.parse(event.data);
 
-        if (messageData.type === 'user connected')
+        if (messagesData.type === 'user connected') {
             return;
-
-        const message = {
-            text: messageData.content,
-            attachmentType: false,
-            attachmentSource: false,
-            datetime: messageData.time,
-            time: messageData.time,
-            isOwner: messageData.user_id === userID,
-            isRead: true
-        };
+        }
 
         const props = this.storeGet(storeMap.chatPageProps) as PlainObject;
 
-        if (!props.feed)
-            props.feed = [];
-        if (Array.isArray(props.feed))
-            props.feed.push(message);
+        if (!Array.isArray(messagesData)) {
+            messagesData = [messagesData];
+        }
+
+        messagesData.reduceRight((messageList: unknown[], message: PlainObject) => {
+            const parsedMessage = this._parseMessage(message, userID as number);
+            messageList.push(parsedMessage);
+            return messageList
+        }, props.feed)
 
         this.storeRewrite(storeMap.chatPageProps, props);
     }

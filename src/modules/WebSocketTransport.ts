@@ -10,11 +10,15 @@ interface IWebSocketTransport {
 }
 
 enum EVENTS {
-    OPENED = '1',
-    CLOSED = '2',
-    SENT = '3',
-    RECEIVED = '4',
-    ERROR = '5',
+    OPENING = '1',
+    OPENED = '2',
+    CLOSING = '3',
+    CLOSED = '4',
+    CLOSED_CLEAN = '5',
+    CLOSED_BREAK = '6',
+    SENT = '7',
+    RECEIVED = '8',
+    ERROR = '9',
 }
 
 export default class WebSocketTransport implements IWebSocketTransport {
@@ -48,11 +52,15 @@ export default class WebSocketTransport implements IWebSocketTransport {
 
         this.close();
 
+        this._eventBus.emit(EVENTS.OPENING, optionalUrl);
+
         this._socket = new WebSocket(`${this._baseUrl}${optionalUrl}`);
+        this._optionalUrl = optionalUrl;
+
+        this._socket.addEventListener('open', this._openEventHandler.bind(this));
+        this._socket.addEventListener('close', this._closeEventHandler.bind(this));
         this._socket.addEventListener('message', this._messageEventHandler.bind(this));
         this._socket.addEventListener('error', this._errorEventHandler.bind(this));
-        this._optionalUrl = optionalUrl;
-        this._eventBus.emit(EVENTS.OPENED, optionalUrl);
     }
 
     /**
@@ -63,13 +71,16 @@ export default class WebSocketTransport implements IWebSocketTransport {
             return;
         }
 
+        this._eventBus.emit(EVENTS.CLOSING);
+
+        this._socket.removeEventListener('open', this._openEventHandler.bind(this));
+        this._socket.removeEventListener('close', this._closeEventHandler.bind(this));
         this._socket.removeEventListener('message', this._messageEventHandler.bind(this));
         this._socket.removeEventListener('error', this._errorEventHandler.bind(this));
 
         this._socket.close();
         this._socket = null;
         this._optionalUrl = null;
-        this._eventBus.emit(EVENTS.CLOSED);
     }
 
     /**
@@ -102,6 +113,34 @@ export default class WebSocketTransport implements IWebSocketTransport {
      */
     public unsubscribe(event: EVENTS, callback: Callback) {
         this._eventBus.unsubscribe(event, callback);
+    }
+
+    /**
+     * Базовый обработчик события 'open'.
+     * Инициирует событие OPENED на внутренней шине событий.
+     * Добавляется/удаляется при каждом открытии/закрытии сокета
+     * @param event - объект MessageEvent
+     * @protected
+     */
+    protected _openEventHandler(event: Event) {
+        this._eventBus.emit(EVENTS.OPENED, event);
+    }
+
+    /**
+     * Базовый обработчик события 'close'.
+     * Инициирует событие CLOSED на внутренней шине событий и специфичные события
+     * CLOSED_CLEAN/CLOSED_BREAK в зависимости причины закрытия.
+     * Добавляется/удаляется при каждом открытии/закрытии сокета
+     * @param event - объект MessageEvent
+     * @protected
+     */
+    protected _closeEventHandler(event: any) {
+        this._eventBus.emit(EVENTS.CLOSED, event);
+        if (event.wasClean) {
+            this._eventBus.emit(EVENTS.CLOSED_CLEAN);
+        } else {
+            this._eventBus.emit(EVENTS.CLOSED_BREAK);
+        }
     }
 
     /**
