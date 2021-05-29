@@ -23,11 +23,9 @@ class ChatsController extends Controller {
             return;
         }
 
-        this.storeSet(storeMap.chatPageProps, null);
+        this.storeSet(storeMap.chatList, null);
 
         for (const chat of chats) {
-            //TODO:
-            console.log(chat);
             if (chat.avatar === null) {
                 chat.avatar = SETTINGS.avatarDummy;
             }
@@ -106,7 +104,6 @@ class ChatsController extends Controller {
         const userID = this.storeGet(storeMap.currentUserID);
 
         this.storeRewrite(storeMap.activeChatFeed, []);
-
         this.storeSet(storeMap.activeChatID, chatID);
         await this._socket.open(`/chats/${userID}/${chatID}/${chatToken}`);
     }

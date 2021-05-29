@@ -10,6 +10,7 @@ export const storeMap = {
     errorPageProps: 'store.errorPage',
     chatPageProps: 'store.chatPage',
     profilePageProps: 'store.profile',
+    chatList: 'store.chatPage.chats',
     activeChatFeed: 'store.chatPage.feed',
     activeChatID: 'store.activeChatID',
     activeChatToken: 'store.activeChatToken',
