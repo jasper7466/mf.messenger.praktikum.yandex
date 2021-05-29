@@ -1,14 +1,13 @@
 {
   "name": "mf.messenger.praktikum.yandex",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "",
   "private": true,
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack --mode production",
     "dev": "cross-env NODE_ENV=development webpack --mode development",
     "watch": "cross-env NODE_ENV=development webpack --mode development --watch",
-    "serve": "cross-env NODE_ENV=development webpack serve --mode development",
-    "open": "npm run serve --open",
+    "open": "cross-env NODE_ENV=development webpack serve --mode development --open",
+    "build": "cross-env NODE_ENV=production webpack --mode production",
     "start": "node server.js",
     "test": "./node_modules/.bin/mocha",
     "eslint": "eslint src/**/*.ts",
