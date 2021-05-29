@@ -228,7 +228,7 @@ class ChatsController extends Controller {
             messagesData = [messagesData];
         }
 
-        messagesData.reduceRight((messageList: unknown[], message: PlainObject) => {
+        messagesData.reduce((messageList: unknown[], message: PlainObject) => {
             const parsedMessage = this._parseMessage(message, userID as number);
             messageList.push(parsedMessage);
             return messageList
