@@ -18,15 +18,21 @@ export const template =`
                     </div>
                     <p class="chat-caption">{{title}}</p>
                     <p class="chat-list__last-reply">{{last}}</p>
-                    <time class="timestamp" <!--datetime=datetime-->>{{time}}</time>
-                    <div class="chat-list__unreads-counter">{{unreads}}</div>
+                    <time class="timestamp">{{time}}</time>
+                    <div
+                        class="chat-list__unreads-counter"
+                        {{#ifEquals unreads '0'}} style="display: none" {{/ifEquals}}
+                    >
+                        {{unreads}}
+                    </div>
+
                 </li>
                 <span class="span-line">&nbsp;</span>
             {{/each}}
         </ul>
         {{> addChatButton}}
     </section>
-    
+
     <!-- Окно чата, чат не выбран -->
     <section class="side-container side-container_type_centered no-chat-selected
     {{#if this.chatSelected}}
@@ -35,9 +41,9 @@ export const template =`
     ">
     Выберите чат чтобы отправить сообщение
     </section>
-    
+
     <!-- Окно чата, чат выбран -->
-    <section class="side-container chat 
+    <section class="side-container chat
     {{#unless this.chatSelected}}
         side-container_hidden
     {{/unless}}
@@ -49,7 +55,7 @@ export const template =`
             <p class="chat-caption">{{chat.name}}</p>
             <button class="round-button round-button_type_options chat-options-button"></button>
         </div>
-        <div class="chat__feed">        
+        <div class="chat__feed">
             {{#each this.feed}}
                 <p class="chat__message
                     {{#if attachmentType}}
@@ -57,7 +63,7 @@ export const template =`
                     {{else}}
                         chat__message_type_text
                     {{/if}}
-                    
+
                     {{#if isOwner}}
                         chat__message_owner
                         {{#if isRead}}
@@ -69,7 +75,7 @@ export const template =`
                         {{text}}
                         {{#if attachmentType}}
                             <img src={{attachmentSource}} alt="Изображение в сообщении">
-                        {{/if}}    
+                        {{/if}}
                         <time class="timestamp" datetime={{datetime}}>{{time}}</time>
                 </p>
                 {{/each}}
@@ -80,7 +86,7 @@ export const template =`
             <button class="round-button round-button_type_send"></button>
         </div>
     </section>
-    
+
     <!-- Модальное окно добавления чата -->
     <section class="modal new-chat-modal">
         <form class="form new-chat-form">
@@ -97,7 +103,7 @@ export const template =`
             </form>
         </form>
     </section>
-    
+
     <!-- Модальное окно меню чата -->
     <section class="modal chat-menu-modal">
         <form class="form new-chat-form">
@@ -106,7 +112,7 @@ export const template =`
             <a class="form__link remove-user-link">Удалить пользователя</a>
         </form>
     </section>
-    
+
     <!-- Модальное окно добавления пользователя -->
     <section class="modal add-user-modal">
         <form class="form add-user-form">
@@ -121,7 +127,7 @@ export const template =`
             </section>
         </form>
     </section>
-    
+
     <!-- Модальное окно удаления пользователя -->
     <section class="modal remove-user-modal">
         <form class="form remove-user-form">

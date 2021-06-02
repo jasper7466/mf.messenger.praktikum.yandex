@@ -10,7 +10,7 @@ export class ProfilePage extends Component {
         this.element.addEventListener('click', e => this.clickHandler(e));
     }
 
-    componentDidMount() {
+    beforeMount() {
         controller.updateUserInfo();
     }
 

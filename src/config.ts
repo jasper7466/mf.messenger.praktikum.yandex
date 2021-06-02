@@ -9,11 +9,13 @@ export const SETTINGS = {
 export const storeMap = {
     errorPageProps: 'store.errorPage',
     chatPageProps: 'store.chatPage',
-    //chatsList: 'store.chatsList',
     profilePageProps: 'store.profile',
+    chatList: 'store.chatPage.chats',
+    activeChatFeed: 'store.chatPage.feed',
     activeChatID: 'store.activeChatID',
     activeChatToken: 'store.activeChatToken',
-    activeChatFeed: 'store.activeChatFeed',
+    activeChatAvatar: 'store.chatPage.chat.image',
+    activeChatName: 'store.chatPage.chat.name',
     currentUserID: 'store.userID'
 }
 
@@ -106,4 +108,15 @@ export const chatNameValidationRules = {
         FormValidator.CHECKS.ALPHANUMERIC,
         FormValidator.CHECKS.MAX_LENGTH,
     ]
+}
+
+export const demoUsers = {
+    user1: {
+        login: 'RbdEz8E2KV',
+        password: 'RbdEz8E2KV',
+    },
+    user2: {
+        login: 'VEjb9ws4CZ',
+        password: 'VEjb9ws4CZ',
+    }
 }

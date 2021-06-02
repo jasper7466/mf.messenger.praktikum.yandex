@@ -6,6 +6,7 @@ import { ProfilePage } from './pages/profile/index';
 import { ProfileDataPage } from './pages/profile-data/index';
 import { ProfilePasswordPage } from './pages/profile-password/index';
 import { SignupPage } from './pages/signup/index';
+import { DemoPage } from './pages/demo/index';
 import { data as loginContext } from './pages/login/index.tmpl';
 import { data as chatSelectContext } from './pages/chat-select/index.tmpl';
 import { data as profileContext } from './pages/profile/index.tmpl';
@@ -25,8 +26,21 @@ export enum Routes {
     profile = '/profile',
     profileData = '/profile-data',
     profilePassword = '/profile-password',
-    signup = '/signup'
+    signup = '/signup',
+    demo = '/demo',
 }
+
+/**
+ * Обработчик перехода по несуществующему роуту
+ */
+const badRouteHandler = () => {
+    new Store().set(storeMap.errorPageProps, {type: '404', description: 'Не туда попали'});
+    router.go(Routes.error);
+}
+
+Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
+    return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
 
 router
     .use(Routes.login, LoginPage, loginContext)
@@ -36,12 +50,7 @@ router
     .use(Routes.profileData, ProfileDataPage, profileDataContext)
     .use(Routes.profilePassword, ProfilePasswordPage, profilePasswordContext)
     .use(Routes.signup, SignupPage, signupContext)
-    .start();
-
-// Обработчик несуществующего роута
-router.badRouteHandler = () => {
-    new Store().set(storeMap.errorPageProps, {type: '404', description: 'Не туда попали'});
-    router.go(Routes.error);
-}
-
-router.go(Routes.login);
+    .use(Routes.demo, DemoPage, {})
+    .setDefaultRoute(Routes.login)
+    .setBadRouteHandler(badRouteHandler)
+    .start()

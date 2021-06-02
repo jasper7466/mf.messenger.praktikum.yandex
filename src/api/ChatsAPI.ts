@@ -57,7 +57,7 @@ class ChatsAPI extends API {
     }
 
     addUser(data: AddChatUserData) {
-        return this.post('/chats/users', {data});
+        return this.put('/chats/users', {data});
     }
 
     deleteUser(data: any) {

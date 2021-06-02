@@ -1,5 +1,6 @@
 import Controller from "@modules/Controller";
 import {UserProfileData, usersAPI} from "@api/UsersAPI";
+import profileController from "../profile/controller";
 
 class ProfileDataController extends Controller {
     constructor() {
@@ -17,8 +18,8 @@ class ProfileDataController extends Controller {
 
     async changeProfileAvatar(data: FormData) {
         try {
-            await usersAPI.changeAvatar(data);
-            alert('Аватар обновлён');
+            const userInfo = await usersAPI.changeAvatar(data);
+            await profileController.updateUserInfo(userInfo.response);
         } catch (e) {
             this.statusHandler(e.status);
         }

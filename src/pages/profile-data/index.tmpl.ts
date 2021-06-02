@@ -61,7 +61,7 @@ export const template =`
         <form class="form avatar-form">
             <h1 class="form__header">Загрузите файл</h1>
             Выбрать файл на компьютере
-            <input class="form__link" id="avatar" type="file" accept="image/*">
+            <input class="form__link" id="avatar" name="avatar" type="file" accept="image/*">
             {{> changeButton}}
         </form>
     </section>

@@ -39,7 +39,7 @@ describe('Router.ts: Роутинг', () => {
 
     it('Чейнинг в методе use()', () => {
         const router = new Router();
-        const chainLink = router.use('/path', ComponentLike, {});
+        const chainLink = router.use('/default/path', ComponentLike, {});
         assert.equal(router, chainLink, 'Возвращается экземпляр роутера');
     });
 

@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCssAssetWebpackPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 const isDevMode = process.env.NODE_ENV === 'development';
@@ -19,7 +19,7 @@ const optimization = () => {
 
     if (isProdMode) {
         config.minimizer = [
-            new OptimizeCssAssetWebpackPlugin(),
+            new CssMinimizerPlugin(),
             new TerserWebpackPlugin()
         ];
     }
@@ -42,37 +42,6 @@ const cssLoaders = extra => {
         loaders.push(extra);
 
     return loaders;
-}
-
-// Не используется
-const scriptLoaders = (extra) => {
-    const loaders = [];
-
-    if (extra)
-        loaders.loaders.push(extra);
-    
-    if (isDevMode)
-        loaders.push('eslint-loader');  // WARN: eslint-loader is deprecated
-
-    return loaders;
-}
-
-// Не используется
-const babelOptions = preset => {
-    const opts = {
-        presets: [
-            '@babel/preset-env',
-            '@babel/preset-typescript'
-        ],
-        plugins: [
-            '@babel/plugin-proposal-calss-properties'
-        ]
-    }
-
-    if (preset)
-        opts.presets.push(preset);
-
-    return opts;
 }
 
 module.exports = {
@@ -117,6 +86,7 @@ module.exports = {
         open: true,
         hot: isDevMode,
         host: 'localhost',
+        historyApiFallback: true
     },
     module: {
         rules: [

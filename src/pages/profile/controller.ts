@@ -27,8 +27,10 @@ export class ProfileController extends Controller {
         }
     }
 
-    async updateUserInfo() {
-        const userInfo: UserInfoData = await this.getUserInfo();
+    async updateUserInfo(userInfo?: UserInfoData) {
+        if (!userInfo) {
+            userInfo = await this.getUserInfo();
+        }
         if (!userInfo) {
             return;
         }
@@ -36,7 +38,7 @@ export class ProfileController extends Controller {
             userInfo.avatar = SETTINGS.avatarDummy;
         }
         else {
-            userInfo.avatar = SETTINGS.baseURL + userInfo.avatar;
+            userInfo.avatar = `${SETTINGS.baseURL}/resources${userInfo.avatar}`;
         }
 
         this.storeSet(storeMap.profilePageProps, userInfo);

@@ -1,7 +1,7 @@
 export default class FormValidator {
     static CHECKS = {
         MIN_LENGTH: {
-            exp: /^[a-zа-яё0-9_-]{3,}$/,
+            exp: /^.{3,}$/,
             err: 'Минимальная длина - 3 символа'
         },
         MAX_LENGTH: {
@@ -13,7 +13,7 @@ export default class FormValidator {
             err: 'Только буквы'
         },
         ALPHANUMERIC: {
-            exp: /^[a-zа-яё0-9_-]*$/,
+            exp: /^[a-zA-Zа-яА-ЯёЁ0-9_-]*$/,
             err: 'Недопустимые символы'
         },
         REQUIRED: {

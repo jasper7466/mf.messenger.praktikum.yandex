@@ -1,6 +1,6 @@
 .chat__feed {
-    display: flex;   
-    flex-direction: column;
+    display: flex;
+    flex-direction: column-reverse;
     justify-content: flex-start;
     align-items: flex-start;
     width: 100%;
@@ -25,4 +25,3 @@
 }
 
 
-    
